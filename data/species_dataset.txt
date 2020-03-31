@@ -1,0 +1,425 @@
+tetraodon_nigroviridis
+ailuropoda_melanoleuca
+ficedula_albicollis
+pongo_abelii
+lepisosteus_oculatus
+latimeria_chalumnae
+chlorocebus_sabaeus
+ornithorhynchus_anatinus
+ochotona_princeps
+poecilia_formosa
+dasypus_novemcinctus
+gasterosteus_aculeatus
+mustela_putorius_furo
+otolemur_garnettii
+pteropus_vampyrus
+tursiops_truncatus
+pelodiscus_sinensis
+ovis_aries
+sarcophilus_harrisii
+procavia_capensis
+notamacropus_eugenii
+jaculus_jaculus
+mesocricetus_auratus
+cavia_aperea
+chinchilla_lanigera
+dipodomys_ordii
+cricetulus_griseus_crigri
+ictidomys_tridecemlineatus
+heterocephalus_glaber_female
+cavia_porcellus
+heterocephalus_glaber_male
+octodon_degus
+fukomys_damarensis
+microtus_ochrogaster
+cricetulus_griseus_chok1gshd
+rattus_norvegicus
+nannospalax_galili
+cebus_capucinus
+aotus_nancymaae
+saimiri_boliviensis_boliviensis
+pan_troglodytes
+cercocebus_atys
+pan_paniscus
+propithecus_coquereli
+mandrillus_leucophaeus
+macaca_nemestrina
+macaca_fascicularis
+papio_anubis
+nomascus_leucogenys
+rhinopithecus_bieti
+colobus_angolensis_palliatus
+rhinopithecus_roxellana
+pan_troglodytes
+carlito_syrichta
+mus_caroli
+mus_pahari
+capra_hircus
+capra_hircus
+gorilla_gorilla
+mus_spretus
+danio_rerio
+panthera_tigris_altaica
+panthera_pardus
+danio_rerio
+esox_lucius
+anabas_testudineus
+astyanax_mexicanus
+poecilia_mexicana
+cyprinodon_variegatus
+monopterus_albus
+esox_lucius
+microcebus_murinus
+poecilia_reticulata
+oryzias_latipes_hni
+oryzias_latipes
+haplochromis_burtoni
+maylandia_zebra
+ictalurus_punctatus
+ictalurus_punctatus
+seriola_dumerili
+astyanax_mexicanus
+amphilophus_citrinellus
+periophthalmus_magnuspinnatus
+oryzias_melastigma
+fundulus_heteroclitus
+ictalurus_punctatus
+mastacembelus_armatus
+pygocentrus_nattereri
+poecilia_latipinna
+paramormyrops_kingsleyae
+gambusia_affinis
+hippocampus_comes
+kryptolebias_marmoratus
+pygocentrus_nattereri
+neolamprologus_brichardi
+oryzias_latipes_hsok
+pundamilia_nyererei
+xiphophorus_maculatus
+seriola_lalandi_dorsalis
+sphenodon_punctatus
+canis_lupus_dingo
+gopherus_agassizii
+vulpes_vulpes
+ursus_maritimus
+ursus_americanus
+equus_asinus_asinus
+gallus_gallus
+chrysemys_picta_bellii
+calidris_pygmaea
+pogona_vitticeps
+nothoprocta_perdicaria
+anser_brachyrhynchus
+apteryx_rowi
+meleagris_gallopavo
+urocitellus_parryii
+bos_mutus
+neovison_vison
+dromaius_novaehollandiae
+prolemur_simus
+lonchura_striata_domestica
+apteryx_haastii
+phascolarctos_cinereus
+apteryx_owenii
+spermophilus_dauricus
+melopsittacus_undulatus
+chelonoidis_abingdonii
+calidris_pugnax
+meriones_unguiculatus
+lepidothrix_coronata
+castor_canadensis
+piliocolobus_tephrosceles
+cyanistes_caeruleus
+mus_spicilegus
+cricetulus_griseus_picr
+bison_bison_bison
+serinus_canaria
+manacus_vitellinus
+crocodylus_porosus
+junco_hyemalis
+marmota_marmota_marmota
+salvator_merianae
+parus_major
+coturnix_japonica
+peromyscus_maniculatus_bairdii
+numida_meleagris
+bos_taurus
+theropithecus_gelada
+lates_calcarifer
+hucho_hucho
+vombatus_ursinus
+callorhinchus_milii
+hucho_hucho
+bos_taurus_hybrid
+bos_taurus_hybrid
+bos_indicus_hybrid
+clupea_harengus
+denticeps_clupeoides
+astyanax_mexicanus_pachon
+clupea_harengus
+erpetoichthys_calabaricus
+betta_splendens
+gouania_willdenowi
+denticeps_clupeoides
+astyanax_mexicanus_pachon
+felis_catus
+callithrix_jacchus
+sus_scrofa
+canis_familiaris
+oryctolagus_cuniculus
+equus_caballus
+xenopus_tropicalis
+xenopus_tropicalis
+macaca_mulatta
+erpetoichthys_calabaricus
+monodelphis_domestica
+pavo_cristatus
+accipiter_nisus
+sparus_aurata
+anser_cygnoides
+cyprinus_carpio_huanghe
+struthio_camelus_australis
+phasianus_colchicus
+cyprinus_carpio_germanmirror
+cyprinus_carpio_germanmirror
+cyprinus_carpio_huanghe
+echeneis_naucrates
+sinocyclocheilus_rhinocerous
+sinocyclocheilus_rhinocerous
+chrysolophus_pictus
+canis_lupus_familiarisgreatdane
+cyprinus_carpio_huanghe
+canis_lupus_familiarisbasenji
+aquila_chrysaetos_chrysaetos
+sinocyclocheilus_anshuiensis
+erythrura_gouldiae
+cyprinus_carpio_huanghe
+oreochromis_aureus
+oreochromis_niloticus
+salmo_trutta
+amazona_collaria
+takifugu_rubripes
+cyprinus_carpio_germanmirror
+cyprinus_carpio_germanmirror
+sinocyclocheilus_rhinocerous
+sinocyclocheilus_rhinocerous
+sinocyclocheilus_anshuiensis
+sinocyclocheilus_anshuiensis
+sinocyclocheilus_anshuiensis
+sinocyclocheilus_grahami
+sinocyclocheilus_rhinocerous
+sinocyclocheilus_grahami
+taeniopygia_guttata
+salmo_trutta
+rhinolophus_ferrumequinum
+sinocyclocheilus_grahami
+scleropages_formosus
+myripristis_murdjan
+cyprinus_carpio_hebaored
+podarcis_muralis
+strigops_habroptila
+mus_musculus
+camelus_dromedarius
+salmo_trutta
+terrapene_carolina_triunguis
+physeter_catodon
+moschus_moschiferus
+moschus_moschiferus
+bos_grunniens
+lynx_canadensis
+catagonus_wagneri
+homo_sapiens
+Homo sapiens
+Mus musculus
+Rattus norvegicus
+Bos taurus
+Gallus gallus
+Sus scrofa
+Canis lupus
+Macaca mulatta
+Oryctolagus cuniculus
+Monodelphis domestica
+Equus caballus
+Ornithorhynchus anatinus
+Papio anubis
+Callithrix jacchus
+Pongo abelii
+Ailuropoda melanoleuca
+Meleagris gallopavo
+Nomascus leucogenys
+Loxodonta africana
+Cavia porcellus
+Cricetulus griseus
+Sarcophilus harrisii
+Otolemur garnettii
+Pan paniscus
+Saimiri boliviensis
+Felis catus
+Gorilla gorilla
+Orcinus orca
+Tursiops truncatus
+Trichechus manatus
+Odobenus rosmarus
+Ceratotherium simum
+Dasypus novemcinctus
+Ochotona princeps
+Sorex araneus
+Octodon degus
+Jaculus jaculus
+Condylura cristata
+Echinops telfairi
+Mustela putorius
+Heterocephalus glaber
+Anas platyrhynchos
+Ficedula albicollis
+Mesocricetus auratus
+Melopsittacus undulatus
+Falco peregrinus
+Macaca fascicularis
+Chrysemys picta
+Ictidomys tridecemlineatus
+Microtus ochrogaster
+Chinchilla lanigera
+Falco cherrug
+Columba livia
+Pseudopodoces humilis
+Capra hircus
+Myotis brandtii
+Bos mutus
+Latimeria chalumnae
+Alligator sinensis
+Bubalus bubalis
+Myotis lucifugus
+Pelodiscus sinensis
+Tupaia chinensis
+Camelus ferus
+Vicugna pacos
+Leptonychotes weddellii
+Myotis davidii
+Chrysochloris asiatica
+Elephantulus edwardii
+Pteropus alecto
+Peromyscus maniculatus
+Chelonia mydas
+Physeter catodon
+Balaenoptera acutorostrata
+Python bivittatus
+Lipotes vexillifer
+Erinaceus europaeus
+Callorhinchus milii
+Orycteropus afer
+Chlorocebus sabaeus
+Carlito syrichta
+Eptesicus fuscus
+Calypte anna
+Equus przewalskii
+Galeopterus variegatus
+Ursus maritimus
+Nannospalax galili
+Serinus canaria
+Aptenodytes forsteri
+Pterocles gutturalis
+Rhinopithecus roxellana
+Haliaeetus leucocephalus
+Fukomys damarensis
+Notothenia coriiceps
+Bison bison
+Camelus bactrianus
+Camelus dromedarius
+Pteropus vampyrus
+Aquila chrysaetos
+Macaca nemestrina
+Colobus angolensis
+Mandrillus leucophaeus
+Cercocebus atys
+Aotus nancymaae
+Taeniopygia guttata
+Propithecus coquereli
+Microcebus murinus
+Dipodomys ordii
+Apteryx mantelli
+Equus asinus
+Sturnus vulgaris
+Calidris pugnax
+Acinonyx jubatus
+Gekko japonicus
+Marmota marmota
+Panthera tigris
+Parus major
+Protobothrops mucrosquamatus
+Coturnix japonica
+Rousettus aegyptiacus
+Miniopterus natalensis
+Pan troglodytes
+Cebus capucinus
+Manis javanica
+Corvus brachyrhynchos
+Lepidothrix coronata
+Rhinopithecus bieti
+Nanorana parkeri
+Scleropages formosus
+Panthera pardus
+Alligator mississippiensis
+Gavialis gangeticus
+Crocodylus porosus
+Hipposideros armiger
+Bos indicus
+Castor canadensis
+Rhincodon typus
+Pogona vitticeps
+Odocoileus virginianus
+Phascolarctos cinereus
+Mus caroli
+Mus pahari
+Numida meleagris
+Lonchura striata
+Meriones unguiculatus
+Neomonachus schauinslandi
+Enhydra lutris
+Delphinapterus leucas
+Piliocolobus tephrosceles
+Terrapene carolina
+Desmodus rotundus
+Neophocaena asiaeorientalis
+Theropithecus gelada
+Canis lupus
+Callorhinus ursinus
+Puma concolor
+Vulpes vulpes
+Apteryx rowi
+Urocitellus parryii
+Ursus arctos
+Pseudonaja textilis
+Lagenorhynchus obliquidens
+Bos indicus
+Zalophus californianus
+Corapipo altera
+Neopelma chrysocephalum
+Pipra filicauda
+Vombatus ursinus
+Empidonax traillii
+Marmota flaviventris
+Eumetopias jubatus
+Phyllostomus discolor
+Podarcis muralis
+Grammomys surdaster
+Peromyscus leucopus
+Monodon monoceros
+Rhinatrema bivittatum
+Suricata suricatta
+Aquila chrysaetos
+Microcaecilia unicolor
+Lynx canadensis
+Strigops habroptila
+Gopherus evgoodei
+Globicephala melas
+Camarhynchus parvulus
+Mastomys coucha
+Phasianus colchicus
+Corvus moneduloides
+Hylobates moloch
+Aythya fuligula
+Thamnophis elegans
+Sapajus apella
+Mustela erminea
+Phoca vitulina

@@ -1,6 +1,6 @@
 # APOA1 Molecular Evolution
 
-This folder contains all the data and code used to prepare the the manuscript "Title to choose".
+This folder contains all the data and code used to prepare the manuscript about APOA1 evoution.
 
 ## Sequences retrieval
 

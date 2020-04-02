@@ -1,0 +1,425 @@
+ENSTNIP00000017370,tetraodon_nigroviridis
+ENSAMEP00000009115,ailuropoda_melanoleuca
+ENSFALP00000005823,ficedula_albicollis
+ENSPPYP00000004472,pongo_abelii
+ENSLOCP00000007525,lepisosteus_oculatus
+ENSLACP00000022439,latimeria_chalumnae
+ENSCSAP00000015337,chlorocebus_sabaeus
+ENSOANP00000024761,ornithorhynchus_anatinus
+ENSOPRP00000016294,ochotona_princeps
+ENSPFOP00000007217,poecilia_formosa
+ENSDNOP00000015747,dasypus_novemcinctus
+ENSGACP00000008005,gasterosteus_aculeatus
+ENSMPUP00000004184,mustela_putorius_furo
+ENSOGAP00000020480,otolemur_garnettii
+ENSPVAP00000016820,pteropus_vampyrus
+ENSTTRP00000010994,tursiops_truncatus
+ENSPSIP00000013398,pelodiscus_sinensis
+ENSOARP00000002748,ovis_aries
+ENSSHAP00000015521,sarcophilus_harrisii
+ENSPCAP00000001437,procavia_capensis
+ENSMEUP00000009139,notamacropus_eugenii
+ENSJJAP00000010024,jaculus_jaculus
+ENSMAUP00000019954,mesocricetus_auratus
+ENSCAPP00000008812,cavia_aperea
+ENSCLAP00000016837,chinchilla_lanigera
+ENSDORP00000011659,dipodomys_ordii
+ENSCGRP00000019384,cricetulus_griseus_crigri
+ENSSTOP00000002077,ictidomys_tridecemlineatus
+ENSHGLP00000027468,heterocephalus_glaber_female
+ENSCPOP00000032306,cavia_porcellus
+ENSHGLP00100014646,heterocephalus_glaber_male
+ENSODEP00000012142,octodon_degus
+ENSFDAP00000018576,fukomys_damarensis
+ENSMOCP00000019788,microtus_ochrogaster
+ENSCGRP00001027089,cricetulus_griseus_chok1gshd
+ENSRNOP00000065206,rattus_norvegicus
+ENSNGAP00000019853,nannospalax_galili
+ENSCCAP00000013613,cebus_capucinus
+ENSANAP00000033484,aotus_nancymaae
+ENSSBOP00000022311,saimiri_boliviensis_boliviensis
+ENSPTRP00000080550,pan_troglodytes
+ENSCATP00000044852,cercocebus_atys
+ENSPPAP00000007656,pan_paniscus
+ENSPCOP00000003211,propithecus_coquereli
+ENSMLEP00000035049,mandrillus_leucophaeus
+ENSMNEP00000035632,macaca_nemestrina
+ENSMFAP00000037249,macaca_fascicularis
+ENSPANP00000006074,papio_anubis
+ENSNLEP00000008947,nomascus_leucogenys
+ENSRBIP00000043069,rhinopithecus_bieti
+ENSCANP00000040304,colobus_angolensis_palliatus
+ENSRROP00000041818,rhinopithecus_roxellana
+ENSPTRP00000007404,pan_troglodytes
+ENSTSYP00000021888,carlito_syrichta
+MGP_CAROLIEiJ_P0087687,mus_caroli
+MGP_PahariEiJ_P0023342,mus_pahari
+ENSCHIP00000023988,capra_hircus
+ENSCHIP00000032705,capra_hircus
+ENSGGOP00000033442,gorilla_gorilla
+MGP_SPRETEiJ_P0091280,mus_spretus
+ENSDARP00000025613,danio_rerio
+ENSPTIP00000000106,panthera_tigris_altaica
+ENSPPRP00000001916,panthera_pardus
+ENSDARP00000151245,danio_rerio
+ENSELUP00000008426,esox_lucius
+ENSATEP00000032693,anabas_testudineus
+ENSAMXP00000053269,astyanax_mexicanus
+ENSPMEP00000027254,poecilia_mexicana
+ENSCVAP00000013437,cyprinodon_variegatus
+ENSMALP00000028026,monopterus_albus
+ENSELUP00000031198,esox_lucius
+ENSMICP00000036936,microcebus_murinus
+ENSPREP00000010904,poecilia_reticulata
+ENSORLP00020024535,oryzias_latipes_hni
+ENSORLP00000019715,oryzias_latipes
+ENSHBUP00000020577,haplochromis_burtoni
+ENSMZEP00005007685,maylandia_zebra
+ENSIPUP00000010831,ictalurus_punctatus
+ENSIPUP00000010907,ictalurus_punctatus
+ENSSDUP00000017113,seriola_dumerili
+ENSAMXP00000042134,astyanax_mexicanus
+ENSACIP00000016048,amphilophus_citrinellus
+ENSPMGP00000009058,periophthalmus_magnuspinnatus
+ENSOMEP00000025197,oryzias_melastigma
+ENSFHEP00000030955,fundulus_heteroclitus
+ENSIPUP00000028731,ictalurus_punctatus
+ENSMAMP00000020022,mastacembelus_armatus
+ENSPNAP00000001440,pygocentrus_nattereri
+ENSPLAP00000024869,poecilia_latipinna
+ENSPKIP00000026041,paramormyrops_kingsleyae
+ENSGAFP00000020357,gambusia_affinis
+ENSHCOP00000011146,hippocampus_comes
+ENSKMAP00000029246,kryptolebias_marmoratus
+ENSPNAP00000027231,pygocentrus_nattereri
+ENSNBRP00000001211,neolamprologus_brichardi
+ENSORLP00015010368,oryzias_latipes_hsok
+ENSPNYP00000005801,pundamilia_nyererei
+ENSXMAP00000002883,xiphophorus_maculatus
+ENSSLDP00000010524,seriola_lalandi_dorsalis
+ENSSPUP00000007265,sphenodon_punctatus
+ENSCAFP00020002685,canis_lupus_dingo
+ENSGAGP00000013816,gopherus_agassizii
+ENSVVUP00000034996,vulpes_vulpes
+ENSUMAP00000004530,ursus_maritimus
+ENSUAMP00000025573,ursus_americanus
+ENSEASP00005009167,equus_asinus_asinus
+ENSGALP00000011510,gallus_gallus
+ENSCPBP00000028773,chrysemys_picta_bellii
+ENSCPGP00000002516,calidris_pygmaea
+ENSPVIP00000011490,pogona_vitticeps
+ENSNPEP00000003975,nothoprocta_perdicaria
+ENSABRP00000015627,anser_brachyrhynchus
+ENSARWP00000003317,apteryx_rowi
+ENSMGAP00000002830,meleagris_gallopavo
+ENSUPAP00010007066,urocitellus_parryii
+ENSBMUP00000010625,bos_mutus
+ENSNVIP00000007881,neovison_vison
+ENSDNVP00000014880,dromaius_novaehollandiae
+ENSPSMP00000000253,prolemur_simus
+ENSLSDP00000009597,lonchura_striata_domestica
+ENSAHAP00000003827,apteryx_haastii
+ENSPCIP00000032276,phascolarctos_cinereus
+ENSAOWP00000014531,apteryx_owenii
+ENSSDAP00000014821,spermophilus_dauricus
+ENSMUNP00000012161,melopsittacus_undulatus
+ENSCABP00000011720,chelonoidis_abingdonii
+ENSCPUP00000026873,calidris_pugnax
+ENSMUGP00000015766,meriones_unguiculatus
+ENSLCOP00000005332,lepidothrix_coronata
+ENSCCNP00000017901,castor_canadensis
+ENSPTEP00000022375,piliocolobus_tephrosceles
+ENSCCEP00000003664,cyanistes_caeruleus
+ENSMSIP00000012851,mus_spicilegus
+ENSCGRP00015025344,cricetulus_griseus_picr
+ENSBBBP00000016449,bison_bison_bison
+ENSSCAP00000006377,serinus_canaria
+ENSMVIP00005003979,manacus_vitellinus
+ENSCPRP00005000967,crocodylus_porosus
+ENSJHYP00000012243,junco_hyemalis
+ENSMMMP00000026221,marmota_marmota_marmota
+ENSSMRP00000027812,salvator_merianae
+ENSPMJP00000009700,parus_major
+ENSCJPP00005012959,coturnix_japonica
+ENSPEMP00000011287,peromyscus_maniculatus_bairdii
+ENSNMEP00000001196,numida_meleagris
+ENSBTAP00000002914,bos_taurus
+ENSTGEP00000026520,theropithecus_gelada
+ENSLCAP00010028090,lates_calcarifer
+ENSHHUP00000033330,hucho_hucho
+ENSVURP00010032044,vombatus_ursinus
+ENSCMIP00000018084,callorhinchus_milii
+ENSHHUP00000068192,hucho_hucho
+ENSBIXP00000004099,bos_taurus_hybrid
+ENSBIXP00000029002,bos_taurus_hybrid
+ENSBIXP00005041040,bos_indicus_hybrid
+ENSCHAP00000057455,clupea_harengus
+ENSDCDP00000058645,denticeps_clupeoides
+ENSAMXP00005011428,astyanax_mexicanus_pachon
+ENSCHAP00000046001,clupea_harengus
+ENSECRP00000001097,erpetoichthys_calabaricus
+ENSBSLP00000037361,betta_splendens
+ENSGWIP00000008985,gouania_willdenowi
+ENSDCDP00000058992,denticeps_clupeoides
+ENSAMXP00005026665,astyanax_mexicanus_pachon
+ENSFCAP00000016102,felis_catus
+ENSCJAP00000023173,callithrix_jacchus
+ENSSSCP00000033805,sus_scrofa
+ENSCAFP00000019630,canis_familiaris
+ENSOCUP00000009241,oryctolagus_cuniculus
+ENSECAP00000007649,equus_caballus
+ENSXETP00000010857,xenopus_tropicalis
+ENSXETP00000033026,xenopus_tropicalis
+ENSMMUP00000021209,macaca_mulatta
+ENSECRP00000019659,erpetoichthys_calabaricus
+ENSMODP00000059859,monodelphis_domestica
+ENSPSTP00000000252,pavo_cristatus
+ENSANIP00000001475,accipiter_nisus
+ENSSAUP00010000280,sparus_aurata
+ENSACDP00005019725,anser_cygnoides
+ENSCCRP00015065980,cyprinus_carpio_huanghe
+ENSSCUP00000014227,struthio_camelus_australis
+ENSPCLP00000013604,phasianus_colchicus
+ENSCCRP00010079382,cyprinus_carpio_germanmirror
+ENSCCRP00010080560,cyprinus_carpio_germanmirror
+ENSCCRP00015053473,cyprinus_carpio_huanghe
+ENSENLP00000010428,echeneis_naucrates
+ENSSRHP00000097218,sinocyclocheilus_rhinocerous
+ENSSRHP00000013088,sinocyclocheilus_rhinocerous
+ENSCPIP00010013510,chrysolophus_pictus
+ENSCAFP00040004612,canis_lupus_familiarisgreatdane
+ENSCCRP00015007128,cyprinus_carpio_huanghe
+ENSCAFP00030009795,canis_lupus_familiarisbasenji
+ENSACCP00020010530,aquila_chrysaetos_chrysaetos
+ENSSANP00000071624,sinocyclocheilus_anshuiensis
+ENSEGOP00005016720,erythrura_gouldiae
+ENSCCRP00015079253,cyprinus_carpio_huanghe
+ENSOABP00000020189,oreochromis_aureus
+ENSONIP00000021009,oreochromis_niloticus
+ENSSTUP00000036851,salmo_trutta
+ENSACOP00000004363,amazona_collaria
+ENSTRUP00000087291,takifugu_rubripes
+ENSCCRP00010106953,cyprinus_carpio_germanmirror
+ENSCCRP00010029686,cyprinus_carpio_germanmirror
+ENSSRHP00000025024,sinocyclocheilus_rhinocerous
+ENSSRHP00000084565,sinocyclocheilus_rhinocerous
+ENSSANP00000092043,sinocyclocheilus_anshuiensis
+ENSSANP00000015750,sinocyclocheilus_anshuiensis
+ENSSANP00000085321,sinocyclocheilus_anshuiensis
+ENSSGRP00000064943,sinocyclocheilus_grahami
+ENSSRHP00000005444,sinocyclocheilus_rhinocerous
+ENSSGRP00000091691,sinocyclocheilus_grahami
+ENSTGUP00000022325,taeniopygia_guttata
+ENSSTUP00000081744,salmo_trutta
+ENSRFEP00010013048,rhinolophus_ferrumequinum
+ENSSGRP00000032510,sinocyclocheilus_grahami
+ENSSFOP00015060524,scleropages_formosus
+ENSMMDP00005021571,myripristis_murdjan
+ENSCCRP00020054428,cyprinus_carpio_hebaored
+ENSPMRP00000028847,podarcis_muralis
+ENSSHBP00005022354,strigops_habroptila
+ENSMUSP00000034588,mus_musculus
+ENSCDRP00005025823,camelus_dromedarius
+ENSSTUP00000049493,salmo_trutta
+ENSTMTP00000008566,terrapene_carolina_triunguis
+ENSPCTP00005026118,physeter_catodon
+ENSMMSP00000027806,moschus_moschiferus
+ENSMMSP00000027837,moschus_moschiferus
+ENSBGRP00000005993,bos_grunniens
+ENSLCNP00005015953,lynx_canadensis
+ENSCWAP00000005209,catagonus_wagneri
+ENSP00000236850,homo_sapiens
+NP_000030.1,Homo sapiens
+NP_033822.2,Mus musculus
+NP_036870.1,Rattus norvegicus
+NP_776667.2,Bos taurus
+NP_990856.1,Gallus gallus
+NP_999563.1,Sus scrofa
+XP_013968873.1,Canis lupus
+XP_028689839.1,Macaca mulatta
+NP_001095157.1,Oryctolagus cuniculus
+XP_001380867.1,Monodelphis domestica
+XP_005611649.1,Equus caballus
+XP_001517346.1,Ornithorhynchus anatinus
+NP_001106116.1,Papio anubis
+XP_002754495.1,Callithrix jacchus
+XP_024110625.1,Pongo abelii
+XP_002919539.1,Ailuropoda melanoleuca
+XP_010722021.1,Meleagris gallopavo
+XP_003253233.1,Nomascus leucogenys
+XP_003418286.1,Loxodonta africana
+XP_013010905.1,Cavia porcellus
+XP_007649842.2,Cricetulus griseus
+XP_003764238.1,Sarcophilus harrisii
+XP_003794820.1,Otolemur garnettii
+XP_003820129.1,Pan paniscus
+XP_003923713.1,Saimiri boliviensis
+XP_011284668.1,Felis catus
+XP_004052230.1,Gorilla gorilla
+XP_004273413.1,Orcinus orca
+XP_019797580.1,Tursiops truncatus
+XP_004385764.1,Trichechus manatus
+XP_004415532.1,Odobenus rosmarus
+XP_014640623.1,Ceratotherium simum
+XP_004466048.1,Dasypus novemcinctus
+XP_004585160.1,Ochotona princeps
+XP_004605120.1,Sorex araneus
+XP_023576960.1,Octodon degus
+XP_004666497.1,Jaculus jaculus
+XP_004688892.1,Condylura cristata
+XP_004712856.1,Echinops telfairi
+XP_004749957.1,Mustela putorius
+XP_004856701.1,Heterocephalus glaber
+XP_027300122.1,Anas platyrhynchos
+XP_005058651.1,Ficedula albicollis
+NP_001268586.1,Mesocricetus auratus
+XP_005143556.1,Melopsittacus undulatus
+XP_005240114.1,Falco peregrinus
+NP_001270674.1,Macaca fascicularis
+XP_005299801.1,Chrysemys picta
+XP_021584206.1,Ictidomys tridecemlineatus
+XP_005347313.1,Microtus ochrogaster
+XP_005378250.1,Chinchilla lanigera
+XP_005437690.1,Falco cherrug
+XP_021140876.1,Columba livia
+XP_005531141.1,Pseudopodoces humilis
+XP_017915238.1,Capra hircus
+XP_005856882.1,Myotis brandtii
+XP_014333821.1,Bos mutus
+XP_005987291.1,Latimeria chalumnae
+XP_006030393.1,Alligator sinensis
+XP_025122634.1,Bubalus bubalis
+XP_023600077.1,Myotis lucifugus
+XP_006121737.1,Pelodiscus sinensis
+XP_006150046.1,Tupaia chinensis
+XP_032328322.1,Camelus ferus
+XP_006220153.3,Vicugna pacos
+XP_006743516.1,Leptonychotes weddellii
+XP_015417971.1,Myotis davidii
+XP_006833913.1,Chrysochloris asiatica
+XP_006890938.1,Elephantulus edwardii
+XP_006912850.1,Pteropus alecto
+XP_006996748.1,Peromyscus maniculatus
+XP_007060524.1,Chelonia mydas
+XP_007117218.1,Physeter catodon
+XP_007196619.1,Balaenoptera acutorostrata
+XP_007422949.1,Python bivittatus
+XP_007461913.1,Lipotes vexillifer
+XP_007523042.1,Erinaceus europaeus
+XP_007905508.1,Callorhinchus milii
+XP_007934695.1,Orycteropus afer
+XP_008019170.1,Chlorocebus sabaeus
+XP_008054092.1,Carlito syrichta
+XP_008148438.1,Eptesicus fuscus
+XP_030320583.1,Calypte anna
+XP_008514948.1,Equus przewalskii
+XP_008589935.1,Galeopterus variegatus
+XP_008688423.1,Ursus maritimus
+XP_008849164.1,Nannospalax galili
+XP_009096256.1,Serinus canaria
+XP_019326058.1,Aptenodytes forsteri
+XP_010077021.1,Pterocles gutturalis
+XP_010369999.1,Rhinopithecus roxellana
+XP_010573269.1,Haliaeetus leucocephalus
+XP_010627698.1,Fukomys damarensis
+XP_010792180.1,Notothenia coriiceps
+XP_010828679.1,Bison bison
+XP_010951807.1,Camelus bactrianus
+XP_010979716.2,Camelus dromedarius
+XP_011381492.1,Pteropus vampyrus
+XP_011600123.1,Aquila chrysaetos
+XP_011730716.1,Macaca nemestrina
+XP_011782215.1,Colobus angolensis
+XP_011837422.1,Mandrillus leucophaeus
+XP_011908284.1,Cercocebus atys
+XP_012325871.1,Aotus nancymaae
+NP_001232100.1,Taeniopygia guttata
+XP_012513804.1,Propithecus coquereli
+XP_012629141.1,Microcebus murinus
+XP_012865101.1,Dipodomys ordii
+XP_013814309.1,Apteryx mantelli
+XP_014711022.1,Equus asinus
+XP_014740137.1,Sturnus vulgaris
+XP_014805089.1,Calidris pugnax
+XP_026892393.1,Acinonyx jubatus
+XP_015283537.1,Gekko japonicus
+XP_015345327.1,Marmota marmota
+XP_015392250.1,Panthera tigris
+XP_015505367.1,Parus major
+XP_015668391.1,Protobothrops mucrosquamatus
+XP_015739386.1,Coturnix japonica
+XP_015990405.1,Rousettus aegyptiacus
+XP_016060183.1,Miniopterus natalensis
+XP_016777528.1,Pan troglodytes
+XP_017378829.1,Cebus capucinus
+XP_017509604.1,Manis javanica
+XP_017593961.1,Corvus brachyrhynchos
+XP_017664986.1,Lepidothrix coronata
+XP_017738600.1,Rhinopithecus bieti
+XP_018424139.1,Nanorana parkeri
+XP_018595909.1,Scleropages formosus
+XP_019324608.1,Panthera pardus
+XP_019336206.1,Alligator mississippiensis
+XP_019367956.1,Gavialis gangeticus
+XP_019398654.1,Crocodylus porosus
+XP_019502931.1,Hipposideros armiger
+XP_019830885.1,Bos indicus
+XP_020039910.1,Castor canadensis
+XP_020389622.1,Rhincodon typus
+XP_020649396.1,Pogona vitticeps
+XP_020758270.1,Odocoileus virginianus
+XP_020845360.1,Phascolarctos cinereus
+XP_021028645.1,Mus caroli
+XP_021063777.1,Mus pahari
+XP_021231980.1,Numida meleagris
+XP_021385704.1,Lonchura striata
+XP_021495435.1,Meriones unguiculatus
+XP_021552105.1,Neomonachus schauinslandi
+XP_022368558.1,Enhydra lutris
+XP_022414830.1,Delphinapterus leucas
+XP_023064060.1,Piliocolobus tephrosceles
+XP_024072189.1,Terrapene carolina
+XP_024426715.1,Desmodus rotundus
+XP_024607528.1,Neophocaena asiaeorientalis
+XP_025211265.1,Theropithecus gelada
+XP_025321200.1,Canis lupus
+XP_025749339.1,Callorhinus ursinus
+XP_025784816.1,Puma concolor
+XP_025854968.1,Vulpes vulpes
+XP_025913767.1,Apteryx rowi
+XP_026252146.1,Urocitellus parryii
+XP_026361489.1,Ursus arctos
+XP_026564873.1,Pseudonaja textilis
+XP_026937662.1,Lagenorhynchus obliquidens
+XP_027419453.1,Bos indicus
+XP_027436505.1,Zalophus californianus
+XP_027511396.1,Corapipo altera
+XP_027555402.1,Neopelma chrysocephalum
+XP_027595048.1,Pipra filicauda
+XP_027713275.1,Vombatus ursinus
+XP_027737169.1,Empidonax traillii
+XP_027786277.1,Marmota flaviventris
+XP_027961612.1,Eumetopias jubatus
+XP_028370647.1,Phyllostomus discolor
+XP_028564294.1,Podarcis muralis
+XP_028639641.1,Grammomys surdaster
+XP_028722306.1,Peromyscus leucopus
+XP_029065336.1,Monodon monoceros
+XP_029428156.1,Rhinatrema bivittatum
+XP_029771558.1,Suricata suricatta
+XP_029878240.1,Aquila chrysaetos
+XP_030077805.1,Microcaecilia unicolor
+XP_030189349.1,Lynx canadensis
+XP_030361530.1,Strigops habroptila
+XP_030393909.1,Gopherus evgoodei
+XP_030691096.1,Globicephala melas
+XP_030820672.1,Camarhynchus parvulus
+XP_031199368.1,Mastomys coucha
+XP_031455500.1,Phasianus colchicus
+XP_031989671.1,Corvus moneduloides
+XP_032023368.1,Hylobates moloch
+XP_032057697.1,Aythya fuligula
+XP_032085145.1,Thamnophis elegans
+XP_032141331.1,Sapajus apella
+XP_032214539.1,Mustela erminea
+XP_032283611.1,Phoca vitulina

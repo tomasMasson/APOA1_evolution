@@ -1,0 +1,3 @@
+P02647 (a.k.a. Apolipoprotein A-I) from Pfam32.0
+APOA1_HUMAN/69-262
+chain undefined of undefined

@@ -36,7 +36,7 @@ def assign_selective_pressure(df):
     
     episodic_selection = []
     for index, row in df.iterrows():
-        if row['p-value'] <= 0.1:
+        if row['p-value'] <= 0.05:
             episodic_selection.append('Episodic Diversifiyng')
         else:
             episodic_selection.append('Not significant')

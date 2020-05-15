@@ -40,7 +40,7 @@ def main():
     args = parser.parse_args()
     alignment = args.Alignment
     df = get_alignment_entropy(alignment)
-    df.to_csv('sequences_entropy.csv', index=False)
+    df.to_csv('entropy.csv', index=False)
 
 if __name__ == '__main__':
     main()

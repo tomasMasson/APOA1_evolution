@@ -23,9 +23,10 @@ def make_logo(filename, i: int, j: int):
     sequence_logo = logomaker.Logo(sequence_matrix, 
                                    font_name='DejaVu Sans',
                                    color_scheme='hydrophobicity')
+    sequence_logo.ax.tick_params(labelsize=16)
     sequence_logo.ax.set_xticklabels(f'{x}'
                                      for x in range(start, end+1, 1))
-    plt.savefig('sequence_logo.png')
+#    plt.savefig('sequence_logo.png')
     plt.show()
 
 def argument_parser():

@@ -109,51 +109,41 @@ rule cds_alignment:
     shell:
         "pal2nal.pl {input} -output fasta > {output}"
 
+rule hyphy_gard:
+    input:
+        align="molecular_evolution/cds_aln.fna"
+    output:
+        "molecular_evolution/hyphy/hyphy_gard.json"
+    shell:
+        "hyphy gard --alignment {input.align} &&"
+        "mv molecular_evolution/cds_aln.fna.GARD.json {output}"
+
+rule hyphy_meme:
+    input:
+        align="molecular_evolution/cds_aln.fna",
+        tree="molecular_evolution/phylogeny.treefile"
+    output:
+        "molecular_evolution/hyphy/hyphy_meme.json"
+    shell:
+        "hyphy meme --alignment {input.align} --tree {input.tree} &&"
+        "mv molecular_evolution/cds_aln.fna.MEME.json {output}"
+
 rule hyphy_fel:
     input:
         align="molecular_evolution/cds_aln.fna",
         tree="molecular_evolution/phylogeny.treefile"
     output:
-        "molecular_evolution/hyphy_fel.json"
+        "molecular_evolution/hyphy/hyphy_fel.json"
     shell:
         "hyphy fel --alignment {input.align} --tree {input.tree} &&"
         "mv molecular_evolution/cds_aln.fna.FEL.json {output}"
-
-rule hyphy_busted:
-    input:
-        align="molecular_evolution/cds_aln.fna",
-        tree="molecular_evolution/phylogeny.treefile"
-    output:
-        "molecular_evolution/hyphy_busted.json"
-    shell:
-        "hyphy busted --alignment {input.align} --tree {input.tree} &&"
-        "mv molecular_evolution/cds_aln.fna.BUSTED.json {output}"
 
 rule hyphy_fubar:
     input:
         align="molecular_evolution/cds_aln.fna",
         tree="molecular_evolution/phylogeny.treefile"
     output:
-        "molecular_evolution/hyphy_fubar.json"
+        "molecular_evolution/hyphy/hyphy_fubar.json"
     shell:
         "hyphy fubar --alignment {input.align} --tree {input.tree} &&"
         "mv molecular_evolution/cds_aln.fna.FUBAR.json {output}"
-
-#rule hyphy_gard:
-#    input:
-#        align="molecular_evolution/cds_aln.fna"
-#    output:
-#        "molecular_evolution/hyphy_gard.json"
-#    shell:
-#        "hyphy gard --alignment {input.align} &&"
-#        "mv molecular_evolution/cds_aln.fna.GARD.json {output}"
-
-#rule hyphy_meme:
-#    input:
-#        align="molecular_evolution/cds_aln.fna",
-#        tree="molecular_evolution/phylogeny.treefile"
-#    output:
-#        "molecular_evolution/hyphy_meme.json"
-#    shell:
-#        "hyphy meme --alignment {input.align} --tree {input.tree} &&"
-#        "mv molecular_evolution/cds_aln.fna.MEME.json {output}"

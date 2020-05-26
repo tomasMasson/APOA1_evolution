@@ -7,16 +7,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
 def get_foldx_results(folder):
-    ''' 
+    '''
     Retrieves the results from the output folder of FoldX.
 
     Return a dictionary containing the residue identifiers as key
     and the ddG as values.
 
-    Residues ddg order is [G,A,V,L,I,M,F,W,P,S,T,C,Y,N,Q,D,E,K,R,H]. 
+    Residues ddg order is [G,A,V,L,I,M,F,W,P,S,T,C,Y,N,Q,D,E,K,R,H].
     '''
-    
+
     cwd = str(Path.cwd()) + '/'
     results = folder
     directory = Path(cwd+results)
@@ -25,15 +26,16 @@ def get_foldx_results(folder):
         with open(entry, 'r') as fh:
             next(fh)
             key = int(entry.name.split('_')[0][2:])
-            data[key] = [line.split()[0] for line in fh] 
+            data[key] = [line.split()[0] for line in fh]
     data_sorted = {}
     for key in sorted(data.keys()):
         data_sorted[key] = data[key]
 
     return data_sorted
 
+
 def plot_foldx_results(data):
-    
+
     mutations = ['G', 'A', 'V', 'L', 'I', 'M', 'F', 'W', 'P', 'S',
                  'T', 'C', 'Y', 'N', 'Q', 'D', 'E', 'K', 'R', 'H']
 
@@ -75,9 +77,10 @@ def get_mutants_ddg(data, filename):
                     str(item.strip()[-1]),
                     str(item.strip()))
                     for item in fh]
-    print(f'Mutation,ddg')
+    print('Mutation,ddg')
     for item in residues:
         print(item[2], df.iloc[item[0]-1][item[1]])
+
 
 def arguments_parser():    
     ''' Command line argument parser.'''
@@ -93,12 +96,14 @@ def arguments_parser():
 
     return args.folder, args.filename
 
+
 def main():
 
     results_folder, filename = arguments_parser()
     data = get_foldx_results(results_folder)
     plot_foldx_results(data)
 #    get_mutants_ddg(data, filename)
+
 
 if __name__ == '__main__':
     main()

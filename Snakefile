@@ -1,3 +1,9 @@
+# Target files
+rule all:
+    input:
+        "molecular_evolution/APOA1_phylogeny.treefile",
+        "molecular_evolution/cds_alignment.fna"
+
 # Data Tidying
 
 rule merge_sequences:
@@ -23,7 +29,7 @@ rule cdhit_clustering:
     output:
         "data/sequences_dataset.faa"
     shell:
-        "cd-hit -i {input} -o {output}"
+        "cd-hit -i {input} -o {output} -c 0.98 "
 
 rule add_names_sequences:
     input:
@@ -55,14 +61,14 @@ rule fix_refseq_headers:
     shell:
         "src/fix_refseq_header.py {input} > {output}"
 
-rule get_cds_ensembl:
+rule filter_cds_ensembl:
     input:
         "data/raw_cds_ensembl.fna",
         "data/sequences_dataset.faa"
     output:
         "data/cds_ensembl.fna"
     shell:
-        "src/get_sequences.py {input} > {output}"
+        "src/filter_cds_ensembl.py {input} > {output}"
 
 rule merge_cds_sequences:
     input:
@@ -88,62 +94,65 @@ rule mafft_alignment:
     input:
         "data/sequences_dataset_labeled.faa"
     output:
-        "molecular_evolution/sequences_aln.faa"
+        "molecular_evolution/APOA1_alignment.faa"
     shell:
-        "mafft {input} >> {output}"
+        "clustalo -i {input} -o {output}"
 
 rule iqtree_phylogeny:
     input:
-        "molecular_evolution/sequences_aln.faa"
+        "molecular_evolution/APOA1_alignment.faa"
     output:
-        "molecular_evolution/phylogeny.treefile"
+        "molecular_evolution/APOA1_phylogeny.treefile"
+    params:
+        "molecular_evolution/APOA1_phylogeny"
     shell:
-        "iqtree -s {input} -alrt 1000 -nt 4 -pre molecular_evolution/phylogeny"
+        "iqtree -s {input} -bb 1000 -nt 4 -pre {params} -redo"
 
 rule cds_alignment:
     input:
-        "molecular_evolution/sequences_aln.faa",
+        "molecular_evolution/APOA1_alignment.faa",
         "data/cds_dataset_labeled.fna"
     output:
-        "molecular_evolution/cds_aln.fna"
+        "molecular_evolution/cds_alignment.fna"
     shell:
         "pal2nal.pl {input} -output fasta > {output}"
 
 rule hyphy_gard:
     input:
-        align="molecular_evolution/cds_aln.fna"
+        align="molecular_evolution/cds_alignment.fna"
     output:
         "molecular_evolution/hyphy/hyphy_gard.json"
     shell:
         "hyphy gard --alignment {input.align} &&"
-        "mv molecular_evolution/cds_aln.fna.GARD.json {output}"
-
-rule hyphy_meme:
-    input:
-        align="molecular_evolution/cds_aln.fna",
-        tree="molecular_evolution/phylogeny.treefile"
-    output:
-        "molecular_evolution/hyphy/hyphy_meme.json"
-    shell:
-        "hyphy meme --alignment {input.align} --tree {input.tree} &&"
-        "mv molecular_evolution/cds_aln.fna.MEME.json {output}"
+        "mv molecular_evolution/cds_alignment.fna.GARD.json {output}"
 
 rule hyphy_fel:
     input:
-        align="molecular_evolution/cds_aln.fna",
-        tree="molecular_evolution/phylogeny.treefile"
+        align="molecular_evolution/cds_alignment.fna",
+        tree="molecular_evolution/APOA1_phylogeny.treefile"
     output:
         "molecular_evolution/hyphy/hyphy_fel.json"
     shell:
         "hyphy fel --alignment {input.align} --tree {input.tree} &&"
-        "mv molecular_evolution/cds_aln.fna.FEL.json {output}"
+        "mv molecular_evolution/cds_alignment.fna.FEL.json {output}"
 
 rule hyphy_fubar:
     input:
-        align="molecular_evolution/cds_aln.fna",
-        tree="molecular_evolution/phylogeny.treefile"
+        align="molecular_evolution/cds_alignment.fna",
+        tree="molecular_evolution/APOA1_phylogeny.treefile"
     output:
         "molecular_evolution/hyphy/hyphy_fubar.json"
     shell:
         "hyphy fubar --alignment {input.align} --tree {input.tree} &&"
-        "mv molecular_evolution/cds_aln.fna.FUBAR.json {output}"
+        "mv molecular_evolution/cds_alignment.fna.FUBAR.json {output}"
+
+rule hyphy_meme:
+    input:
+        align="molecular_evolution/cds_alignment.fna",
+        tree="molecular_evolution/APOA1_phylogeny.treefile"
+    output:
+        "molecular_evolution/hyphy/hyphy_meme.json"
+    shell:
+        "hyphy meme --alignment {input.align} --tree {input.tree} &&"
+        "mv molecular_evolution/cds_alignment.fna.MEME.json {output}"
+

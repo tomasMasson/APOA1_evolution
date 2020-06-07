@@ -20,14 +20,21 @@ def reformat_gnomad_data(filename):
     with open(filename, 'r') as fh:
         reader = csv.reader(fh)
         next(reader)
+        print('Position,Variant,Frequency,gnomAD')
+        if '_v2' in filename:
+            gnomad = 'gnomAD_v2'
+        else:
+            gnomad = 'gnomAD_v3'
         for line in reader:
             data = line[8]
             if data[-3:] in aa_codes:
                 mutation = aa_codes[data[-3:]]
                 position = int(data[5:-3])
                 aa = aa_codes[data[2:5]]
+            frequency = line[15]
             if position > 24:
-                print(f'{aa}{position-24}{mutation}')
+                position = position - 24
+                print(f'{position},{aa}{position}{mutation},{frequency},{gnomad}')
 
 
 def argument_parser():

@@ -8,13 +8,21 @@ import argparse
 
 def plot_dataset(dataframe):
     sns.set(style="white")
-    ax = sns.distplot(
+    sns.distplot(
             dataframe['Position'],
-            color='gray',
-            bins=50,
+            color='#0571b0',
+            bins=20,
             kde=False
             )
-    ax.set(xlabel='Sequence Position', ylabel='# Amyloid Regions')
+    df = dataframe[dataframe['Taxon'] == 'Mammalia']
+    sns.distplot(
+            df['Position'],
+            color='#e66101',
+            bins=20,
+            kde=False
+            )
+    plt.xlabel('Sequence Position')
+    plt.ylabel('# Amyloid Regions')
     plt.savefig('amyloid_regions_distribution.svg')
     return plt.show()
 

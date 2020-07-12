@@ -22,9 +22,10 @@ def make_logo(filename, i: int, j: int):
     sequence_logo = logomaker.Logo(sequence_matrix,
                                    font_name='DejaVu Sans',
                                    color_scheme='NajafabadiEtAl2017')
-    sequence_logo.ax.tick_params(labelsize=14)
+    sequence_logo.ax.set_xticks(range(len(sequence_matrix)))
+    sequence_logo.ax.tick_params(labelsize=10)
     sequence_logo.ax.set_xticklabels(f'{x}'
-                                     for x in range(start, end+1, 1))
+                                     for x in range(start+1, end+1, 1))
     sequence_logo.ax.set_xlabel('Sequence Position', fontsize=14)
     sequence_logo.ax.set_ylabel('Information (Bits)', fontsize=14)
     plt.savefig('sequence_logo.svg')

@@ -2,7 +2,10 @@
 rule all:
     input:
         "molecular_evolution/APOA1_phylogeny.treefile",
-        "molecular_evolution/cds_alignment.fna"
+        "molecular_evolution/hyphy/hyphy_gard.json",
+        "molecular_evolution/hyphy/hyphy_fel.json",
+        "molecular_evolution/hyphy/hyphy_fubar.json",
+        "molecular_evolution/hyphy/hyphy_leisr.json"
 
 # Data Tidying
 
@@ -146,13 +149,13 @@ rule hyphy_fubar:
         "hyphy fubar --alignment {input.align} --tree {input.tree} &&"
         "mv molecular_evolution/cds_alignment.fna.FUBAR.json {output}"
 
-rule hyphy_meme:
+rule hyphy_leisr:
     input:
-        align="molecular_evolution/cds_alignment.fna",
+        align="molecular_evolution/APOA1_alignment.faa",
         tree="molecular_evolution/APOA1_phylogeny.treefile"
     output:
-        "molecular_evolution/hyphy/hyphy_meme.json"
+        "molecular_evolution/hyphy/hyphy_leisr.json"
     shell:
-        "hyphy meme --alignment {input.align} --tree {input.tree} &&"
-        "mv molecular_evolution/cds_alignment.fna.MEME.json {output}"
+        "hyphy leisr --alignment {input.align} --tree {input.tree} &&"
+        "mv molecular_evolution/APOA1_alignment.faa.LEISR.json {output}"
 

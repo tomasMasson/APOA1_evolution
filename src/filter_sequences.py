@@ -5,9 +5,9 @@ import argparse
 
 
 def filter_sequences(multifasta):
-    ''' 
+    '''
     Takes a multifasta file and remove sequences less than 200
-    amino acids, not starting with a methionine or with an
+    amino acids long, not starting with a methionine or with an
     undefined character.
     '''
 
@@ -21,9 +21,16 @@ def filter_sequences(multifasta):
 
 
 def argument_parser():
-    '''Command-line argument parser.'''
+    '''Command line argument parser.'''
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+            description="""
+            Discard sequences smaller than 200 amino acids,
+            without an initial methionine or with undefined
+            characters (X).
+            """,
+            usage="python3 filter_sequences.py <sequences>"
+            )
     parser.add_argument('sequences', help='File with sequences')
     args = parser.parse_args()
     return args.sequences

@@ -16,7 +16,7 @@ def add_species_name(seq_file, species_names):
         for record in fh:
             identifier, name = record.strip().split(',')
             species[identifier] = name
-            
+
     output_name = f'{seq_file.split(".")[0]}_labeled.{seq_file.split(".")[1]}'
     with open(output_name, 'w') as fh:
         for sequence in sequences:
@@ -27,9 +27,15 @@ def add_species_name(seq_file, species_names):
 
 def argument_parser():
     '''Command line argument parser.'''
-    parser = argparse.ArgumentParser()
-    parser.add_argument('sequences', help='File with sequeces')
-    parser.add_argument('names', help='File containing the species name')
+    parser = argparse.ArgumentParser(
+            description="""
+            Appends the species name to the header of
+            each fasta sequence.
+            """,
+            usage="python3 rename_sequences <sequences> <names>"
+            )
+    parser.add_argument('sequences', help='Sequences file')
+    parser.add_argument('names', help='Species name file')
     args = parser.parse_args()
     return args.sequences, args.names
 

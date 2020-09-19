@@ -21,8 +21,14 @@ def fix_refseq_header(multifasta):
 def argument_parser():
     ''' Command line argument parser.'''
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('sequences', help='File with sequences')
+    parser = argparse.ArgumentParser(
+            description="""
+            Modify Refseq sequence header to retain
+            only the unique protein identifier.
+            """,
+            usage="python fix_refseq_header.py <sequences>"
+            )
+    parser.add_argument('sequences', help='Sequences file')
     args = parser.parse_args()
     return args.sequences
 

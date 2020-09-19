@@ -21,7 +21,14 @@ def filter_sequences(raw_cds, dataset):
 def argument_parser():
     ''' Command line argument parser.'''
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+            description="""
+            Takes a multifasta file containing Ensembl CDS an
+            retain only the sequences that are present in the
+            protein dataset supplied.
+            Results are returned to standard output.""",
+            usage="python3 filter_cds_ensembl.py <raw_cds> <proteins_dataset>"
+            )
     parser.add_argument('raw_cds',
                         help='File with cds in fasta format')
     parser.add_argument('dataset',

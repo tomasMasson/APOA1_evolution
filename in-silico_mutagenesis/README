@@ -1,2 +1,0 @@
-# MutateX command run inside mutatex-env (as recommended in the repo)
-~/mutatex/bin/mutatex apoa1-hdl.pdb --foldx-binary ~/foldx5Linux64.tar__0/foldx --rotabase rotabase.txt --np 4 --binding-energy --foldx-log --clean deep --compress

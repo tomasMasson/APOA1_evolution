@@ -2,12 +2,12 @@
 
 from prody import *
 from pylab import *
-import pandas as pd
 import argparse
 
-def get_GNM(pdb):
+
+def calculate_GNM(pdb):
     '''
-    Parse a .pdb structure an calculates residue mobility using Prody.
+    Parse a .pdb structure and calculates residue mobility using Prody.
     '''
     prot = parsePDB(pdb)
     calphas = prot.select('calpha')
@@ -17,16 +17,15 @@ def get_GNM(pdb):
     residues_fluct = calcSqFlucts(gnm[:10])
     for fluct in residues_fluct:
         print(fluct)
-    # Show modes fluctuation
-    showSqFlucts(gnm[:10])
-    plt.show()
+
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('PDB', help='PDB file')
     args = parser.parse_args()
     pdb = args.PDB
-    get_GNM(pdb)
+    calculate_GNM(pdb)
+
 
 if __name__ == '__main__':
     main()

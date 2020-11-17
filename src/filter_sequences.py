@@ -4,7 +4,7 @@ from Bio import SeqIO
 import argparse
 
 
-def filter_sequences(multifasta):
+def filter_sequences(multifasta, outfile):
     '''
     Takes a multifasta file and remove sequences less than 200
     amino acids long, not starting with a methionine or with an
@@ -12,8 +12,7 @@ def filter_sequences(multifasta):
     '''
 
     sequences = SeqIO.parse(multifasta, 'fasta')
-    out_file = f'data/filtered_{multifasta.split("raw_")[1]}'
-    with open(out_file, 'w') as fh:
+    with open(outfile, 'w') as fh:
         for sequence in sequences:
             seq = sequence.seq
             if len(seq) >= 240 and seq.startswith('M') and 'X' not in seq:
@@ -32,13 +31,14 @@ def argument_parser():
             usage="python3 filter_sequences.py <sequences>"
             )
     parser.add_argument('sequences', help='File with sequences')
+    parser.add_argument('outfile', help='Output file name')
     args = parser.parse_args()
-    return args.sequences
+    return args.sequences, args.outfile
 
 
 def main():
-    multifasta = argument_parser()
-    filter_sequences(multifasta)
+    multifasta, outfile = argument_parser()
+    filter_sequences(multifasta, outfile)
 
 
 if __name__ == '__main__':

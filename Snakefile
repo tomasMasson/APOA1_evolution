@@ -1,7 +1,7 @@
 # Set apoa1 alignments as target file
 rule all:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.aln"
+        "apr_evolution/vertebrates_phylogeny.treefile"
 
 
 # Get apoa1 protein ortholog sequences from ensembl
@@ -44,7 +44,7 @@ rule mafft_alignment:
     input:
         "apr_evolution/vertebrates_sequences.faa"
     output:
-        "apr_evolution/vertebrates_mafft.aln"
+        "apr_evolution/vertebrates_mafft.faa"
     shell:
         """
         mafft --maxiterate 1000 --localpair \
@@ -53,8 +53,22 @@ rule mafft_alignment:
 # Trim out highly gapped positions
 rule trim_alignment:
     input:
-        "apr_evolution/vertebrates_mafft.aln"
+        "apr_evolution/vertebrates_mafft.faa"
     output:
-        "apr_evolution/vertebrates_mafft_trimmed.aln"
+        "apr_evolution/vertebrates_mafft_trimmed.faa"
     shell:
-        "trimal -in {input} -out {output} -gt 0.06"
+        "trimal -in {input} -out {output} -gt 0.09"
+
+# Infer a phylogeny from the vertabrates alignment
+rule infer_phylogeny:
+    input:
+        "apr_evolution/vertebrates_mafft_trimmed.faa"
+    params:
+        "apr_evolution/vertebrates_phylogeny"
+    output:
+        "apr_evolution/vertebrates_phylogeny.treefile"
+    shell:
+        """
+        iqtree -s {input} --prefix {params} \
+        -B 1000 --alrt 1000 -nt 4 --ancestral
+        """

@@ -3,6 +3,8 @@
 import argparse
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def get_ancestral_sequence(states, node):
@@ -33,6 +35,8 @@ def get_ancestral_sequence(states, node):
     # Put together the sequence into a string
     seq = f'>{node}\n{"".join(seq)}'
 
+    sns.histplot(post_prob)
+    plt.show()
     return seq
 
 

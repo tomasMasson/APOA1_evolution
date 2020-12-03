@@ -1,4 +1,0 @@
-155 Erpetoichthys calabaricus/Fishes
-101 Reptiles/Birds
-99  Mammals/Marsupials
-23  Hominids/Rest mammals

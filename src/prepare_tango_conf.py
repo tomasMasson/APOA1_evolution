@@ -20,7 +20,7 @@ def prepare_TANGO_configuration(input_file):
 
 if __name__ == '__main__':
     input_file = sys.argv[1]
-
-    with open('TANGO_configuration.txt', 'w') as fh:
+    out_file = f"{input_file.split('.')[0]}.config"
+    with open(out_file, 'w') as fh:
         for item in prepare_TANGO_configuration(input_file):
             fh.write(item)

@@ -128,6 +128,30 @@ rule fubar_analysis:
         rm apr_evolution/vertebrates_mafft_trimmed.fna.FUBAR.cache
         """
 
+# Remove treefile node label for MEME
+rule meme_analysis:
+    input:
+        "apr_evolution/vertebrates_phylogeny.treefile"
+    output:
+        "apr_evolution/vertebrates_phylogeny_meme.treefile"
+    shell:
+        """
+        sed -E 's/Node[0-9]*\///g' {input} > {output}
+        """
+
+# Run MEME analysis
+rule fix_treefile_meme:
+    input:
+        "apr_evolution/vertebrates_mafft_trimmed.fna",
+        "apr_evolution/vertebrates_phylogeny_meme.treefile"
+    output:
+        "apr_evolution/vertebrates_meme.json"
+    shell:
+        """
+        hyphy meme  --alignment {input[0]} --tree {input[1]} --outfile {output} &&\
+        mv apr_evolution/vertebrates_mafft_trimmed.fna.MEME.json {output}
+        """
+
 # Parse HyPhy results
 rule parse_fel:
     input:

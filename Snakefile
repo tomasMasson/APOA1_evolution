@@ -3,7 +3,11 @@ rule all:
     input:
         "apr_evolution/vertebrates_fel.csv",
         "apr_evolution/vertebrates_fubar.csv",
-        "apr_evolution/vertebrates_meme.csv"
+        "apr_evolution/vertebrates_meme.csv",
+        "ancestral_reconstruction/Node10/Node10.B99990001.pdb",
+        "ancestral_reconstruction/Node15/Node15.B99990001.pdb",
+        "ancestral_reconstruction/Node92/Node92.B99990001.pdb",
+        "ancestral_reconstruction/Node99/Node99.B99990001.pdb"
 
 # Get apoa1 protein ortholog sequences from ensembl
 rule get_protein_sequences:
@@ -152,7 +156,7 @@ rule fix_treefile_meme:
         mv apr_evolution/vertebrates_mafft_trimmed.fna.MEME.json {output}
         """
 
-# Parse HyPhy results
+# Parse HyPhy JSON results into CSV files
 rule parse_fel:
     input:
         "apr_evolution/vertebrates_fel.json",
@@ -184,4 +188,73 @@ rule parse_meme:
     shell:
         """
         ./src/parse_hyphy_meme.py {input} gorilla
+        """
+
+# Reconstruct ancestral sequences from IQ-Tree states file
+rule extract_ancestral_sequences:
+    input:
+        "apr_evolution/vertebrates_phylogeny.state"
+    output:
+        "ancestral_reconstruction/ancestral_sequences.faa"
+    shell:
+        """
+        ./src/get_ancestral_sequence.py {input} Node10 >> {output} &&\
+        ./src/get_ancestral_sequence.py {input} Node15 >> {output} &&\
+        ./src/get_ancestral_sequence.py {input} Node92 >> {output} &&\
+        ./src/get_ancestral_sequence.py {input} Node99 >> {output} &&\
+        mv *.svg ancestral_reconstruction/
+        """
+
+# Add Human, Mouse, Chicken and Crocodrillus sequences
+rule add_extant_sequences:
+    input:
+        "apr_evolution/vertebrates_sequences.faa"
+    output:
+        "ancestral_reconstruction/extant_sequences.faa"
+    shell:
+        """
+        grep -A 1 Crocodylus {input} >> {output} &&\
+        grep -A 1 Gallus {input} >> {output} &&\
+        grep -A 1 Rattus {input} >> {output} &&\
+        grep -A 1 Gorilla {input} >> {output}
+        """
+
+# Merge ancestral and extant sequences
+rule merge_sequences:
+    input:
+        "ancestral_reconstruction/ancestral_sequences.faa",
+        "ancestral_reconstruction/extant_sequences.faa"
+    output:
+        "ancestral_reconstruction/all_sequences.faa"
+    shell:
+        "cat {input} > {output}"
+
+# Align protein sequences with MAFFT
+rule mafft2_protein_alignment:
+    input:
+        "ancestral_reconstruction/all_sequences.faa"
+    output:
+        "ancestral_reconstruction/alignment.faa"
+    shell:
+        """
+        mafft --maxiterate 1000 --localpair \
+        {input} >> {output}
+        """
+
+# Modelling proteins with Modeller
+rule protein_modelling:
+    input:
+        "ancestral_reconstruction/alignment.faa",
+        "apoa1.pdb",
+    output:
+        "ancestral_reconstruction/Node10/Node10.B99990001.pdb",
+        "ancestral_reconstruction/Node15/Node15.B99990001.pdb",
+        "ancestral_reconstruction/Node92/Node92.B99990001.pdb",
+        "ancestral_reconstruction/Node99/Node99.B99990001.pdb"
+    shell:
+        """
+        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node10 {input} &&\
+        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node15 {input} &&\
+        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node92 {input} &&\
+        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node99 {input}
         """

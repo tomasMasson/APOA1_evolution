@@ -21,22 +21,24 @@ def get_ancestral_sequence(states, node):
                      skiprows=8)  # Skip commentary rows
     # Filter the dataframe to retain only the node of interest
     df = df[df.Node == node]
+    # Remove terminal regions of the alignment (poor quality)
+    df = df.iloc[41:285, :]
     # Discard columns without sequence state data
     df = df.iloc[1:-1, 3:]
-
     # Set the possible states (20 amino acid letters)
     states = df.columns
     # Create a list with the most probable states
-    seq = [states[np.argmax(row[1])].lstrip("p_")  # Get the most probable state
+    seq = [states[np.argmax(row[1])].lstrip("p_")  # Get most probable state
            for row in df.iterrows()]  # Iterate over the rows of the dataframe
     # Store the posterior probabilities of most probable states
     post_prob = [np.amax(row[1])  # Store higher posterior probability
-                 for row in df.iterrows()]  # Iterate over the rows of the dataframe
+                 for row in df.iterrows()]  # Iterate over dataframe rows
     # Put together the sequence into a string
     seq = f'>{node}\n{"".join(seq)}'
 
-    sns.histplot(post_prob)
-    plt.show()
+    sns.histplot(post_prob, bins=20, stat="probability")
+    outfile = f"{node}_post_prob.svg"
+    plt.savefig(outfile)
     return seq
 
 

@@ -1,13 +1,18 @@
+from Bio import AlignIO
+
 # Set apoa1 alignments as target file
+TARGETS = ["Node10", "Node15", "Node92", "Node99"]
+
 rule all:
     input:
         "apr_evolution/vertebrates_fel.csv",
         "apr_evolution/vertebrates_fubar.csv",
         "apr_evolution/vertebrates_meme.csv",
-        "ancestral_reconstruction/Node10/Node10.B99990001.pdb",
-        "ancestral_reconstruction/Node15/Node15.B99990001.pdb",
-        "ancestral_reconstruction/Node92/Node92.B99990001.pdb",
-        "ancestral_reconstruction/Node99/Node99.B99990001.pdb"
+        expand("ancestral_reconstruction/{target}/best_model.pdb", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS),
+        "ancestral_reconstruction/msf.csv",
+        "ancestral_reconstruction/wcn.csv"
 
 # Get apoa1 protein ortholog sequences from ensembl
 rule get_protein_sequences:
@@ -241,16 +246,26 @@ rule mafft2_protein_alignment:
         {input} >> {output}
         """
 
-# Modelling proteins with Modeller
+# Trim signal peptide from alignment
+rule trim_signal_peptide:
+    input:
+        "ancestral_reconstruction/alignment.faa"
+    output:
+        "ancestral_reconstruction/alignment_trimmed.faa"
+    run:
+        align = AlignIO.read(input[0], "fasta")
+        align_trimmed = align[:, 24:]
+        with open (output[0], "w") as fh:
+            for seq in align_trimmed:
+                fh.write(f">{seq.id}\n{seq.seq}\n")
+
+# Create protein models with Modeller
 rule protein_modelling:
     input:
-        "ancestral_reconstruction/alignment.faa",
+        "ancestral_reconstruction/alignment_trimmed.faa",
         "apoa1.pdb",
     output:
-        "ancestral_reconstruction/Node10/Node10.B99990001.pdb",
-        "ancestral_reconstruction/Node15/Node15.B99990001.pdb",
-        "ancestral_reconstruction/Node92/Node92.B99990001.pdb",
-        "ancestral_reconstruction/Node99/Node99.B99990001.pdb"
+        "ancestral_reconstruction/{target}/best_model.pdb"
     shell:
         """
         ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node10 {input} &&\
@@ -258,3 +273,37 @@ rule protein_modelling:
         ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node92 {input} &&\
         ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node99 {input}
         """
+
+# Compute MSF and WCN for each model
+rule compute_msf:
+    input:
+        "ancestral_reconstruction/{target}/best_model.pdb"
+    output:
+        "ancestral_reconstruction/{target}/best_model.msf"
+    shell:
+        "./src/calc_gnm.py {input} > {output}"
+
+rule compute_wcn:
+    input:
+        "ancestral_reconstruction/{target}/best_model.pdb"
+    output:
+        "ancestral_reconstruction/{target}/best_model.wcn"
+    shell:
+        "python ./src/calc_wcn.py {input} > {output}"
+
+# Aggregate MSF and WCN values
+rule aggregate_msf:
+    input:
+        expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS)
+    output:
+        "ancestral_reconstruction/msf.csv"
+    shell:
+        "paste {input} > {output}"
+
+rule aggregate_wcn:
+    input:
+        expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS)
+    output:
+        "ancestral_reconstruction/wcn.csv"
+    shell:
+        "paste {input} > {output}"

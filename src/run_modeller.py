@@ -2,7 +2,7 @@
 
 import argparse
 import os
-import shutil
+from shutil import copyfile
 from pathlib import Path
 from Bio import AlignIO
 
@@ -21,7 +21,7 @@ def create_modeller_alignment(template, target, alignment, folder):
         for seq in aln:
             # Write template sequence
             if template == seq.id:
-                template_seq = f">P1;template\nstructureX:template:1:A:243:A::::\n{seq.seq[24:]}*\n"
+                template_seq = f">P1;template\nstructureX:template:1:A:243:A::::\n{seq.seq}*\n"
                 fh.write(template_seq)
         for seq in aln:
             # Write target sequence
@@ -37,6 +37,8 @@ def create_modeller_config(target, folder):
 
     # Configuration file
     config = f"""
+import sys
+from shutil import copyfile
 from modeller import *              # Load standard Modeller classes
 from modeller.automodel import *    # Load the automodel class
 
@@ -52,8 +54,24 @@ a = automodel(env,
               sequence='{target}',  # Target sequence
               assess_methods=(assess.DOPE, assess.DOPEHR))  # Evaluation methods
 a.starting_model = 1    # index of the first model
-a.ending_model = 4      # index of the last model
+a.ending_model = 10      # index of the last model
 a.make()                # Run comparative modeling
+
+# Get a list of all successfully built models from a.outputs
+ok_models = [x for x in a.outputs if x['failure'] is None]
+
+# Rank the models by DOPE score
+key = 'DOPE score'
+if sys.version_info[:2] == (2,3):
+    # Python 2.3's sort doesn't have a 'key' argument
+    ok_models.sort(lambda a,b: cmp(a[key], b[key]))
+else:
+    ok_models.sort(key=lambda a: a[key])
+
+# Get top model
+m = ok_models[0]
+# Copy model to a new file
+copyfile(m["name"], 'best_model.pdb')
     """
     # Write config to file inside a new folder for the target
     config_file = f"{folder}/modeller_config.py"
@@ -89,7 +107,7 @@ def main():
     # Create Modeller configuration file
     create_modeller_config(target, target_folder)
     # Copy template structure
-    shutil.copyfile(template_structure, target_folder / "template.pdb")
+    copyfile(template_structure, target_folder / "template.pdb")
     # Run Modeller
     os.chdir(target_folder)
     command = "python modeller_config.py"

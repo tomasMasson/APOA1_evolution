@@ -20,26 +20,38 @@ def plot_aprs_scores(aggregation, entropy):
     """
 
     # Convert aggregation input to a pd DataFrame
-    agg_df = pd.read_csv(aggregation)
-    # Convert entropy input to a pd DataFrame
-    ent_df = pd.read_csv(entropy)
-    # Drop non-apr data
-    ent_df = ent_df[ent_df.Class != "Non-APR"]
+    agg_df = pd.read_csv(aggregation, names=["Specie", "Aggregation_score", "Class"])
+    agg_df = agg_df.drop(columns=["Specie"])
     # Normalize APR score to residue score
     agg_df.Aggregation_score = agg_df.Aggregation_score / 8
 
+    # Convert entropy input to a pd DataFrame
+    ent_df = pd.read_csv(entropy, names=["Entropy"])
+    # Trim gapped positions
+    ent_df = ent_df.iloc[43:286, :]
+    # Reset index values
+    ent_df = ent_df.reset_index(drop=True)
+    # Add APR/non-APR labels
+    ent_df["Class"] = "non-APR"
+    ent_df.loc[13:18, "Class"] = "APR1"
+    ent_df.loc[52:57, "Class"] = "APR2"
+    ent_df.loc[66:71, "Class"] = "APR3"
+    ent_df.loc[226:231, "Class"] = "APR4"
+    # Drop non-apr data
+    ent_df = ent_df[ent_df.Class != "non-APR"]
+
     # Create a new DataFrame to store the conservation value for each APR.
     # Initialize it with the number of sequences analyzed
-    counts = agg_df.groupby("APR").count()
+    counts = agg_df.groupby("Class").count()
     # Fix column name
     counts.columns = ["Sequences"]
     # Filter APRs with an average tango score of at least 5
     # and store them into another column
-    counts["APR"] = agg_df[agg_df.Aggregation_score >= 5].groupby("APR").count()
+    counts["Class"] = agg_df[agg_df.Aggregation_score >= 5].groupby("Class").count()
     # Fill NaN values
     counts = counts.fillna(0)
     # Compute the conservation of APRs relative to total number of sequences
-    counts["Conservation"] = counts.APR / counts.Sequences * 100
+    counts["Conservation"] = counts.Class / counts.Sequences * 100
 
     # Set font size to 10
     matplotlib.rcParams.update({'font.size': 10})
@@ -88,16 +100,16 @@ def plot_aprs_scores(aggregation, entropy):
 def plot_selection_type(hyphy_results):
     """
     Plot a rectangle with colors scheme based on the
-    selection regimes affecting protein sequence 
+    selection regimes affecting protein sequence
     inferred with HyPhy.
     """
 
     # Open Hyphy results and store them into a list
     with open(hyphy_results, "r") as fh:
         data = [line for line in fh]
-    fel = [item.split()[0] for item in data]
-    fubar = [item.split()[1] for item in data]
-    meme = [item.split()[2] for item in data]
+    fel = [item.split(",")[0] for item in data]
+    fubar = [item.split(",")[1] for item in data]
+    meme = [item.split(",")[2] for item in data]
     # Create a new figure
     f, ax = plt.subplots(1, 1, figsize=(6, 4))
     # Set Axis limits

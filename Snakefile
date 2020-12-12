@@ -1,3 +1,4 @@
+import pandas as pd
 from Bio import AlignIO
 
 # Species used for structural comparisons
@@ -8,17 +9,19 @@ EXTANTS = ["Gorilla_gorilla_ENSGGOP00000033442",
            "Gallus_gallus_ENSGALP00000011510"]
 TARGETS = NODES + EXTANTS
 
-# Required output files
+### Required output files ###
 rule all:
     input:
-        "apr_evolution/vertebrates_fel.csv",
-        "apr_evolution/vertebrates_fubar.csv",
-        "apr_evolution/vertebrates_meme.csv",
         expand("ancestral_reconstruction/{target}/best_model.pdb", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS),
+        "viz/panels/aprs_conservation.svg",
+        "viz/panels/selection_pressure.svg",
         "viz/panels/aprs_flexibility.svg",
         "viz/panels/aprs_flexibility_profiles.svg"
+
+
+### APRs evolution ###
 
 # Get apoa1 protein ortholog sequences from ensembl
 rule get_protein_sequences:
@@ -45,6 +48,7 @@ rule sequences_filtering:
     shell:
         "src/filter_sequences.py {input} {output}"
 
+# Cluster together sequences at 98% of identity
 rule sequences_clustering:
     input:
         "apr_evolution/vertebrates_sequences_filt.faa"
@@ -144,7 +148,7 @@ rule fubar_analysis:
         """
 
 # Remove treefile node label for MEME
-rule meme_analysis:
+rule fix_treefile_meme:
     input:
         "apr_evolution/vertebrates_phylogeny.treefile"
     output:
@@ -155,7 +159,7 @@ rule meme_analysis:
         """
 
 # Run MEME analysis
-rule fix_treefile_meme:
+rule meme_analysis:
     input:
         "apr_evolution/vertebrates_mafft_trimmed.fna",
         "apr_evolution/vertebrates_phylogeny_meme.treefile"
@@ -167,7 +171,7 @@ rule fix_treefile_meme:
         mv apr_evolution/vertebrates_mafft_trimmed.fna.MEME.json {output}
         """
 
-# Parse HyPhy JSON results into CSV files
+# Parse FEL JSON results into CSV files
 rule parse_fel:
     input:
         "apr_evolution/vertebrates_fel.json",
@@ -179,6 +183,7 @@ rule parse_fel:
         ./src/parse_hyphy_fel.py {input} gorilla
         """
 
+# Parse FUBAR JSON results into CSV files
 rule parse_fubar:
     input:
         "apr_evolution/vertebrates_fubar.json",
@@ -190,6 +195,7 @@ rule parse_fubar:
         ./src/parse_hyphy_fubar.py {input} gorilla
         """
 
+# Parse MEME JSON results into CSV files
 rule parse_meme:
     input:
         "apr_evolution/vertebrates_meme.json",
@@ -200,6 +206,57 @@ rule parse_meme:
         """
         ./src/parse_hyphy_meme.py {input} gorilla
         """
+
+# Aggregate HyPhy results
+rule aggregate_hyphy_results:
+    input:
+        "apr_evolution/vertebrates_fel.csv",
+        "apr_evolution/vertebrates_fubar.csv",
+        "apr_evolution/vertebrates_meme.csv"
+    output:
+        "apr_evolution/hyphy_results.csv"
+    run :
+        # Read all inputs as Pandas DataFrames
+        df_fel = pd.read_csv(input[0])    
+        df_fubar = pd.read_csv(input[1])    
+        df_meme = pd.read_csv(input[2])    
+        # Save columns with the selection regime data
+        dic = { "FEL": df_fel["Selection_type"],
+                "FUBAR": df_fubar["Selection_type"],
+                "MEME": df_meme["Episodic Selection"]}
+        # Save data to output file
+        df = pd.DataFrame(dic)
+        df.to_csv(output[0], index=False, header=True)
+
+
+### APR aggregation prediction ###
+
+# Predict aggregation propensity with Tango
+rule run_tango_predictions:
+    input:
+        "apr_evolution/vertebrates_mafft_trimmed.faa",
+        "/home/tmasson/Tango/tango_x86_64_release"
+    output:
+        "apr_evolution/aprs_aggregation_scores.csv"
+    shell:
+        """
+        ./src/run_tango.py {input} 54 62 APR1 >> {output}
+        ./src/run_tango.py {input} 93 101 APR2 >> {output}
+        ./src/run_tango.py {input} 107 115 APR3 >> {output}
+        ./src/run_tango.py {input} 267 275 APR4 >> {output}
+        """
+
+
+### Calculate sequence entropy ###
+rule calc_shannon_entropy:
+    input:
+        "apr_evolution/vertebrates_mafft_trimmed.faa"
+    output:
+        "apr_evolution/aprs_entropy.csv"
+    shell:
+        "src/calc_shannon_entropy.py {input} >> {output}"
+
+### Flexibility evolution ###
 
 # Reconstruct ancestral sequences from IQ-Tree states file
 rule extract_ancestral_sequences:
@@ -273,7 +330,7 @@ rule protein_modelling:
     shell:
         "./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 {wildcards.target} {input}"
 
-# Compute MSF and WCN for each model
+# Compute MSF for each model
 rule compute_msf:
     input:
         "ancestral_reconstruction/{target}/best_model.pdb"
@@ -282,6 +339,7 @@ rule compute_msf:
     shell:
         "./src/calc_gnm.py {input} -o {wildcards.target} > {output}"
 
+# Compute WCN for each model
 rule compute_wcn:
     input:
         "ancestral_reconstruction/{target}/best_model.pdb"
@@ -290,7 +348,7 @@ rule compute_wcn:
     shell:
         "python ./src/calc_wcn.py {input} -o {wildcards.target} > {output}"
 
-# Aggregate MSF and WCN values
+# Aggregate MSF values
 rule aggregate_msf:
     input:
         expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS)
@@ -299,6 +357,7 @@ rule aggregate_msf:
     shell:
         "paste {input} > {output}"
 
+# Aggregate WCN values
 rule aggregate_wcn:
     input:
         expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS)
@@ -307,7 +366,26 @@ rule aggregate_wcn:
     shell:
         "paste {input} > {output}"
 
+
 ### Plots generation ###
+
+# APRs evolution plotting
+rule plot_aprs_evolution:
+    input:
+        "apr_evolution/aprs_aggregation_scores.csv",
+        "apr_evolution/aprs_entropy.csv",
+        "apr_evolution/hyphy_results.csv"
+    output:
+        "viz/panels/aprs_conservation.svg",
+        "viz/panels/selection_pressure.svg"
+    params:
+        "aprs_conservation.svg",
+        "selection_pressure.svg"
+    shell:
+        """
+        ./viz/src/plot_apr_evolution.py {input} &&\
+        mv {params} viz/panels/
+        """
 
 # MSF and WCN plotting
 rule plot_aprs_msf_wcn:

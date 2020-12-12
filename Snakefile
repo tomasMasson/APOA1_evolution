@@ -16,7 +16,7 @@ rule all:
         expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS),
         "viz/panels/aprs_conservation.svg",
-        "viz/panels/selection_pressure.svg",
+        "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
         "viz/panels/aprs_flexibility_profiles.svg"
 
@@ -244,6 +244,7 @@ rule run_tango_predictions:
         ./src/run_tango.py {input} 93 101 APR2 >> {output}
         ./src/run_tango.py {input} 107 115 APR3 >> {output}
         ./src/run_tango.py {input} 267 275 APR4 >> {output}
+        rm nt=N.txt
         """
 
 
@@ -377,10 +378,10 @@ rule plot_aprs_evolution:
         "apr_evolution/hyphy_results.csv"
     output:
         "viz/panels/aprs_conservation.svg",
-        "viz/panels/selection_pressure.svg"
+        "viz/panels/natural_selection_regimes.svg"
     params:
         "aprs_conservation.svg",
-        "selection_pressure.svg"
+        "natural_selection_regimes.svg"
     shell:
         """
         ./viz/src/plot_apr_evolution.py {input} &&\

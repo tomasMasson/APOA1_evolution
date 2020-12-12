@@ -161,7 +161,7 @@ def plot_selection_type(hyphy_results):
     ax.vlines(232, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
     ax.add_artist(rect)
     # Show plot
-    plt.savefig("selection_pressure.svg")
+    plt.savefig("natural_selection_regimes.svg")
 
 
 def main():

@@ -1,21 +1,13 @@
 #!/usr/bin/env python3
 
-'''
-This script parses an input PDB file and returns weighted contact number (WCN)
-values, calculated with respect to the alpha-carbon (wcn_ca) and the sidechain
-geometric center (wcn_sc).
-
-Author: Benjamin R. Jack
-'''
-
 import os
-import csv
 import warnings
 import argparse
 import textwrap
 from Bio.Data import SCOPData
 from Bio.PDB import PDBParser
 from Bio.PDB import is_aa
+
 
 def inv_sq_distance(coord1, coord2):
     '''
@@ -25,6 +17,7 @@ def inv_sq_distance(coord1, coord2):
     for i, j in zip(coord1, coord2):
         distance += (i-j)**2
     return 1/distance
+
 
 def calculate_wcn(residues):
     '''
@@ -43,6 +36,7 @@ def calculate_wcn(residues):
         residue['wcn_sc'] = wcn_sc
 
     return residues
+
 
 def process_residue(residue):
     '''
@@ -96,6 +90,7 @@ def process_residue(residue):
 
     return output_dict
 
+
 def collect_coordinates(structure):
     '''
     Loops over all residues in a structure and collects coordinates for alpha-
@@ -107,6 +102,7 @@ def collect_coordinates(structure):
         if is_aa(residue):
             output_list.append(process_residue(residue))
     return output_list
+
 
 def main():
     '''
@@ -143,7 +139,6 @@ def main():
     if args.o is None:
         # If no output prefix given, assign prefix using input filename
         args.o = pdb_name
-    output_wcn = args.o + '.wcn.csv'
     # Load in PDB with BioPython
     pdb_parser = PDBParser()
     structure = pdb_parser.get_structure(pdb_name.upper(), args.pdb)
@@ -152,15 +147,10 @@ def main():
     # Calculate WCN from coordinates
     output_list = calculate_wcn(output_list)
     # Print output to STDOUT
+    print(args.o)
     for field in output_list:
         print(field['wcn_sc'])
-#    with open(output_wcn, 'w') as csvfile:
-#        writer = csv.DictWriter(csvfile,
-#                                fieldnames=['pdb_position', 'chain', 
-#                                            'pdb_aa', 'wcn_sc', 'wcn_ca'],
-#                                extrasaction="ignore")
-#        writer.writeheader()
-#        writer.writerows(output_list)
+
 
 if __name__ == "__main__":
     main()

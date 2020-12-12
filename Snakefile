@@ -1,8 +1,14 @@
 from Bio import AlignIO
 
-# Set apoa1 alignments as target file
-TARGETS = ["Node10", "Node15", "Node92", "Node99"]
+# Species used for structural comparisons
+NODES = ["Node10", "Node15", "Node92", "Node99"]
+EXTANTS = ["Gorilla_gorilla_ENSGGOP00000033442",
+           "Mus_musculus_ENSMUSP00000034588",
+           "Crocodylus_porosus_ENSCPRP00005000967",
+           "Gallus_gallus_ENSGALP00000011510"]
+TARGETS = NODES + EXTANTS
 
+# Required output files
 rule all:
     input:
         "apr_evolution/vertebrates_fel.csv",
@@ -11,8 +17,8 @@ rule all:
         expand("ancestral_reconstruction/{target}/best_model.pdb", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS),
-        "ancestral_reconstruction/msf.csv",
-        "ancestral_reconstruction/wcn.csv"
+        "viz/panels/aprs_flexibility.svg",
+        "viz/panels/aprs_flexibility_profiles.svg"
 
 # Get apoa1 protein ortholog sequences from ensembl
 rule get_protein_sequences:
@@ -199,30 +205,28 @@ rule parse_meme:
 rule extract_ancestral_sequences:
     input:
         "apr_evolution/vertebrates_phylogeny.state"
+    params:
+        nodes=expand("{nodes}", nodes=NODES)
     output:
         "ancestral_reconstruction/ancestral_sequences.faa"
-    shell:
-        """
-        ./src/get_ancestral_sequence.py {input} Node10 >> {output} &&\
-        ./src/get_ancestral_sequence.py {input} Node15 >> {output} &&\
-        ./src/get_ancestral_sequence.py {input} Node92 >> {output} &&\
-        ./src/get_ancestral_sequence.py {input} Node99 >> {output} &&\
-        mv *.svg ancestral_reconstruction/
-        """
+    run:
+        for node in params.nodes:
+            shell("""
+                  ./src/get_ancestral_sequence.py {input} {node} >> {output} &&\
+                  mv *.svg ancestral_reconstruction/
+                  """)
 
 # Add Human, Mouse, Chicken and Crocodrillus sequences
 rule add_extant_sequences:
     input:
         "apr_evolution/vertebrates_sequences.faa"
+    params:
+        extants=expand("{extants}", extants=EXTANTS)
     output:
         "ancestral_reconstruction/extant_sequences.faa"
-    shell:
-        """
-        grep -A 1 Crocodylus {input} >> {output} &&\
-        grep -A 1 Gallus {input} >> {output} &&\
-        grep -A 1 Rattus {input} >> {output} &&\
-        grep -A 1 Gorilla {input} >> {output}
-        """
+    run:
+        for extant in params.extants:
+            shell("grep -A 1 {extant} {input} >> {output}")
 
 # Merge ancestral and extant sequences
 rule merge_sequences:
@@ -267,12 +271,7 @@ rule protein_modelling:
     output:
         "ancestral_reconstruction/{target}/best_model.pdb"
     shell:
-        """
-        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node10 {input} &&\
-        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node15 {input} &&\
-        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node92 {input} &&\
-        ./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 Node99 {input}
-        """
+        "./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 {wildcards.target} {input}"
 
 # Compute MSF and WCN for each model
 rule compute_msf:
@@ -281,7 +280,7 @@ rule compute_msf:
     output:
         "ancestral_reconstruction/{target}/best_model.msf"
     shell:
-        "./src/calc_gnm.py {input} > {output}"
+        "./src/calc_gnm.py {input} -o {wildcards.target} > {output}"
 
 rule compute_wcn:
     input:
@@ -289,7 +288,7 @@ rule compute_wcn:
     output:
         "ancestral_reconstruction/{target}/best_model.wcn"
     shell:
-        "python ./src/calc_wcn.py {input} > {output}"
+        "python ./src/calc_wcn.py {input} -o {wildcards.target} > {output}"
 
 # Aggregate MSF and WCN values
 rule aggregate_msf:
@@ -307,3 +306,22 @@ rule aggregate_wcn:
         "ancestral_reconstruction/wcn.csv"
     shell:
         "paste {input} > {output}"
+
+### Plots generation ###
+
+# MSF and WCN plotting
+rule plot_aprs_msf_wcn:
+    input:
+        "ancestral_reconstruction/msf.csv",
+        "ancestral_reconstruction/wcn.csv"
+    output:
+        "viz/panels/aprs_flexibility.svg",
+        "viz/panels/aprs_flexibility_profiles.svg"
+    params:
+        "aprs_flexibility.svg",
+        "aprs_flexibility_profiles.svg"
+    shell:
+        """
+        ./viz/src/plot_msf_wcn.py {input} &&\
+        mv {params} viz/panels/
+        """

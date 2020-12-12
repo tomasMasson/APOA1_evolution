@@ -22,8 +22,11 @@ def calculate_GNM(pdb):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('PDB', help='PDB file')
+    parser.add_argument('-o', metavar='<output prefix>', type=str,
+                        help='prefix for output files')
     args = parser.parse_args()
     pdb = args.PDB
+    print(args.o)
     calculate_GNM(pdb)
 
 

@@ -85,7 +85,8 @@ rule infer_phylogeny:
     params:
         "apr_evolution/vertebrates_phylogeny"
     output:
-        "apr_evolution/vertebrates_phylogeny.treefile"
+        "apr_evolution/vertebrates_phylogeny.treefile",
+        "apr_evolution/vertebrates_phylogeny.state"
     shell:
         """
         iqtree -s {input} --prefix {params} \

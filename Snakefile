@@ -235,8 +235,7 @@ rule aggregate_hyphy_results:
 # Predict aggregation propensity with Tango
 rule run_tango_predictions:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.faa",
-        "/home/tmasson/Tango/tango_x86_64_release"
+        "apr_evolution/vertebrates_mafft_trimmed.faa"
     output:
         "apr_evolution/aprs_aggregation_scores.csv"
     shell:
@@ -367,6 +366,22 @@ rule aggregate_wcn:
         "ancestral_reconstruction/wcn.csv"
     shell:
         "paste {input} > {output}"
+
+
+### FoldX in-silico mutagenesis ###
+
+# FoldX Mutagenesis
+rule foldx_mutagenesis:
+    input:
+        "apoa1.pdb"
+    params:
+        "foldx_mutagenesis/mutations_list.txt"
+    output:
+        "foldx_mutagenesis/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
+    shell:
+        """
+        ~/mutatex/build/scripts-3.8/mutatex -f suite5 -x ~/foldx/foldx --mutlist {params} --np 4 {input}
+        """
 
 
 ### Plots generation ###

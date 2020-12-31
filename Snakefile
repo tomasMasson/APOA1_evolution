@@ -12,13 +12,14 @@ TARGETS = NODES + EXTANTS
 ### Required output files ###
 rule all:
     input:
-        expand("ancestral_reconstruction/{target}/best_model.pdb", target=TARGETS),
-        expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS),
-        expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
         "viz/panels/aprs_conservation.svg",
         "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
-        "viz/panels/aprs_flexibility_profiles.svg"
+        "viz/panels/aprs_flexibility_profiles.svg",
+ #       "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
 
 
 ### APRs evolution ###
@@ -331,28 +332,37 @@ rule protein_modelling:
     shell:
         "./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 {wildcards.target} {input}"
 
-# Compute MSF for each model
-rule compute_msf:
+# Model refinement (energy minimization)
+rule model_refinement:
     input:
         "ancestral_reconstruction/{target}/best_model.pdb"
     output:
-        "ancestral_reconstruction/{target}/best_model.msf"
+        "ancestral_reconstruction/{target}/best_model_relaxed.pdb"
+    shell:
+        "./src/pyrosetta_fastrelax.py {input}"
+
+# Compute MSF for each model
+rule compute_msf:
+    input:
+        "ancestral_reconstruction/{target}/best_model_relaxed.pdb"
+    output:
+        "ancestral_reconstruction/{target}/best_model_relaxed.msf"
     shell:
         "./src/calc_gnm.py {input} -o {wildcards.target} > {output}"
 
 # Compute WCN for each model
 rule compute_wcn:
     input:
-        "ancestral_reconstruction/{target}/best_model.pdb"
+        "ancestral_reconstruction/{target}/best_model_relaxed.pdb"
     output:
-        "ancestral_reconstruction/{target}/best_model.wcn"
+        "ancestral_reconstruction/{target}/best_model_relaxed.wcn"
     shell:
         "python ./src/calc_wcn.py {input} -o {wildcards.target} > {output}"
 
 # Aggregate MSF values
 rule aggregate_msf:
     input:
-        expand("ancestral_reconstruction/{target}/best_model.msf", target=TARGETS)
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS)
     output:
         "ancestral_reconstruction/msf.csv"
     shell:
@@ -361,26 +371,56 @@ rule aggregate_msf:
 # Aggregate WCN values
 rule aggregate_wcn:
     input:
-        expand("ancestral_reconstruction/{target}/best_model.wcn", target=TARGETS)
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS)
     output:
         "ancestral_reconstruction/wcn.csv"
     shell:
         "paste {input} > {output}"
 
 
-### FoldX in-silico mutagenesis ###
+### MutateX in-silico mutagenesis ###
 
-# FoldX Mutagenesis
-rule foldx_mutagenesis:
+# Create MutateX configuration files
+rule prepare_mutatex_templates:
     input:
         "apoa1.pdb"
-    params:
-        "foldx_mutagenesis/mutations_list.txt"
     output:
-        "foldx_mutagenesis/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
+        "mutatex_mutagenesis/mutate_runfile_template.txt",
+        "mutatex_mutagenesis/repair_runfile_template.txt"
+    run:
+        with open(output[0], "w") as fh:
+            fh.write("""command=BuildModel
+pdb=$PDBS$
+mutant-file=individual_list.txt
+water=-CRYSTAL
+numberOfRuns=$NRUNS$
+complexWithDNA=true
+""")
+        with open(output[1], "w") as fh:
+            fh.write("""command=RepairPDB
+pdb=$PDBS$
+
+temperature=298
+water=-CRYSTAL
+complexWithDNA=true
+""")
+
+# MutateX Mutagenesis
+rule mutatex_mutagenesis:
+    input:
+        "apoa1.pdb",
+        "mutatex_mutagenesis/mutate_runfile_template.txt",
+        "mutatex_mutagenesis/repair_runfile_template.txt"
+    params:
+        "mutatex_mutagenesis",
+        "/home/tmasson/foldx/foldx"
+    output:
+        "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
     shell:
         """
-        ~/mutatex/build/scripts-3.8/mutatex -f suite5 -x ~/foldx/foldx --mutlist {params} --np 4 {input}
+        cp {input[0]} {params[0]}/
+        cd {params[0]}
+        mutatex -f suite5 -x {params[1]} --np 4 {input[0]}
         """
 
 

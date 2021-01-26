@@ -237,14 +237,16 @@ rule aggregate_hyphy_results:
 rule run_tango_predictions:
     input:
         "apr_evolution/vertebrates_mafft_trimmed.faa"
+#    params:
+#        "/home/tmasson/tango/tango_x86_64_release"
     output:
         "apr_evolution/aprs_aggregation_scores.csv"
     shell:
         """
-        ./src/run_tango.py {input} 54 62 APR1 >> {output}
-        ./src/run_tango.py {input} 93 101 APR2 >> {output}
-        ./src/run_tango.py {input} 107 115 APR3 >> {output}
-        ./src/run_tango.py {input} 267 275 APR4 >> {output}
+        ./src/run_tango.py {input} 54 62 {config[tango]} APR1 >> {output}
+        ./src/run_tango.py {input} 93 101 {config[tango]} APR2 >> {output}
+        ./src/run_tango.py {input} 107 115 {config[tango]} APR3 >> {output}
+        ./src/run_tango.py {input} 267 275 {config[tango]} APR4 >> {output}
         rm nt=N.txt
         """
 

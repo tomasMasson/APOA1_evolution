@@ -20,7 +20,7 @@ def create_TANGO_configuration(alignment, start, end):
     return config
 
 
-def run_tango(configurations, output):
+def run_tango(bin, configurations, output):
     """
     Runs a set of configurations stored
     in the variable <config>.
@@ -30,7 +30,7 @@ def run_tango(configurations, output):
     """
 
     for key in configurations:
-        command = "tango " + configurations[key]
+        command = f"{bin} " + configurations[key]
         # Run Tango for this configuraton and
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
         # Decode result from binary to utf-8
@@ -50,16 +50,18 @@ def main():
                         help="Start position")
     parser.add_argument("end", type=int,
                         help="End position")
+    parser.add_argument("bin",
+                        help="TANGO binary")
     parser.add_argument("output",
                         help="Name assigned to predicted value")
 
     args = parser.parse_args()
     # Arguments unpacking
-    align, start, end, output = args.alignment, args.start, args.end, args.output
+    align, start, end, bin, output = args.alignment, args.start, args.end, args.bin, args.output
     # Create configuration orders
     config = create_TANGO_configuration(align, start, end)
     # Run Tango
-    run_tango(config, output)
+    run_tango(bin, config, output)
 
 
 if __name__ == "__main__":

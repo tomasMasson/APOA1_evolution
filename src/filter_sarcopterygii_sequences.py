@@ -66,4 +66,19 @@ def filter_sarcopterygii_sequences(multifasta, outfile):
                 # Add sequence
                 fh.write(f">{seq_id}\n{seq.seq}\n")
 
-filter_sarcopterygii_sequences("tmp")
+
+def main():
+    """Command line argument parser"""
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("multifasta",
+                        help="Multifasta input file")
+    parser.add_argument("outfile",
+                        help="Output file name")
+    args = parser.parse_args()
+    # Retrieve sequences
+    filter_sarcopterygii_sequences(args.multifasta, args.outfile)
+
+
+if __name__ == "__main__":
+    main()

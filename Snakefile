@@ -40,30 +40,39 @@ rule get_nucleotide_sequences:
     shell:
         "src/get_ensembl_sequences.py nucleotide {output}"
 
-# Remove sequences too short or without start codon
-rule sequences_filtering:
+# Retain only sequences belonging to sarcopterygii species
+rule filter_sarcopterygii_sequences:
     input:
         "apr_evolution/ensembl_sequences.faa"
     output:
-        temp("apr_evolution/vertebrates_sequences_filt.faa")
+        "apr_evolution/raw_sarcopterygii_sequences.faa"
     shell:
-        "src/filter_sequences.py {input} {output}"
+        "src/filter_sarcopterygii_sequences.py {input} {output}"
+
+# Remove sequences too short or without start codon
+rule filter_bad_quality_sequences:
+    input:
+        "apr_evolution/raw_sarcopterygii_sequences.faa"
+    output:
+        temp("apr_evolution/sequences_filtered.faa")
+    shell:
+        "src/filter_bad_quality_sequences.py {input} {output}"
 
 # Cluster together sequences at 98% of identity
 rule sequences_clustering:
     input:
-        "apr_evolution/vertebrates_sequences_filt.faa"
+        "apr_evolution/sequences_filtered.faa"
     output:
-        "apr_evolution/vertebrates_sequences.faa"
+        "apr_evolution/sarcopterygii_sequences.faa"
     shell:
         "cd-hit -i {input} -o {output} -c 0.98"
 
 # Align protein sequences with MAFFT
 rule mafft_protein_alignment:
     input:
-        "apr_evolution/vertebrates_sequences.faa"
+        "apr_evolution/sarcopterygii_sequences.faa"
     output:
-        "apr_evolution/vertebrates_mafft.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     shell:
         """
         mafft --maxiterate 1000 --localpair \
@@ -73,21 +82,21 @@ rule mafft_protein_alignment:
 # Trim out highly gapped positions
 rule trim_protein_alignment:
     input:
-        "apr_evolution/vertebrates_mafft.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
-        "apr_evolution/vertebrates_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
     shell:
         "trimal -in {input} -out {output} -gt 0.05"
 
-# Infer a protein phylogeny from the vertebrates alignment
+# Infer a protein phylogeny from the sarcopterygii alignment
 rule infer_phylogeny:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
     params:
-        "apr_evolution/vertebrates_phylogeny"
+        "apr_evolution/sarcopterygii_phylogeny"
     output:
-        "apr_evolution/vertebrates_phylogeny.treefile",
-        "apr_evolution/vertebrates_phylogeny.state"
+        "apr_evolution/sarcopterygii_phylogeny.treefile",
+        "apr_evolution/sarcopterygii_phylogeny.state"
     shell:
         """
         iqtree -s {input} --prefix {params} \
@@ -98,19 +107,19 @@ rule infer_phylogeny:
 rule filter_cds_ensembl:
     input:
         "apr_evolution/ensembl_sequences.fna",
-        "apr_evolution/vertebrates_sequences.faa"
+        "apr_evolution/sarcopterygii_sequences.faa"
     output:
-        "apr_evolution/vertebrates_sequences.fna"
+        "apr_evolution/sarcopterygii_sequences.fna"
     shell:
-        "src/filter_cds_ensembl.py {input} > {output}"
+        "src/filter_nucleotide_sequences.py {input} > {output}"
 
 # Align nucleotide sequences with PAL2NAL
 rule pal2nal_alignment:
     input:
-        "apr_evolution/vertebrates_mafft.faa",
-        "apr_evolution/vertebrates_sequences.fna"
+        "apr_evolution/sarcopterygii_mafft.faa",
+        "apr_evolution/sarcopterygii_sequences.fna"
     output:
-        "apr_evolution/vertebrates_mafft.fna"
+        "apr_evolution/sarcopterygii_mafft.fna"
     shell:
         """
         pal2nal.pl {input} -output fasta > {output}
@@ -119,42 +128,42 @@ rule pal2nal_alignment:
 # Trim out highly gapped positions
 rule trim_nucleotide_alignment:
     input:
-        "apr_evolution/vertebrates_mafft.fna"
+        "apr_evolution/sarcopterygii_mafft.fna"
     output:
-        "apr_evolution/vertebrates_mafft_trimmed.fna"
+        "apr_evolution/sarcopterygii_mafft_trimmed.fna"
     shell:
         "trimal -in {input} -out {output} -gt 0.05"
 
 # Run FEL analysis
 rule fel_analysis:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.fna",
-        "apr_evolution/vertebrates_phylogeny.treefile"
+        "apr_evolution/sarcopterygii_mafft_trimmed.fna",
+        "apr_evolution/sarcopterygii_phylogeny.treefile"
     output:
-        "apr_evolution/vertebrates_fel.json"
+        "apr_evolution/sarcopterygii_fel.json"
     shell:
         "hyphy fel --alignment {input[0]} --tree {input[1]} --output {output}"
 
 # Run FUBAR analysis
 rule fubar_analysis:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.fna",
-        "apr_evolution/vertebrates_phylogeny.treefile"
+        "apr_evolution/sarcopterygii_mafft_trimmed.fna",
+        "apr_evolution/sarcopterygii_phylogeny.treefile"
     output:
-        "apr_evolution/vertebrates_fubar.json"
+        "apr_evolution/sarcopterygii_fubar.json"
     shell:
         """
         hyphy fubar --alignment {input[0]} --tree {input[1]} && \
-        mv apr_evolution/vertebrates_mafft_trimmed.fna.FUBAR.json {output} && \
-        rm apr_evolution/vertebrates_mafft_trimmed.fna.FUBAR.cache
+        mv apr_evolution/sarcopterygii_mafft_trimmed.fna.FUBAR.json {output} && \
+        rm apr_evolution/sarcopterygii_mafft_trimmed.fna.FUBAR.cache
         """
 
 # Remove treefile node label for MEME
 rule fix_treefile_meme:
     input:
-        "apr_evolution/vertebrates_phylogeny.treefile"
+        "apr_evolution/sarcopterygii_phylogeny.treefile"
     output:
-        "apr_evolution/vertebrates_phylogeny_meme.treefile"
+        "apr_evolution/sarcopterygii_phylogeny_meme.treefile"
     shell:
         """
         sed -E 's/Node[0-9]*\///g' {input} > {output}
@@ -163,23 +172,23 @@ rule fix_treefile_meme:
 # Run MEME analysis
 rule meme_analysis:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.fna",
-        "apr_evolution/vertebrates_phylogeny_meme.treefile"
+        "apr_evolution/sarcopterygii_mafft_trimmed.fna",
+        "apr_evolution/sarcopterygii_phylogeny_meme.treefile"
     output:
-        "apr_evolution/vertebrates_meme.json"
+        "apr_evolution/sarcopterygii_meme.json"
     shell:
         """
         hyphy meme  --alignment {input[0]} --tree {input[1]} --outfile {output} &&\
-        mv apr_evolution/vertebrates_mafft_trimmed.fna.MEME.json {output}
+        mv apr_evolution/sarcopterygii_mafft_trimmed.fna.MEME.json {output}
         """
 
 # Parse FEL JSON results into CSV files
 rule parse_fel:
     input:
-        "apr_evolution/vertebrates_fel.json",
-        "apr_evolution/vertebrates_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_fel.json",
+        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
     output:
-        "apr_evolution/vertebrates_fel.csv"
+        "apr_evolution/sarcopterygii_fel.csv"
     shell:
         """
         ./src/parse_hyphy_fel.py {input} gorilla
@@ -188,10 +197,10 @@ rule parse_fel:
 # Parse FUBAR JSON results into CSV files
 rule parse_fubar:
     input:
-        "apr_evolution/vertebrates_fubar.json",
-        "apr_evolution/vertebrates_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_fubar.json",
+        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
     output:
-        "apr_evolution/vertebrates_fubar.csv"
+        "apr_evolution/sarcopterygii_fubar.csv"
     shell:
         """
         ./src/parse_hyphy_fubar.py {input} gorilla
@@ -200,10 +209,10 @@ rule parse_fubar:
 # Parse MEME JSON results into CSV files
 rule parse_meme:
     input:
-        "apr_evolution/vertebrates_meme.json",
-        "apr_evolution/vertebrates_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_meme.json",
+        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
     output:
-        "apr_evolution/vertebrates_meme.csv"
+        "apr_evolution/sarcopterygii_meme.csv"
     shell:
         """
         ./src/parse_hyphy_meme.py {input} gorilla
@@ -212,9 +221,9 @@ rule parse_meme:
 # Aggregate HyPhy results
 rule aggregate_hyphy_results:
     input:
-        "apr_evolution/vertebrates_fel.csv",
-        "apr_evolution/vertebrates_fubar.csv",
-        "apr_evolution/vertebrates_meme.csv"
+        "apr_evolution/sarcopterygii_fel.csv",
+        "apr_evolution/sarcopterygii_fubar.csv",
+        "apr_evolution/sarcopterygii_meme.csv"
     output:
         "apr_evolution/hyphy_results.csv"
     run :
@@ -236,7 +245,7 @@ rule aggregate_hyphy_results:
 # Predict aggregation propensity with Tango
 rule run_tango_predictions:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
 #    params:
 #        "/home/tmasson/tango/tango_x86_64_release"
     output:
@@ -254,7 +263,7 @@ rule run_tango_predictions:
 ### Calculate sequence entropy ###
 rule calc_shannon_entropy:
     input:
-        "apr_evolution/vertebrates_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
     output:
         "apr_evolution/aprs_entropy.csv"
     shell:
@@ -265,7 +274,7 @@ rule calc_shannon_entropy:
 # Reconstruct ancestral sequences from IQ-Tree states file
 rule extract_ancestral_sequences:
     input:
-        "apr_evolution/vertebrates_phylogeny.state"
+        "apr_evolution/sarcopterygii_phylogeny.state"
     params:
         nodes=expand("{nodes}", nodes=NODES)
     output:
@@ -280,7 +289,7 @@ rule extract_ancestral_sequences:
 # Add Human, Mouse, Chicken and Crocodrillus sequences
 rule add_extant_sequences:
     input:
-        "apr_evolution/vertebrates_sequences.faa"
+        "apr_evolution/sarcopterygii_sequences.faa"
     params:
         extants=expand("{extants}", extants=EXTANTS)
     output:

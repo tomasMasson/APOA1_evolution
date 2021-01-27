@@ -30,16 +30,20 @@ def fetch_ensembl_sequences(molecule_type, outfile):
     with open(outfile, 'w') as fh:
         # Iterate over all orthologs stored in the dictionary
         for seq in decoded['data'][0]['homologies']:
-            species = seq['target']['species'].capitalize()
-            protein_id = seq['target']['protein_id']
-            # Write species and protein id as sequence identifier
-            fh.write(f">{species}_{protein_id}\n")
-            # Extract sequence from pairwise alignment and remove gaps
-            fh.write(f"{seq['target']['align_seq'].replace('-', '')}\n")
+            # Discard within-specie orthologs (APOA4, APOAE, etc)
+            if seq['target']['species'] != "homo_sapiens":
+                species = seq['target']['species'].capitalize()
+                protein_id = seq['target']['protein_id']
+                taxon_id = seq['target']['taxon_id']
+                # Write species and protein id as sequence identifier
+                fh.write(f">{taxon_id}_{species}_{protein_id}\n")
+                # Extract sequence from pairwise alignment and remove gaps
+                fh.write(f"{seq['target']['align_seq'].replace('-', '')}\n")
         # Add human apoa1 sequence
         species = seq['source']['species'].capitalize()
         protein_id = seq['source']['protein_id']
-        fh.write(f">{species}_{protein_id}\n")
+        taxon_id = seq['source']['taxon_id']
+        fh.write(f">{taxon_id}_{species}_{protein_id}\n")
         fh.write(f"{seq['source']['align_seq'].replace('-', '')}\n")
 
 

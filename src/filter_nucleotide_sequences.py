@@ -14,8 +14,9 @@ def filter_sequences(raw_cds, dataset):
     ids = [sequence.id for sequence in protein_seqs]
     cds = SeqIO.parse(raw_cds, 'fasta')
     for sequence in cds:
-        if sequence.id in ids:
-            print(f'>{sequence.id}\n{sequence.seq}\n')
+        cds_id = "_".join(sequence.id.split("_")[1:])
+        if cds_id in ids:
+            print(f'>{cds_id}\n{sequence.seq}\n')
 
 
 def argument_parser():

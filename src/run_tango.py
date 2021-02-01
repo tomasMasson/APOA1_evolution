@@ -5,19 +5,43 @@ import subprocess
 from Bio import SeqIO
 
 
+def correct_position_human2alg(position, align):
+    """
+    Correct the position of the human protein sequence
+    to reflect the corresponding position on the
+    protein alignment (in this case, it must be a
+    Seq object from Biopython).
+    """
+
+    # Iterate over the alignment
+    for seq in align:
+        # Use the Human sequence
+        if "Gorilla_gorilla" in seq.id:
+            # Count the number of gaps
+            gaps = seq.seq[:position].count("-")
+    # Correct the Human position using the number of gaps
+    position_corr = position + gaps
+    
+    return position_corr
+
+
 def create_TANGO_configuration(alignment, start, end):
     """
     Takes a fasta alignment and returns a list
     containing a TANGO configuration string
-    for each sequence.
+    for each sequence based on the start and end
+    coordinates provided.
     """
 
     # Read sequences from a fasta alignment
-    align = SeqIO.parse(alignment, "fasta")
+    align = list(SeqIO.parse(alignment, "fasta"))
+    # Correct the initial coordinates
+    start_corr = correct_position_human2alg(start, align)
+    end_corr = correct_position_human2alg(end, align)
     # Create a configuration list from sequences
-    config = {seq.id: f"nt='N' ct='N' ph='7' te='310' io='0.1' seq='{seq.seq[start:end].rstrip()}'"
-              for seq in align}
-    return config
+    conf = {seq.id: f"nt='N' ct='N' ph='7' te='310' io='0.1' seq='{seq.seq[start_corr:end_corr].rstrip()}'"
+             for seq in align}
+    return conf
 
 
 def run_tango(bin, configurations, output):

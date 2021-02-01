@@ -100,7 +100,7 @@ rule infer_phylogeny:
     shell:
         """
         iqtree -s {input} --prefix {params} \
-        -B 1000 --alrt 1000 -nt 4 --ancestral
+        --alrt 1000 -nt 4 --ancestral -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
         """
 
 # Retain only coding sequences matching the sequences present in the protein dataset
@@ -252,10 +252,10 @@ rule run_tango_predictions:
         "apr_evolution/aprs_aggregation_scores.csv"
     shell:
         """
-        ./src/run_tango.py {input} 54 62 {config[tango]} APR1 >> {output}
-        ./src/run_tango.py {input} 93 101 {config[tango]} APR2 >> {output}
-        ./src/run_tango.py {input} 107 115 {config[tango]} APR3 >> {output}
-        ./src/run_tango.py {input} 267 275 {config[tango]} APR4 >> {output}
+        ./src/run_tango.py {input} 36 44 {config[tango]} APR1 >> {output}
+        ./src/run_tango.py {input} 75 83 {config[tango]} APR2 >> {output}
+        ./src/run_tango.py {input} 89 97 {config[tango]} APR3 >> {output}
+        ./src/run_tango.py {input} 249 257 {config[tango]} APR4 >> {output}
         rm nt=N.txt
         """
 

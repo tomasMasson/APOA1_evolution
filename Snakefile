@@ -15,8 +15,8 @@ rule all:
         expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
-        "viz/panels/aprs_conservation.svg",
-        "viz/panels/natural_selection_regimes.svg",
+#        "viz/panels/aprs_conservation.svg",
+#        "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
         "viz/panels/aprs_flexibility_profiles.svg",
  #       "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
@@ -50,22 +50,13 @@ rule filter_sarcopterygii_sequences:
         "src/filter_sarcopterygii_sequences.py {input} {output}"
 
 # Remove sequences too short or without start codon
-rule filter_bad_quality_sequences:
+rule filter_low_quality_sequences:
     input:
         "apr_evolution/raw_sarcopterygii_sequences.faa"
     output:
-        temp("apr_evolution/sequences_filtered.faa")
-    shell:
-        "src/filter_bad_quality_sequences.py {input} {output}"
-
-# Cluster together sequences at 98% of identity
-rule sequences_clustering:
-    input:
-        "apr_evolution/sequences_filtered.faa"
-    output:
         "apr_evolution/sarcopterygii_sequences.faa"
     shell:
-        "cd-hit -i {input} -o {output} -c 0.98"
+        "src/filter_bad_quality_sequences.py {input} {output}"
 
 # Align protein sequences with MAFFT
 rule mafft_protein_alignment:

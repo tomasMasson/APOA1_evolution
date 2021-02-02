@@ -15,6 +15,7 @@ rule all:
         expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
+        "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
 #        "viz/panels/aprs_conservation.svg",
 #        "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
@@ -91,7 +92,35 @@ rule infer_phylogeny:
     shell:
         """
         iqtree -s {input} --prefix {params} \
-        --alrt 1000 -nt 4 --ancestral -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
+        --bb 1000 --alrt 1000 -nt 4 --ancestral \
+        -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
+        """
+
+# Align protein sequences with ClustalO
+rule clustalo_protein_alignment:
+    input:
+        "apr_evolution/sarcopterygii_sequences.faa"
+    output:
+        "apr_evolution/sarcopterygii_clustalo.faa"
+    shell:
+        """
+        clustalo --maxiterate 1000 --localpair \
+        {input} >> {output}
+        """
+
+# Prepare another phylogeny based on the ClustalO alignment
+rule infer_supplementary_phylogeny:
+    input:
+        "apr_evolution/sarcopterygii_clustalo.faa"
+    params:
+        "apr_evolution/sarcopterygii_phylogeny_suppl"
+    output:
+        "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
+    shell:
+        """
+        iqtree -s {input} --prefix {params} \
+        --bb 1000 --alrt 1000 -nt 4 \
+        -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
         """
 
 # Retain only coding sequences matching the sequences present in the protein dataset
@@ -243,10 +272,10 @@ rule run_tango_predictions:
         "apr_evolution/aprs_aggregation_scores.csv"
     shell:
         """
-        ./src/run_tango.py {input} 36 44 {config[tango]} APR1 >> {output}
-        ./src/run_tango.py {input} 75 83 {config[tango]} APR2 >> {output}
-        ./src/run_tango.py {input} 89 97 {config[tango]} APR3 >> {output}
-        ./src/run_tango.py {input} 249 257 {config[tango]} APR4 >> {output}
+        ./src/run_tango.py {input} 12 20 {config[tango]} APR1 >> {output}
+        ./src/run_tango.py {input} 51 59 {config[tango]} APR2 >> {output}
+        ./src/run_tango.py {input} 65 73 {config[tango]} APR3 >> {output}
+        ./src/run_tango.py {input} 225 233 {config[tango]} APR4 >> {output}
         rm nt=N.txt
         """
 

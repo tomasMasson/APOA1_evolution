@@ -35,6 +35,9 @@ def create_TANGO_configuration(alignment, start, end):
 
     # Read sequences from a fasta alignment
     align = list(SeqIO.parse(alignment, "fasta"))
+    # Add signal peptide length to the coordinates (24 aa)
+    start = start + 24
+    end = end + 24
     # Correct the initial coordinates
     start_corr = correct_position_human2alg(start, align)
     end_corr = correct_position_human2alg(end, align)

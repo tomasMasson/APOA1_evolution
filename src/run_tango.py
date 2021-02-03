@@ -16,7 +16,7 @@ def correct_position_human2alg(position, align):
     # Iterate over the alignment
     for seq in align:
         # Use the Human sequence
-        if "Gorilla_gorilla" in seq.id:
+        if "Homo_sapiens" in seq.id:
             # Count the number of gaps
             gaps = seq.seq[:position].count("-")
     # Correct the Human position using the number of gaps

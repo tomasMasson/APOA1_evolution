@@ -16,8 +16,8 @@ rule all:
         expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
         expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
         "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
-#        "viz/panels/aprs_conservation.svg",
-#        "viz/panels/natural_selection_regimes.svg",
+        "viz/panels/aprs_conservation.svg",
+        "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
         "viz/panels/aprs_flexibility_profiles.svg",
  #       "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
@@ -71,19 +71,10 @@ rule mafft_protein_alignment:
         {input} >> {output}
         """
 
-# Trim out highly gapped positions
-rule trim_protein_alignment:
-    input:
-        "apr_evolution/sarcopterygii_mafft.faa"
-    output:
-        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
-    shell:
-        "trimal -in {input} -out {output} -gt 0.05"
-
 # Infer a protein phylogeny from the sarcopterygii alignment
 rule infer_phylogeny:
     input:
-        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     params:
         "apr_evolution/sarcopterygii_phylogeny"
     output:
@@ -92,7 +83,7 @@ rule infer_phylogeny:
     shell:
         """
         iqtree -s {input} --prefix {params} \
-        --bb 1000 --alrt 1000 -nt 4 --ancestral \
+        --ufboot 1000 --alrt 1000 -nt 4 --ancestral \
         -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
         """
 
@@ -104,11 +95,10 @@ rule clustalo_protein_alignment:
         "apr_evolution/sarcopterygii_clustalo.faa"
     shell:
         """
-        clustalo --maxiterate 1000 --localpair \
-        {input} >> {output}
+        clustalo -i {input} -o {output}
         """
 
-# Prepare another phylogeny based on the ClustalO alignment
+# Prepare a supplementary phylogeny based on the ClustalO alignment
 rule infer_supplementary_phylogeny:
     input:
         "apr_evolution/sarcopterygii_clustalo.faa"
@@ -119,7 +109,7 @@ rule infer_supplementary_phylogeny:
     shell:
         """
         iqtree -s {input} --prefix {params} \
-        --bb 1000 --alrt 1000 -nt 4 \
+        --ufboot 1000 --alrt 1000 -nt 4 \
         -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
         """
 
@@ -206,7 +196,7 @@ rule meme_analysis:
 rule parse_fel:
     input:
         "apr_evolution/sarcopterygii_fel.json",
-        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
         "apr_evolution/sarcopterygii_fel.csv"
     shell:
@@ -218,7 +208,7 @@ rule parse_fel:
 rule parse_fubar:
     input:
         "apr_evolution/sarcopterygii_fubar.json",
-        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
         "apr_evolution/sarcopterygii_fubar.csv"
     shell:
@@ -230,7 +220,7 @@ rule parse_fubar:
 rule parse_meme:
     input:
         "apr_evolution/sarcopterygii_meme.json",
-        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
         "apr_evolution/sarcopterygii_meme.csv"
     shell:
@@ -265,9 +255,7 @@ rule aggregate_hyphy_results:
 # Predict aggregation propensity with Tango
 rule run_tango_predictions:
     input:
-        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
-#    params:
-#        "/home/tmasson/tango/tango_x86_64_release"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
         "apr_evolution/aprs_aggregation_scores.csv"
     shell:
@@ -279,11 +267,10 @@ rule run_tango_predictions:
         rm nt=N.txt
         """
 
-
 ### Calculate sequence entropy ###
 rule calc_shannon_entropy:
     input:
-        "apr_evolution/sarcopterygii_mafft_trimmed.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
         "apr_evolution/aprs_entropy.csv"
     shell:
@@ -294,17 +281,23 @@ rule calc_shannon_entropy:
 # Reconstruct ancestral sequences from IQ-Tree states file
 rule extract_ancestral_sequences:
     input:
-        "apr_evolution/sarcopterygii_phylogeny.state"
-    params:
-        nodes=expand("{nodes}", nodes=NODES)
+        "apr_evolution/sarcopterygii_phylogeny.state",
+        "apr_evolution/sarcopterygii_phylogeny.treefile",
+#    params:
+#        nodes=expand("{nodes}", nodes=NODES)
     output:
         "ancestral_reconstruction/ancestral_sequences.faa"
-    run:
-        for node in params.nodes:
-            shell("""
-                  ./src/get_ancestral_sequence.py {input} {node} >> {output} &&\
-                  mv *.svg ancestral_reconstruction/
-                  """)
+    shell:
+        """
+        src/get_ancestral_sequence.py {input} >> {output} &&
+        mv *.svg ancestral_reconstruction/
+        """
+#    run:
+#        for node in params.nodes:
+#            shell("""
+#                  ./src/get_ancestral_sequence.py {input} >> {output} &&\
+#                  mv *.svg ancestral_reconstruction/
+#                  """)
 
 # Add Human, Mouse, Chicken and Crocodrillus sequences
 rule add_extant_sequences:

@@ -5,6 +5,29 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from ete3 import Tree
+
+def get_human_ancestral_nodes(tree_file):
+    """
+    Get all the ancestral nodes for the Human APOA1
+    sequence (species ID: Homo_sapiens_ENSP00000364472).
+    Only the nodes with UltraFast Bootstrap and 
+    aLRT support values greater than 70 are returned.
+    """
+
+    # Unique identifier of the Human Sequence
+    id = "Homo_sapiens_ENSP00000364472"
+    # Load phylogeny data
+    tree = Tree(tree_file, format=1)
+    # Search for the Human node data
+    human_node= tree.search_nodes(name=id)[0]
+    # Get all ancestral nodes for the human seq
+    ancestors = human_node.get_ancestors()
+    # Create a list with the name of all the ancestral nodes
+    ancestral_nodes = [node.name.split("/")[0]
+                       for node in ancestors]
+
+    return ancestral_nodes
 
 
 def get_ancestral_sequence(states, node):
@@ -21,24 +44,39 @@ def get_ancestral_sequence(states, node):
                      skiprows=8)  # Skip commentary rows
     # Filter the dataframe to retain only the node of interest
     df = df[df.Node == node]
-    # Remove terminal regions of the alignment (poor quality)
-    df = df.iloc[41:285, :]
     # Discard columns without sequence state data
-    df = df.iloc[1:-1, 3:]
+    df = df.iloc[:, 3:]
+
     # Set the possible states (20 amino acid letters)
     states = df.columns
-    # Create a list with the most probable states
-    seq = [states[np.argmax(row[1])].lstrip("p_")  # Get most probable state
-           for row in df.iterrows()]  # Iterate over the rows of the dataframe
-    # Store the posterior probabilities of most probable states
-    post_prob = [np.amax(row[1])  # Store higher posterior probability
-                 for row in df.iterrows()]  # Iterate over dataframe rows
+    # Initialize a list to store the reconstructed sequence, and other to save the posterior probability values (for plotting)
+    seq = []
+    post_prob = []
+    # Iterate over the rows of the dataframe
+    for row in df.iterrows():
+        # Get the column number of the most probable state
+        most_probable = np.argmax(row[1])
+        # Store the posterior probability (PP)
+        probability = np.amax(row[1])
+        # Assign character if the PP is greater than 0.8, either assign a gap ("-")
+        if probability >= 0.8:
+            # Add the most probable state to the sequence
+            seq.append(states[most_probable].lstrip("p_"))
+        else:
+            # Add a gap
+            seq.append("-")
+        # Store the PP of the most probable states
+        post_prob.append(probability)
     # Put together the sequence into a string
     seq = f'>{node}\n{"".join(seq)}'
 
+    # Create a histogram for the posterior probabilities
     sns.histplot(post_prob, bins=20, stat="probability")
+    # Save the histogram
     outfile = f"{node}_post_prob.svg"
     plt.savefig(outfile)
+    plt.close()
+
     return seq
 
 
@@ -48,11 +86,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("states",
                         help="IQ-TREE states outfile")
-    parser.add_argument("node",
-                        help="Node selected for reconstruction (e.g. Node1)")
+    parser.add_argument("treefile",
+                        help="IQ-TREE phylogeny outfile")
     args = parser.parse_args()
-    states, node = args.states, args.node
-    print(get_ancestral_sequence(states, node))
+    states, treefile = args.states, args.treefile
+    nodes = get_human_ancestral_nodes(treefile)
+    for node in nodes:
+        print(get_ancestral_sequence(states, node))
 
 
 if __name__ == "__main__":

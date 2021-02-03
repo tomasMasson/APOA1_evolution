@@ -56,7 +56,7 @@ def plot_aprs_scores(aggregation, entropy, alignment):
     ent_df = ent_df.reset_index(drop=True)
     # Add APR/non-APR labels
     ent_df["Class"] = "non-APR"
-    ent_df.loc[37:45, "Class"] = "APR1"
+    ent_df.loc[37:43, "Class"] = "APR1"
     ent_df.loc[76:82, "Class"] = "APR2"
     ent_df.loc[90:96, "Class"] = "APR3"
     ent_df.loc[250:256, "Class"] = "APR4"

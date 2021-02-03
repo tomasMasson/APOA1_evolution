@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from ete3 import Tree
+from Bio import AlignIO
 
 def get_human_ancestral_nodes(tree_file):
     """
@@ -26,11 +27,35 @@ def get_human_ancestral_nodes(tree_file):
     # Create a list with the name of all the ancestral nodes
     ancestral_nodes = [node.name.split("/")[0]
                        for node in ancestors]
+    # Discard last item (is empty)
+    ancestral_nodes = ancestral_nodes[:-1]
 
     return ancestral_nodes
 
 
-def get_ancestral_sequence(states, node):
+def filter_gapped_positions(df, alignment):
+    '''
+    Filters a Dataframe to retain only the rows
+    corresponding to the non-gap characters on
+    the Human sequence.
+    '''
+
+    # Load sequence alignment
+    algn = AlignIO.read(alignment, 'fasta')
+    # Iterate over each sequence
+    for sequence in algn:
+        # For the Human sequence
+        if sequence.id == "Homo_sapiens_ENSP00000364472":
+            # Store the position of the gaps
+            gaps = [index for index, position in enumerate(sequence.seq)
+                    if position == "-"]
+    # Filter the dataframe rows using the gap positions
+    df = df.drop(df.index[gaps])
+
+    return df
+
+
+def get_ancestral_sequence(states, node, alignment):
     """
     Reconstructs the most probable sequence
     (higher posterior probability) for a
@@ -46,6 +71,8 @@ def get_ancestral_sequence(states, node):
     df = df[df.Node == node]
     # Discard columns without sequence state data
     df = df.iloc[:, 3:]
+    # Filter out the gap positions
+    df = filter_gapped_positions(df, alignment)
 
     # Set the possible states (20 amino acid letters)
     states = df.columns
@@ -88,11 +115,17 @@ def main():
                         help="IQ-TREE states outfile")
     parser.add_argument("treefile",
                         help="IQ-TREE phylogeny outfile")
+    parser.add_argument("alignment",
+                        help="Fasta alignment used to remove gaps")
+
+    # Parse command line arguments
     args = parser.parse_args()
-    states, treefile = args.states, args.treefile
+    states, treefile, alignment = args.states, args.treefile, args.alignment
+    # Get ancestral nodes
     nodes = get_human_ancestral_nodes(treefile)
     for node in nodes:
-        print(get_ancestral_sequence(states, node))
+        # Get ancestral sequece
+        print(get_ancestral_sequence(states, node, alignment))
 
 
 if __name__ == "__main__":

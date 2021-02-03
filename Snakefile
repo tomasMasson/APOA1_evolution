@@ -17,9 +17,9 @@ rule all:
         "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
         "viz/panels/aprs_conservation.svg",
 #        "viz/panels/natural_selection_regimes.svg",
-        "viz/panels/aprs_flexibility.svg",
-        "viz/panels/aprs_flexibility_profiles.svg",
- #       "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
+#        "viz/panels/aprs_flexibility.svg",
+#        "viz/panels/aprs_flexibility_profiles.svg",
+#        "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
 
 
 ### APRs evolution ###
@@ -283,8 +283,6 @@ rule extract_ancestral_sequences:
         "apr_evolution/sarcopterygii_phylogeny.state",
         "apr_evolution/sarcopterygii_phylogeny.treefile",
         "apr_evolution/sarcopterygii_mafft.faa"
-#    params:
-#        nodes=expand("{nodes}", nodes=NODES)
     output:
         "ancestral_reconstruction/ancestral_sequences.faa"
     shell:
@@ -292,12 +290,6 @@ rule extract_ancestral_sequences:
         src/get_ancestral_sequence.py {input} >> {output} &&
         mv *.svg ancestral_reconstruction/
         """
-#    run:
-#        for node in params.nodes:
-#            shell("""
-#                  ./src/get_ancestral_sequence.py {input} >> {output} &&\
-#                  mv *.svg ancestral_reconstruction/
-#                  """)
 
 # Add Human, Mouse, Chicken and Crocodrillus sequences
 rule add_extant_sequences:

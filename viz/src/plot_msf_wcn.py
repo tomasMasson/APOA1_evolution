@@ -23,10 +23,10 @@ def read_df(data):
     df["Average"] = df.mean(axis=1)
     # Add APR/non-APR labels
     df["Class"] = "non-APR"
-    df.iloc[13:19, 9] = "APR"
-    df.iloc[52:58, 9] = "APR"
-    df.iloc[66:72, 9] = "APR"
-    df.iloc[226:232, 9] = "APR"
+    df.iloc[13:19, -1] = "APR"
+    df.iloc[52:58, -1] = "APR"
+    df.iloc[66:72, -1] = "APR"
+    df.iloc[226:232, -1] = "APR"
 
     return df
 

@@ -2,22 +2,21 @@ import pandas as pd
 from Bio import AlignIO
 
 # Species used for structural comparisons
-NODES = ["Node10", "Node15", "Node92", "Node99"]
 EXTANTS = ["Gorilla_gorilla_ENSGGOP00000033442",
            "Mus_musculus_ENSMUSP00000034588",
            "Crocodylus_porosus_ENSCPRP00005000967",
            "Gallus_gallus_ENSGALP00000011510"]
-TARGETS = NODES + EXTANTS
+TARGETS = EXTANTS
 
 ### Required output files ###
 rule all:
     input:
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
+#        expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
+#        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
+#        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
         "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
         "viz/panels/aprs_conservation.svg",
-        "viz/panels/natural_selection_regimes.svg",
+#        "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
         "viz/panels/aprs_flexibility_profiles.svg",
  #       "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
@@ -255,7 +254,7 @@ rule aggregate_hyphy_results:
 # Predict aggregation propensity with Tango
 rule run_tango_predictions:
     input:
-        "apr_evolution/sarcopterygii_mafft.faa"
+        "apr_evolution/sarcopterygii_sequences.faa"
     output:
         "apr_evolution/aprs_aggregation_scores.csv"
     shell:
@@ -283,6 +282,7 @@ rule extract_ancestral_sequences:
     input:
         "apr_evolution/sarcopterygii_phylogeny.state",
         "apr_evolution/sarcopterygii_phylogeny.treefile",
+        "apr_evolution/sarcopterygii_mafft.faa"
 #    params:
 #        nodes=expand("{nodes}", nodes=NODES)
     output:
@@ -455,16 +455,28 @@ rule plot_aprs_evolution:
     input:
         "apr_evolution/aprs_aggregation_scores.csv",
         "apr_evolution/aprs_entropy.csv",
-        "apr_evolution/hyphy_results.csv"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
-        "viz/panels/aprs_conservation.svg",
-        "viz/panels/natural_selection_regimes.svg"
+        "viz/panels/aprs_conservation.svg"
     params:
-        "aprs_conservation.svg",
-        "natural_selection_regimes.svg"
+        "aprs_conservation.svg"
     shell:
         """
         ./viz/src/plot_apr_evolution.py {input} &&\
+        mv {params} viz/panels/
+        """
+
+# HyPhy selection regimes plotting
+rule plot_hyphy_evolution:
+    input:
+        "apr_evolution/hyphy_results.csv"
+    output:
+        "viz/panels/natural_selection_regimes.svg"
+    params:
+        "natural_selection_regimes.svg"
+    shell:
+        """
+        ./viz/src/plot_hyphy_selection.py {input} &&\
         mv {params} viz/panels/
         """
 

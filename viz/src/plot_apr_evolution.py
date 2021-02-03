@@ -5,9 +5,32 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
+from Bio import AlignIO
 
 
-def plot_aprs_scores(aggregation, entropy):
+def filter_gapped_positions(df, alignment):
+    '''
+    Filters a Dataframe to retain only the rows
+    corresponding to the non-gap characters on
+    the Human sequence.
+    '''
+
+    # Load sequence alignment
+    algn = AlignIO.read(alignment, 'fasta')
+    # Iterate over each sequence
+    for sequence in algn:
+        # For the Human sequence
+        if sequence.id == "Homo_sapiens_ENSP00000364472":
+            # Store the position of the gaps
+            gaps = [index for index, position in enumerate(sequence.seq)
+                    if position == "-"]
+    # Filter the dataframe rows using the gap positions
+    df = df.drop(df.index[gaps])
+
+    return df
+
+
+def plot_aprs_scores(aggregation, entropy, alignment):
     """
     Creates two graphs:
 
@@ -27,16 +50,16 @@ def plot_aprs_scores(aggregation, entropy):
 
     # Convert entropy input to a pd DataFrame
     ent_df = pd.read_csv(entropy, names=["Entropy"])
-    # Trim gapped positions
-    ent_df = ent_df.iloc[43:286, :]
+    # Filter out the gap positions
+    ent_df = filter_gapped_positions(ent_df, alignment)
     # Reset index values
     ent_df = ent_df.reset_index(drop=True)
     # Add APR/non-APR labels
     ent_df["Class"] = "non-APR"
-    ent_df.loc[13:18, "Class"] = "APR1"
-    ent_df.loc[52:57, "Class"] = "APR2"
-    ent_df.loc[66:71, "Class"] = "APR3"
-    ent_df.loc[226:231, "Class"] = "APR4"
+    ent_df.loc[37:45, "Class"] = "APR1"
+    ent_df.loc[76:82, "Class"] = "APR2"
+    ent_df.loc[90:96, "Class"] = "APR3"
+    ent_df.loc[250:256, "Class"] = "APR4"
     # Drop non-apr data
     ent_df = ent_df[ent_df.Class != "non-APR"]
 
@@ -97,73 +120,6 @@ def plot_aprs_scores(aggregation, entropy):
     return f
 
 
-def plot_selection_type(hyphy_results):
-    """
-    Plot a rectangle with colors scheme based on the
-    selection regimes affecting protein sequence
-    inferred with HyPhy.
-    """
-
-    # Open Hyphy results and store them into a list
-    with open(hyphy_results, "r") as fh:
-        data = [line for line in fh]
-    fel = [item.split(",")[0] for item in data]
-    fubar = [item.split(",")[1] for item in data]
-    meme = [item.split(",")[2] for item in data]
-    # Create a new figure
-    f, ax = plt.subplots(1, 1, figsize=(6, 4))
-    # Set Axis limits
-    ax.set_xlim([0, 250])
-    ax.set_ylim([0, 100])
-    # Remove Y axis
-    ax.axes.get_yaxis().set_visible(False)
-    # Set X axis label
-    ax.set_xlabel("Sequence Position")
-    # Hide all the spines except for the one of the bottom
-    ax.spines['right'].set_visible(False)
-    ax.spines['top'].set_visible(False)
-    ax.spines['left'].set_visible(False)
-    # Plot FEL sites
-    for index, sel in enumerate(fel):
-        color = "#1f78b4"
-        if "Diver" in sel:
-            color = "#fdc086"
-        elif "Neutral" in sel:
-            color = "#a6cee3"
-        rect = plt.Rectangle((index, 80), 1, 10, color=color)
-        ax.add_artist(rect)
-    ax.text(-30, 83, 'FEL')
-    # Plot FUBAR sites
-    for index, sel in enumerate(fubar):
-        color = "#1f78b4"
-        if "Diver" in sel:
-            color = "#fdc086"
-        elif "Neutral" in sel:
-            color = "#a6cee3"
-        rect = plt.Rectangle((index, 50), 1, 10, color=color)
-        ax.add_artist(rect)
-    ax.text(-30, 53, 'FUBAR')
-    # Plot MEME sites
-    for index, sel in enumerate(meme):
-        color = "#1f78b4"
-        if "Episodic" in sel:
-            color = "#fdc086"
-        rect = plt.Rectangle((index, 20), 1, 10, color=color)
-        ax.add_artist(rect)
-    ax.text(-30, 23, 'MEME')
-    ax.vlines(14, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.vlines(19, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.vlines(53, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.vlines(58, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.vlines(67, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.vlines(72, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.vlines(227, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.vlines(232, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
-    ax.add_artist(rect)
-    # Show plot
-    plt.savefig("natural_selection_regimes.svg")
-
-
 def main():
     """Command line argument parser."""
 
@@ -175,10 +131,11 @@ def main():
             )
     parser.add_argument('agg_scores', help='APRs scores file')
     parser.add_argument('entropies', help='Residues entropy values')
-    parser.add_argument('hyphy', help='HyPhy residues selection regimes')
+    parser.add_argument('alignment', help='Protein alignment used to remove gapped positions')
+    # Parse command line arguments
     args = parser.parse_args()
-    plot_aprs_scores(args.agg_scores, args.entropies)
-    plot_selection_type(args.hyphy)
+    agg_scores, entropies, alignment = args.agg_scores, args.entropies, args.alignment
+    plot_aprs_scores(agg_scores, entropies, alignment)
 
 
 if __name__ == "__main__":

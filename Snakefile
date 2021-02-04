@@ -2,7 +2,7 @@ import pandas as pd
 from Bio import AlignIO
 
 # Species used for structural comparisons
-EXTANTS = ["Gorilla_gorilla_ENSGGOP00000033442",
+EXTANTS = ["Homo_sapiens_ENSP00000364472",
            "Mus_musculus_ENSMUSP00000034588",
            "Crocodylus_porosus_ENSCPRP00005000967",
            "Gallus_gallus_ENSGALP00000011510"]
@@ -11,14 +11,14 @@ TARGETS = EXTANTS
 ### Required output files ###
 rule all:
     input:
-#        expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
-#        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
-#        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
+        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
         "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
         "viz/panels/aprs_conservation.svg",
 #        "viz/panels/natural_selection_regimes.svg",
-#        "viz/panels/aprs_flexibility.svg",
-#        "viz/panels/aprs_flexibility_profiles.svg",
+        "viz/panels/aprs_flexibility.svg",
+        "viz/panels/aprs_flexibility_profiles.svg",
 #        "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
 
 
@@ -346,7 +346,7 @@ rule protein_modelling:
     output:
         "ancestral_reconstruction/{target}/best_model.pdb"
     shell:
-        "./src/run_modeller.py Gorilla_gorilla_ENSGGOP00000033442 {wildcards.target} {input}"
+        "./src/run_modeller.py Homo_sapiens_ENSP00000364472 {wildcards.target} {input}"
 
 # Model refinement (energy minimization)
 rule model_refinement:

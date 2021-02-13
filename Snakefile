@@ -1,20 +1,12 @@
 import pandas as pd
 from Bio import AlignIO
-
-# Species used for structural comparisons
-EXTANTS = ["Homo_sapiens_ENSP00000364472",
-           "Mus_musculus_ENSMUSP00000034588",
-           "Crocodylus_porosus_ENSCPRP00005000967",
-           "Gallus_gallus_ENSGALP00000011510"]
-TARGETS = EXTANTS
+from pytools.persistent_dict import PersistentDict
 
 ### Required output files ###
 rule all:
     input:
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.pdb", target=TARGETS),
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS),
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS),
         "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
+        "ancestral_reconstruction/ancestral_sequences.faa",
         "viz/panels/aprs_conservation.svg",
 #        "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
@@ -278,7 +270,7 @@ rule calc_shannon_entropy:
 ### Flexibility evolution ###
 
 # Reconstruct ancestral sequences from IQ-Tree states file
-rule extract_ancestral_sequences:
+rule reconstruct_ancestral_sequences:
     input:
         "apr_evolution/sarcopterygii_phylogeny.state",
         "apr_evolution/sarcopterygii_phylogeny.treefile",
@@ -291,32 +283,38 @@ rule extract_ancestral_sequences:
         mv *.svg ancestral_reconstruction/
         """
 
-# Add Human, Mouse, Chicken and Crocodrillus sequences
-rule add_extant_sequences:
+# Species used for structural comparisons
+TARGETS = ["Homo_sapiens_ENSP00000364472",
+           "Mus_musculus_ENSMUSP00000034588",
+           "Crocodylus_porosus_ENSCPRP00005000967",
+           "Gallus_gallus_ENSGALP00000011510"]
+
+# Extrac target sequences to be structurally modelled
+rule extract_target_sequences:
     input:
         "apr_evolution/sarcopterygii_sequences.faa"
     params:
-        extants=expand("{extants}", extants=EXTANTS)
+        targets=expand("{targets}", targets=TARGETS)
     output:
-        "ancestral_reconstruction/extant_sequences.faa"
+        "ancestral_reconstruction/target_sequences.faa"
     run:
-        for extant in params.extants:
-            shell("grep -A 1 {extant} {input} >> {output}")
+        for target in params.targets:
+            shell("grep -A 1 {target} {input} >> {output}")
 
 # Merge ancestral and extant sequences
-rule merge_sequences:
-    input:
-        "ancestral_reconstruction/ancestral_sequences.faa",
-        "ancestral_reconstruction/extant_sequences.faa"
-    output:
-        "ancestral_reconstruction/all_sequences.faa"
-    shell:
-        "cat {input} > {output}"
+#rule merge_sequences:
+#    input:
+#        "ancestral_reconstruction/ancestral_sequences.faa",
+#        "ancestral_reconstruction/extant_sequences.faa"
+#    output:
+#        "ancestral_reconstruction/all_sequences.faa"
+#    shell:
+#        "cat {input} > {output}"
 
 # Align protein sequences with MAFFT
 rule mafft2_protein_alignment:
     input:
-        "ancestral_reconstruction/all_sequences.faa"
+        "ancestral_reconstruction/target_sequences.faa"
     output:
         "ancestral_reconstruction/alignment.faa"
     shell:
@@ -344,41 +342,47 @@ rule protein_modelling:
         "ancestral_reconstruction/alignment_trimmed.faa",
         "apoa1.pdb",
     output:
-        "ancestral_reconstruction/{target}/best_model.pdb"
+        "ancestral_reconstruction/{target}_best_model.pdb"
     shell:
-        "./src/run_modeller.py Homo_sapiens_ENSP00000364472 {wildcards.target} {input}"
+        "./src/run_modeller.py Homo_sapiens_ENSP00000364472 {input}"
 
 # Model refinement (energy minimization)
 rule model_refinement:
     input:
-        "ancestral_reconstruction/{target}/best_model.pdb"
+        "ancestral_reconstruction/{target}_best_model.pdb",
     output:
-        "ancestral_reconstruction/{target}/best_model_relaxed.pdb"
+        "ancestral_reconstruction/{target}_best_model_relaxed.pdb"
     shell:
-        "./src/pyrosetta_fastrelax.py {input}"
+        """
+        ./src/pyrosetta_fastrelax.py {input}
+        """
 
 # Compute MSF for each model
 rule compute_msf:
     input:
-        "ancestral_reconstruction/{target}/best_model_relaxed.pdb"
+        "ancestral_reconstruction/{target}_best_model_relaxed.pdb",
     output:
-        "ancestral_reconstruction/{target}/best_model_relaxed.msf"
+        "ancestral_reconstruction/{target}_best_model_relaxed.msf"
     shell:
-        "./src/calc_gnm.py {input} -o {wildcards.target} > {output}"
+        """
+        ./src/calc_gnm.py {input}
+        """
 
-# Compute WCN for each model
+#  Compute WCN for each model
 rule compute_wcn:
     input:
-        "ancestral_reconstruction/{target}/best_model_relaxed.pdb"
+        "ancestral_reconstruction/{target}_best_model_relaxed.pdb",
     output:
-        "ancestral_reconstruction/{target}/best_model_relaxed.wcn"
+        "ancestral_reconstruction/{target}_best_model_relaxed.wcn"
     shell:
-        "python ./src/calc_wcn.py {input} -o {wildcards.target} > {output}"
+        """
+        python ./src/calc_wcn.py {input}
+        """
 
 # Aggregate MSF values
 rule aggregate_msf:
     input:
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.msf", target=TARGETS)
+        expand("ancestral_reconstruction/{target}_best_model_relaxed.msf", target=TARGETS)
     output:
         "ancestral_reconstruction/msf.csv"
     shell:
@@ -387,7 +391,7 @@ rule aggregate_msf:
 # Aggregate WCN values
 rule aggregate_wcn:
     input:
-        expand("ancestral_reconstruction/{target}/best_model_relaxed.wcn", target=TARGETS)
+        expand("ancestral_reconstruction/{target}_best_model_relaxed.wcn", target=TARGETS)
     output:
         "ancestral_reconstruction/wcn.csv"
     shell:

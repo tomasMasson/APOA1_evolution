@@ -7,6 +7,19 @@ from pathlib import Path
 from Bio import AlignIO
 
 
+def get_targets(alignment):
+    """
+    Extract the sequence identifiers from a fasta alignment
+    """
+
+    # Read sequence alignment
+    seqs = AlignIO.read(alignment, "fasta")
+    # Extract sequences identifiers (will be used as targets for modelling)
+    targets = [seq.id for seq in seqs]
+
+    return targets
+
+
 def create_modeller_alignment(template, target, alignment, folder):
     """
     Takes a fasta multiple sequence alignment
@@ -71,12 +84,39 @@ else:
 # Get top model
 m = ok_models[0]
 # Copy model to a new file
-copyfile(m["name"], 'best_model.pdb')
+copyfile(m["name"], '{target}_best_model.pdb')
     """
-    # Write config to file inside a new folder for the target
-    config_file = f"{folder}/modeller_config.py"
+
+    # Set config file inside a specific modelling folder
+    config_file = f"{folder}/{target}_modeller_config.py"
+    # Write config file
     with open(config_file, "w") as fh:
         fh.write(config)
+
+
+def run_modeller(template, target, align, template_structure):
+    """
+    Wrapper function to run modeller
+    """
+
+    # Set the base path
+    base_path = Path.cwd()
+    # Create a separate path for modelling results
+    target_folder = base_path /"ancestral_reconstruction" 
+    # Create a PIR alignment
+    create_modeller_alignment(template, target, align, target_folder)
+    # Create Modeller configuration file
+    create_modeller_config(target, target_folder)
+    # Copy template structure
+    copyfile(template_structure, target_folder / "template.pdb")
+    # Move to the modelling folder
+    os.chdir(target_folder)
+    # Set the modeller command
+    command = f"python {target}_modeller_config.py"
+    # Run modeller
+    os.system(command)
+    # Return to the base path
+    os.chdir(base_path)
 
 
 def main():
@@ -85,33 +125,19 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("template",
                         help="template sequence to model")
-    parser.add_argument("target",
-                        help="target sequence to model")
     parser.add_argument("alignment",
                         help="sequence alignment between target and template")
     parser.add_argument("template_structure",
                         help="template PDB structure")
     args = parser.parse_args()
-    template, target, align, template_structure = args.template, args.target, args.alignment, args.template_structure
-    # Create a separate path for each modelling
-    target_folder = Path.cwd() / "ancestral_reconstruction" / target
-    # Remove folder from previous runs
-    if Path.exists(target_folder):
-        for file in target_folder.iterdir():
-            Path.unlink(file)
-        Path.rmdir(target_folder)
-    # Make a new folder for each target
-    Path.mkdir(target_folder)
-    # Create PIR alignment
-    create_modeller_alignment(template, target, align, target_folder)
-    # Create Modeller configuration file
-    create_modeller_config(target, target_folder)
-    # Copy template structure
-    copyfile(template_structure, target_folder / "template.pdb")
-    # Run Modeller
-    os.chdir(target_folder)
-    command = "python modeller_config.py"
-    os.system(command)
+    template, align, template_structure = args.template, args.alignment, args.template_structure
+
+    # Get the sequences ids
+    targets = get_targets(align)
+
+    # Run Modeller for each target sequence
+    for target in targets:
+        run_modeller(template, target, align, template_structure)
 
 
 if __name__ == "__main__":

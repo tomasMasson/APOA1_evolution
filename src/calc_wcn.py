@@ -109,6 +109,8 @@ def main():
     Parse an input PDB file and return a CSV with weighted contact number
     values.
     '''
+
+    # Command-line argument parser
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description='Calculate WCN values for an input PDB.',
@@ -117,39 +119,32 @@ def main():
             
             Column name   Description
             ===================================================================
-            pdb_position  Residue number, extracted from the input PDB file.
-
-            chain         PDB chain.
-            
-            pdb_aa        Single-letter amino acid.
-            
             wcn_sc        Weighted contact number calculated with respect to 
                           the amino acid side-chain center-of-mass.
-            
-            wcn_ca        Weighted contact number calculated with respect to the
-                          amino acid alpha carbon.
             ''')        )
     parser.add_argument('pdb', metavar='<PDB path>', type=str,
                         help='input pdb file')
-    parser.add_argument('-o', metavar='<output prefix>', type=str,
-                        help='prefix for output files')
     args = parser.parse_args()
-    pdb_name = os.path.splitext(os.path.basename(args.pdb))[0]
-    # Define output file names
-    if args.o is None:
-        # If no output prefix given, assign prefix using input filename
-        args.o = pdb_name
+    pdb_name = args.pdb
+
     # Load in PDB with BioPython
     pdb_parser = PDBParser()
     structure = pdb_parser.get_structure(pdb_name.upper(), args.pdb)
     # Collect coordinate information
-    output_list = collect_coordinates(structure)
+    coordinates = collect_coordinates(structure)
     # Calculate WCN from coordinates
-    output_list = calculate_wcn(output_list)
-    # Print output to STDOUT
-    print(args.o)
-    for field in output_list:
-        print(field['wcn_sc'])
+    wcn_values = calculate_wcn(coordinates)
+    # Set the output file name (replace .pdb extension with .wcn)
+    outfile = f"{pdb_name.split('.')[0]}.wcn"
+    # Store the model's name
+    model = f"{pdb_name.split('/')[1]}"
+    # Write output to outfile
+    with open(outfile,"w") as fh:
+        # Use model name as header
+        fh.write(f"{model}\n")
+        # Write WCN values
+        for field in wcn_values:
+            fh.write(f"{field['wcn_sc']}\n")
 
 
 if __name__ == "__main__":

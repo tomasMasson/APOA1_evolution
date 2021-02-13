@@ -12,7 +12,7 @@ def get_human_ancestral_nodes(tree_file):
     """
     Get all the ancestral nodes for the Human APOA1
     sequence (species ID: Homo_sapiens_ENSP00000364472).
-    Only the nodes with UltraFast Bootstrap and 
+    Only the nodes with UltraFast Bootstrap and
     aLRT support values greater than 70 are returned.
     """
 
@@ -85,8 +85,8 @@ def get_ancestral_sequence(states, node, alignment):
         most_probable = np.argmax(row[1])
         # Store the posterior probability (PP)
         probability = np.amax(row[1])
-        # Assign character if the PP is greater than 0.8, either assign a gap ("-")
-        if probability >= 0.8:
+        # Assign character if the PP is greater than 0.5, either assign a gap ("-")
+        if probability >= 0.5:
             # Add the most probable state to the sequence
             seq.append(states[most_probable].lstrip("p_"))
         else:

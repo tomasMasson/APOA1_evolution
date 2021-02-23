@@ -354,7 +354,7 @@ rule protein_modelling:
     shell:
         """
         ./src/run_modeller.py {input[0]} {params} {input[1]} &&\
-        rm *.B* *.D* *.V* *.ini *.rsr *.sch &&\
+        rm template.pdb *.B* *.D* *.V* *.ini *.rsr *.sch &&\
         mv *best_model.pdb *.pir ancestral_reconstruction/
         """
 

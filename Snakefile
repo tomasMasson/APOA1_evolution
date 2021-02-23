@@ -283,33 +283,39 @@ rule reconstruct_ancestral_sequences:
         mv *.svg ancestral_reconstruction/
         """
 
-# Species used for structural comparisons
-TARGETS = ["Homo_sapiens_ENSP00000364472",
+# Extant species used for structural comparisons
+EXTANTS = ["Homo_sapiens_ENSP00000364472",
            "Mus_musculus_ENSMUSP00000034588",
            "Crocodylus_porosus_ENSCPRP00005000967",
            "Gallus_gallus_ENSGALP00000011510"]
 
+# Ancestral nodes used for structural comparisons
+NODES = [f"Node{i}" for i in range(2, 15, 1)]
+
+# Set target sequences
+TARGETS = EXTANTS + NODES
+
 # Extrac target sequences to be structurally modelled
-rule extract_target_sequences:
+rule extract_extant_sequences:
     input:
         "apr_evolution/sarcopterygii_sequences.faa"
     params:
-        targets=expand("{targets}", targets=TARGETS)
+        extants=expand("{extants}", extants=EXTANTS)
     output:
-        "ancestral_reconstruction/target_sequences.faa"
+        "ancestral_reconstruction/extant_sequences.faa"
     run:
-        for target in params.targets:
-            shell("grep -A 1 {target} {input} >> {output}")
+        for extant in params.extants:
+            shell("grep -A 1 {extant} {input} >> {output}")
 
 # Merge ancestral and extant sequences
-#rule merge_sequences:
-#    input:
-#        "ancestral_reconstruction/ancestral_sequences.faa",
-#        "ancestral_reconstruction/extant_sequences.faa"
-#    output:
-#        "ancestral_reconstruction/all_sequences.faa"
-#    shell:
-#        "cat {input} > {output}"
+rule merge_sequences:
+    input:
+        "ancestral_reconstruction/ancestral_sequences.faa",
+        "ancestral_reconstruction/extant_sequences.faa"
+    output:
+        "ancestral_reconstruction/target_sequences.faa"
+    shell:
+        "cat {input} > {output}"
 
 # Align protein sequences with MAFFT
 rule mafft2_protein_alignment:
@@ -341,10 +347,16 @@ rule protein_modelling:
     input:
         "ancestral_reconstruction/alignment_trimmed.faa",
         "apoa1.pdb",
+    params:
+        "Homo_sapiens_ENSP00000364472"
     output:
-        "ancestral_reconstruction/{target}_best_model.pdb"
+        expand("ancestral_reconstruction/{target}_best_model.pdb", target=TARGETS)
     shell:
-        "./src/run_modeller.py Homo_sapiens_ENSP00000364472 {input}"
+        """
+        ./src/run_modeller.py {input[0]} {params} {input[1]} &&\
+        rm *.B* *.D* *.V* *.ini *.rsr *.sch &&\
+        mv *best_model.pdb *.pir ancestral_reconstruction/
+        """
 
 # Model refinement (energy minimization)
 rule model_refinement:

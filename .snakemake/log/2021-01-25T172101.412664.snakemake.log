@@ -1,0 +1,90 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	add_extant_sequences
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	1	calc_shannon_entropy
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	fel_analysis
+	1	filter_cds_ensembl
+	1	fix_treefile_meme
+	1	fubar_analysis
+	1	get_nucleotide_sequences
+	1	get_protein_sequences
+	1	infer_phylogeny
+	1	mafft2_protein_alignment
+	1	mafft_protein_alignment
+	1	meme_analysis
+	1	merge_sequences
+	8	model_refinement
+	1	pal2nal_alignment
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	run_tango_predictions
+	1	sequences_clustering
+	1	sequences_filtering
+	1	trim_nucleotide_alignment
+	1	trim_protein_alignment
+	1	trim_signal_peptide
+	62
+Select jobs to execute...
+
+[Mon Jan 25 17:21:01 2021]
+rule get_nucleotide_sequences:
+    output: apr_evolution/ensembl_sequences.fna
+    jobid: 53
+
+
+[Mon Jan 25 17:21:01 2021]
+rule get_protein_sequences:
+    output: apr_evolution/ensembl_sequences.faa
+    jobid: 12
+
+[Mon Jan 25 17:21:21 2021]
+Finished job 12.
+1 of 62 steps (2%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:21:21 2021]
+rule sequences_filtering:
+    input: apr_evolution/ensembl_sequences.faa
+    output: apr_evolution/vertebrates_sequences_filt.faa
+    jobid: 11
+
+[Mon Jan 25 17:21:21 2021]
+Finished job 11.
+2 of 62 steps (3%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:21:21 2021]
+rule sequences_clustering:
+    input: apr_evolution/vertebrates_sequences_filt.faa
+    output: apr_evolution/vertebrates_sequences.faa
+    jobid: 10
+
+[Mon Jan 25 17:21:21 2021]
+Error in rule sequences_clustering:
+    jobid: 10
+    output: apr_evolution/vertebrates_sequences.faa
+    shell:
+        cd-hit -i apr_evolution/vertebrates_sequences_filt.faa -o apr_evolution/vertebrates_sequences.faa -c 0.98
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+[Mon Jan 25 17:21:31 2021]
+Finished job 53.
+3 of 62 steps (5%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-01-25T172101.412664.snakemake.log

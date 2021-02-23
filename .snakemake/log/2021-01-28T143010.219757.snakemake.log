@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 290 of /home/tmasson/APOA1_evolution/Snakefile:
+Missing input files for rule add_extant_sequences:
+apr_evolution/sarcopterygii_sequences.faa

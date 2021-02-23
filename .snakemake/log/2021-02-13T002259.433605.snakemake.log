@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 493 of /home/tmasson/APOA1_evolution/Snakefile:
+Missing input files for rule plot_aprs_msf_wcn:
+ancestral_reconstruction/msf.csv

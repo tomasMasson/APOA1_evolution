@@ -1,0 +1,7 @@
+Building DAG of jobs...
+MissingInputException in line 389 of /home/tmasson/APOA1_evolution/Snakefile:
+Missing input files for rule aggregate_wcn:
+ancestral_reconstruction/Homo_sapiens_ENSP00000364472/best_model_relaxed.wcn
+ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.wcn
+ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.wcn
+ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.wcn

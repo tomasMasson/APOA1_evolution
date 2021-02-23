@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 370 of /home/tmasson/APOA1_evolution/Snakefile:
+Missing input files for rule compute_wcn:
+ancestral_reconstruction/Homo_sapiens_ENSP00000364472/best_model_relaxed.pdb

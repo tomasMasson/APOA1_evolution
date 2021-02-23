@@ -1,0 +1,77 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	fel_analysis
+	1	fix_treefile_meme
+	1	fubar_analysis
+	1	mafft2_protein_alignment
+	1	meme_analysis
+	1	merge_sequences
+	8	model_refinement
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	run_tango_predictions
+	1	trim_signal_peptide
+	50
+Select jobs to execute...
+
+[Mon Jan 25 17:00:46 2021]
+rule fubar_analysis:
+    input: apr_evolution/vertebrates_mafft_trimmed.fna, apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_fubar.json
+    jobid: 55
+
+
+[Mon Jan 25 17:00:46 2021]
+rule run_tango_predictions:
+    input: apr_evolution/vertebrates_mafft_trimmed.faa
+    output: apr_evolution/aprs_aggregation_scores.csv
+    jobid: 45
+
+[Mon Jan 25 17:00:54 2021]
+Finished job 45.
+1 of 50 steps (2%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:00:54 2021]
+rule fel_analysis:
+    input: apr_evolution/vertebrates_mafft_trimmed.fna, apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_fel.json
+    jobid: 49
+
+Terminating processes on user request, this might take some time.
+[Mon Jan 25 17:01:16 2021]
+Error in rule fubar_analysis:
+    jobid: 55
+    output: apr_evolution/vertebrates_fubar.json
+[Mon Jan 25 17:01:16 2021]
+    shell:
+        
+        hyphy fubar --alignment apr_evolution/vertebrates_mafft_trimmed.fna --tree apr_evolution/vertebrates_phylogeny.treefile &&         mv apr_evolution/vertebrates_mafft_trimmed.fna.FUBAR.json apr_evolution/vertebrates_fubar.json &&         rm apr_evolution/vertebrates_mafft_trimmed.fna.FUBAR.cache
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+Error in rule fel_analysis:
+
+    jobid: 49
+    output: apr_evolution/vertebrates_fel.json
+    shell:
+        hyphy fel --alignment apr_evolution/vertebrates_mafft_trimmed.fna --tree apr_evolution/vertebrates_phylogeny.treefile --output apr_evolution/vertebrates_fel.json
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job fel_analysis since they might be corrupted:
+apr_evolution/vertebrates_fel.json
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-01-25T170046.018878.snakemake.log

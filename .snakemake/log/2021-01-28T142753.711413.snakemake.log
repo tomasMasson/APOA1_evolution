@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 71 of /home/tmasson/APOA1_evolution/Snakefile:
+Missing input files for rule mafft_protein_alignment:
+apr_evolution/sarcopterygii_filtered.faa

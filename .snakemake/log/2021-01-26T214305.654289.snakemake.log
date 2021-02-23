@@ -1,0 +1,48 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	add_extant_sequences
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	1	calc_shannon_entropy
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	fel_analysis
+	1	filter_cds_ensembl
+	1	filter_sarcopterygii_sequences
+	1	fix_treefile_meme
+	1	fubar_analysis
+	1	infer_phylogeny
+	1	mafft2_protein_alignment
+	1	mafft_protein_alignment
+	1	meme_analysis
+	1	merge_sequences
+	8	model_refinement
+	1	pal2nal_alignment
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	run_tango_predictions
+	1	sequences_clustering
+	1	sequences_filtering
+	1	trim_nucleotide_alignment
+	1	trim_protein_alignment
+	1	trim_signal_peptide
+	61
+Select jobs to execute...
+
+[Tue Jan 26 21:43:06 2021]
+rule filter_sarcopterygii_sequences:
+    input: apr_evolution/ensembl_sequences.faa
+    output: apr_evolution/raw_sarcopterygii_sequences.faa
+    jobid: 12
+

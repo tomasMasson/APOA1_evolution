@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 138 of /home/tmasson/APOA1_evolution/Snakefile:
+Missing input files for rule fel_analysis:
+apr_evolution/sarcopterygii_mafft_trimmed.fnaapr_evolution/sarcopterygii_phylogeny.treefile

@@ -1,0 +1,148 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	add_extant_sequences
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	1	calc_shannon_entropy
+	1	clustalo_protein_alignment
+	4	compute_msf
+	4	compute_wcn
+	1	extract_ancestral_sequences
+	1	fel_analysis
+	1	filter_cds_ensembl
+	1	filter_low_quality_sequences
+	1	filter_sarcopterygii_sequences
+	1	fix_treefile_meme
+	1	fubar_analysis
+	1	get_nucleotide_sequences
+	1	get_protein_sequences
+	1	infer_phylogeny
+	1	infer_supplementary_phylogeny
+	1	mafft2_protein_alignment
+	1	mafft_protein_alignment
+	1	meme_analysis
+	1	merge_sequences
+	4	model_refinement
+	1	pal2nal_alignment
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	4	protein_modelling
+	1	run_tango_predictions
+	1	trim_nucleotide_alignment
+	1	trim_protein_alignment
+	1	trim_signal_peptide
+	48
+Select jobs to execute...
+
+[Tue Feb  2 10:28:22 2021]
+rule get_nucleotide_sequences:
+    output: apr_evolution/ensembl_sequences.fna
+    jobid: 39
+
+
+[Tue Feb  2 10:28:22 2021]
+rule get_protein_sequences:
+    output: apr_evolution/ensembl_sequences.faa
+    jobid: 12
+
+[Tue Feb  2 10:28:26 2021]
+Finished job 12.
+1 of 48 steps (2%) done
+Select jobs to execute...
+
+[Tue Feb  2 10:28:26 2021]
+rule filter_sarcopterygii_sequences:
+    input: apr_evolution/ensembl_sequences.faa
+    output: apr_evolution/raw_sarcopterygii_sequences.faa
+    jobid: 11
+
+[Tue Feb  2 10:28:27 2021]
+Finished job 39.
+2 of 48 steps (4%) done
+[Tue Feb  2 10:28:30 2021]
+Finished job 11.
+3 of 48 steps (6%) done
+Select jobs to execute...
+
+[Tue Feb  2 10:28:30 2021]
+rule filter_low_quality_sequences:
+    input: apr_evolution/raw_sarcopterygii_sequences.faa
+    output: apr_evolution/sarcopterygii_sequences.faa
+    jobid: 10
+
+[Tue Feb  2 10:28:31 2021]
+Finished job 10.
+4 of 48 steps (8%) done
+Select jobs to execute...
+
+[Tue Feb  2 10:28:31 2021]
+rule mafft_protein_alignment:
+    input: apr_evolution/sarcopterygii_sequences.faa
+    output: apr_evolution/sarcopterygii_mafft.faa
+    jobid: 9
+
+
+[Tue Feb  2 10:28:31 2021]
+rule filter_cds_ensembl:
+    input: apr_evolution/ensembl_sequences.fna, apr_evolution/sarcopterygii_sequences.faa
+    output: apr_evolution/sarcopterygii_sequences.fna
+    jobid: 38
+
+[Tue Feb  2 10:28:31 2021]
+Finished job 38.
+5 of 48 steps (10%) done
+Select jobs to execute...
+
+[Tue Feb  2 10:28:31 2021]
+rule add_extant_sequences:
+    input: apr_evolution/sarcopterygii_sequences.faa
+    output: ancestral_reconstruction/extant_sequences.faa
+    jobid: 13
+
+[Tue Feb  2 10:28:32 2021]
+Finished job 13.
+6 of 48 steps (12%) done
+Select jobs to execute...
+
+[Tue Feb  2 10:28:32 2021]
+rule clustalo_protein_alignment:
+    input: apr_evolution/sarcopterygii_sequences.faa
+    output: apr_evolution/sarcopterygii_clustalo.faa
+    jobid: 29
+
+[Tue Feb  2 10:28:35 2021]
+Finished job 29.
+7 of 48 steps (15%) done
+Select jobs to execute...
+
+[Tue Feb  2 10:28:35 2021]
+rule infer_supplementary_phylogeny:
+    input: apr_evolution/sarcopterygii_clustalo.faa
+    output: apr_evolution/sarcopterygii_phylogeny_suppl.treefile
+    jobid: 28
+
+[Tue Feb  2 10:28:36 2021]
+Error in rule infer_supplementary_phylogeny:
+    jobid: 28
+    output: apr_evolution/sarcopterygii_phylogeny_suppl.treefile
+    shell:
+        
+        iqtree -s apr_evolution/sarcopterygii_clustalo.faa --prefix apr_evolution/sarcopterygii_phylogeny_suppl         --bb 1000 --alrt 1000 -nt 4         -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+[Tue Feb  2 10:28:47 2021]
+Finished job 9.
+8 of 48 steps (17%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-02T102821.962146.snakemake.log

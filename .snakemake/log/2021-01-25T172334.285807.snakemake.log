@@ -1,0 +1,272 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	add_extant_sequences
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	1	calc_shannon_entropy
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	fel_analysis
+	1	filter_cds_ensembl
+	1	fix_treefile_meme
+	1	fubar_analysis
+	1	get_nucleotide_sequences
+	1	get_protein_sequences
+	1	infer_phylogeny
+	1	mafft2_protein_alignment
+	1	mafft_protein_alignment
+	1	meme_analysis
+	1	merge_sequences
+	8	model_refinement
+	1	pal2nal_alignment
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	run_tango_predictions
+	1	sequences_clustering
+	1	sequences_filtering
+	1	trim_nucleotide_alignment
+	1	trim_protein_alignment
+	1	trim_signal_peptide
+	62
+Select jobs to execute...
+
+[Mon Jan 25 17:23:34 2021]
+rule get_nucleotide_sequences:
+    output: apr_evolution/ensembl_sequences.fna
+    jobid: 53
+
+
+[Mon Jan 25 17:23:34 2021]
+rule get_protein_sequences:
+    output: apr_evolution/ensembl_sequences.faa
+    jobid: 12
+
+[Mon Jan 25 17:23:40 2021]
+Finished job 12.
+1 of 62 steps (2%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:23:40 2021]
+rule sequences_filtering:
+    input: apr_evolution/ensembl_sequences.faa
+    output: apr_evolution/vertebrates_sequences_filt.faa
+    jobid: 11
+
+[Mon Jan 25 17:23:40 2021]
+Finished job 11.
+2 of 62 steps (3%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:23:40 2021]
+rule sequences_clustering:
+    input: apr_evolution/vertebrates_sequences_filt.faa
+    output: apr_evolution/vertebrates_sequences.faa
+    jobid: 10
+
+Removing temporary output file apr_evolution/vertebrates_sequences_filt.faa.
+[Mon Jan 25 17:23:40 2021]
+Finished job 10.
+3 of 62 steps (5%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:23:40 2021]
+rule mafft_protein_alignment:
+    input: apr_evolution/vertebrates_sequences.faa
+    output: apr_evolution/vertebrates_mafft.faa
+    jobid: 9
+
+[Mon Jan 25 17:23:42 2021]
+Finished job 53.
+4 of 62 steps (6%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:23:42 2021]
+rule filter_cds_ensembl:
+    input: apr_evolution/ensembl_sequences.fna, apr_evolution/vertebrates_sequences.faa
+    output: apr_evolution/vertebrates_sequences.fna
+    jobid: 52
+
+[Mon Jan 25 17:23:42 2021]
+Finished job 52.
+5 of 62 steps (8%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:23:42 2021]
+rule add_extant_sequences:
+    input: apr_evolution/vertebrates_sequences.faa
+    output: ancestral_reconstruction/extant_sequences.faa
+    jobid: 13
+
+[Mon Jan 25 17:23:43 2021]
+Finished job 13.
+6 of 62 steps (10%) done
+[Mon Jan 25 17:24:13 2021]
+Finished job 9.
+7 of 62 steps (11%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:24:13 2021]
+rule pal2nal_alignment:
+    input: apr_evolution/vertebrates_mafft.faa, apr_evolution/vertebrates_sequences.fna
+    output: apr_evolution/vertebrates_mafft.fna
+    jobid: 51
+
+
+[Mon Jan 25 17:24:13 2021]
+rule trim_protein_alignment:
+    input: apr_evolution/vertebrates_mafft.faa
+    output: apr_evolution/vertebrates_mafft_trimmed.faa
+    jobid: 8
+
+[Mon Jan 25 17:24:13 2021]
+Finished job 8.
+8 of 62 steps (13%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:24:13 2021]
+rule calc_shannon_entropy:
+    input: apr_evolution/vertebrates_mafft_trimmed.faa
+    output: apr_evolution/aprs_entropy.csv
+    jobid: 46
+
+[Mon Jan 25 17:24:13 2021]
+Finished job 46.
+9 of 62 steps (15%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:24:13 2021]
+rule infer_phylogeny:
+    input: apr_evolution/vertebrates_mafft_trimmed.faa
+    output: apr_evolution/vertebrates_phylogeny.treefile, apr_evolution/vertebrates_phylogeny.state
+    jobid: 7
+
+[Mon Jan 25 17:24:14 2021]
+Finished job 51.
+10 of 62 steps (16%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:24:14 2021]
+rule run_tango_predictions:
+    input: apr_evolution/vertebrates_mafft_trimmed.faa
+    output: apr_evolution/aprs_aggregation_scores.csv
+    jobid: 45
+
+[Mon Jan 25 17:24:24 2021]
+Finished job 45.
+11 of 62 steps (18%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:24:24 2021]
+rule trim_nucleotide_alignment:
+    input: apr_evolution/vertebrates_mafft.fna
+    output: apr_evolution/vertebrates_mafft_trimmed.fna
+    jobid: 50
+
+[Mon Jan 25 17:24:24 2021]
+Finished job 50.
+12 of 62 steps (19%) done
+[Mon Jan 25 18:10:19 2021]
+Finished job 7.
+13 of 62 steps (21%) done
+Select jobs to execute...
+
+[Mon Jan 25 18:10:19 2021]
+rule fix_treefile_meme:
+    input: apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_phylogeny_meme.treefile
+    jobid: 58
+
+
+[Mon Jan 25 18:10:19 2021]
+rule extract_ancestral_sequences:
+    input: apr_evolution/vertebrates_phylogeny.state
+    output: ancestral_reconstruction/ancestral_sequences.faa
+    jobid: 6
+
+[Mon Jan 25 18:10:19 2021]
+Finished job 58.
+14 of 62 steps (23%) done
+Select jobs to execute...
+
+[Mon Jan 25 18:10:19 2021]
+rule fel_analysis:
+    input: apr_evolution/vertebrates_mafft_trimmed.fna, apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_fel.json
+    jobid: 49
+
+[Mon Jan 25 18:10:28 2021]
+Finished job 6.
+15 of 62 steps (24%) done
+Select jobs to execute...
+
+[Mon Jan 25 18:10:28 2021]
+rule merge_sequences:
+    input: ancestral_reconstruction/ancestral_sequences.faa, ancestral_reconstruction/extant_sequences.faa
+    output: ancestral_reconstruction/all_sequences.faa
+    jobid: 5
+
+[Mon Jan 25 18:10:28 2021]
+Finished job 5.
+16 of 62 steps (26%) done
+Select jobs to execute...
+
+[Mon Jan 25 18:10:28 2021]
+rule mafft2_protein_alignment:
+    input: ancestral_reconstruction/all_sequences.faa
+    output: ancestral_reconstruction/alignment.faa
+    jobid: 4
+
+[Mon Jan 25 18:10:28 2021]
+Finished job 4.
+17 of 62 steps (27%) done
+Select jobs to execute...
+
+[Mon Jan 25 18:10:28 2021]
+rule trim_signal_peptide:
+    input: ancestral_reconstruction/alignment.faa
+    output: ancestral_reconstruction/alignment_trimmed.faa
+    jobid: 3
+
+[Mon Jan 25 18:10:29 2021]
+Finished job 3.
+18 of 62 steps (29%) done
+Select jobs to execute...
+
+[Mon Jan 25 18:10:29 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model.pdb
+    jobid: 25
+    wildcards: target=Crocodylus_porosus_ENSCPRP00005000967
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 328 of /home/tmasson/APOA1_evolution/Snakefile:
+Job Missing files after 5 seconds:
+ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model.pdb
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Job id: 25 completed successfully, but some output files are missing. 25
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 583, in handle_job_success
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 252, in handle_job_success
+Terminating processes on user request, this might take some time.
+[Mon Jan 25 18:37:35 2021]
+Error in rule fel_analysis:
+    jobid: 49
+    output: apr_evolution/vertebrates_fel.json
+    shell:
+        hyphy fel --alignment apr_evolution/vertebrates_mafft_trimmed.fna --tree apr_evolution/vertebrates_phylogeny.treefile --output apr_evolution/vertebrates_fel.json
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job fel_analysis since they might be corrupted:
+apr_evolution/vertebrates_fel.json
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-01-25T172334.285807.snakemake.log

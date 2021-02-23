@@ -1,0 +1,99 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	2	compute_msf
+	3	compute_wcn
+	1	fel_analysis
+	2	model_refinement
+	1	parse_fel
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	2	protein_modelling
+	18
+Select jobs to execute...
+
+[Mon Feb  1 10:37:49 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+    jobid: 27
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+
+[Mon Feb  1 10:37:49 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model.pdb
+    jobid: 23
+    wildcards: target=Mus_musculus_ENSMUSP00000034588
+
+[Mon Feb  1 10:39:43 2021]
+Finished job 27.
+1 of 18 steps (6%) done
+Select jobs to execute...
+
+[Mon Feb  1 10:39:43 2021]
+rule fel_analysis:
+    input: apr_evolution/sarcopterygii_mafft_trimmed.fna, apr_evolution/sarcopterygii_phylogeny.treefile
+    output: apr_evolution/sarcopterygii_fel.json
+    jobid: 49
+
+[Mon Feb  1 10:39:47 2021]
+Finished job 23.
+2 of 18 steps (11%) done
+Select jobs to execute...
+
+[Mon Feb  1 10:39:47 2021]
+rule parse_meme:
+    input: apr_evolution/sarcopterygii_meme.json, apr_evolution/sarcopterygii_mafft_trimmed.faa
+    output: apr_evolution/sarcopterygii_meme.csv
+    jobid: 56
+
+[Mon Feb  1 10:39:48 2021]
+Finished job 56.
+3 of 18 steps (17%) done
+Select jobs to execute...
+
+[Mon Feb  1 10:39:48 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Node99/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node99/best_model_relaxed.wcn
+    jobid: 39
+    wildcards: target=Node99
+
+[Mon Feb  1 10:39:50 2021]
+Finished job 39.
+4 of 18 steps (22%) done
+Select jobs to execute...
+
+[Mon Feb  1 10:39:50 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model.pdb
+    output: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.pdb
+    jobid: 22
+    wildcards: target=Mus_musculus_ENSMUSP00000034588
+
+[Mon Feb  1 10:40:03 2021]
+Error in rule fel_analysis:
+    jobid: 49
+    output: apr_evolution/sarcopterygii_fel.json
+    shell:
+        hyphy fel --alignment apr_evolution/sarcopterygii_mafft_trimmed.fna --tree apr_evolution/sarcopterygii_phylogeny.treefile --output apr_evolution/sarcopterygii_fel.json
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job fel_analysis since they might be corrupted:
+apr_evolution/sarcopterygii_fel.json
+[Mon Feb  1 10:45:16 2021]
+Finished job 22.
+5 of 18 steps (28%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-01T103749.389634.snakemake.log

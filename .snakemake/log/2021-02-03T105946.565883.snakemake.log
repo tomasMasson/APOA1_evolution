@@ -1,0 +1,43 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	mafft2_protein_alignment
+	1	merge_sequences
+	8	model_refinement
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	trim_signal_peptide
+	40
+Select jobs to execute...
+
+[Wed Feb  3 10:59:47 2021]
+rule extract_ancestral_sequences:
+    input: apr_evolution/sarcopterygii_phylogeny.state, apr_evolution/sarcopterygii_phylogeny.treefile
+    output: ancestral_reconstruction/ancestral_sequences.faa
+    jobid: 6
+
+[Wed Feb  3 10:59:49 2021]
+Error in rule extract_ancestral_sequences:
+    jobid: 6
+    output: ancestral_reconstruction/ancestral_sequences.faa
+    shell:
+        
+        src/get_ancestral_sequence.py apr_evolution/sarcopterygii_phylogeny.state apr_evolution/sarcopterygii_phylogeny.treefile >> ancestral_reconstruction/ancestral_sequences.faa &&
+        mv *.svg ancestral_reconstruction/
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job extract_ancestral_sequences since they might be corrupted:
+ancestral_reconstruction/ancestral_sequences.faa
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-03T105946.565883.snakemake.log

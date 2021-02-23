@@ -1,0 +1,31 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	reconstruct_ancestral_sequences
+	2
+Select jobs to execute...
+
+[Sat Feb 13 14:27:37 2021]
+rule reconstruct_ancestral_sequences:
+    input: apr_evolution/sarcopterygii_phylogeny.state, apr_evolution/sarcopterygii_phylogeny.treefile, apr_evolution/sarcopterygii_mafft.faa
+    output: ancestral_reconstruction/ancestral_sequences.faa
+    jobid: 6
+
+[Sat Feb 13 14:27:45 2021]
+Finished job 6.
+1 of 2 steps (50%) done
+Select jobs to execute...
+
+[Sat Feb 13 14:27:45 2021]
+localrule all:
+    input: apr_evolution/sarcopterygii_phylogeny_suppl.treefile, ancestral_reconstruction/ancestral_sequences.faa, viz/panels/aprs_conservation.svg, viz/panels/aprs_flexibility.svg, viz/panels/aprs_flexibility_profiles.svg
+    jobid: 0
+
+[Sat Feb 13 14:27:45 2021]
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-13T142736.691170.snakemake.log

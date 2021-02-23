@@ -1,0 +1,227 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	mafft2_protein_alignment
+	1	merge_sequences
+	8	model_refinement
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	trim_signal_peptide
+	40
+Select jobs to execute...
+
+[Wed Feb  3 11:00:35 2021]
+rule extract_ancestral_sequences:
+    input: apr_evolution/sarcopterygii_phylogeny.state, apr_evolution/sarcopterygii_phylogeny.treefile, apr_evolution/sarcopterygii_mafft.faa
+    output: ancestral_reconstruction/ancestral_sequences.faa
+    jobid: 6
+
+[Wed Feb  3 11:00:44 2021]
+Finished job 6.
+1 of 40 steps (2%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:00:44 2021]
+rule merge_sequences:
+    input: ancestral_reconstruction/ancestral_sequences.faa, ancestral_reconstruction/extant_sequences.faa
+    output: ancestral_reconstruction/all_sequences.faa
+    jobid: 5
+
+[Wed Feb  3 11:00:44 2021]
+Finished job 5.
+2 of 40 steps (5%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:00:44 2021]
+rule mafft2_protein_alignment:
+    input: ancestral_reconstruction/all_sequences.faa
+    output: ancestral_reconstruction/alignment.faa
+    jobid: 4
+
+[Wed Feb  3 11:00:44 2021]
+Finished job 4.
+3 of 40 steps (8%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:00:44 2021]
+rule trim_signal_peptide:
+    input: ancestral_reconstruction/alignment.faa
+    output: ancestral_reconstruction/alignment_trimmed.faa
+    jobid: 3
+
+[Wed Feb  3 11:00:45 2021]
+Finished job 3.
+4 of 40 steps (10%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:00:45 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node10/best_model.pdb
+    jobid: 2
+    wildcards: target=Node10
+
+[Wed Feb  3 11:02:42 2021]
+Finished job 2.
+5 of 40 steps (12%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:02:42 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node15/best_model.pdb
+    jobid: 14
+    wildcards: target=Node15
+
+[Wed Feb  3 11:04:34 2021]
+Finished job 14.
+6 of 40 steps (15%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:04:34 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Node15/best_model.pdb
+    output: ancestral_reconstruction/Node15/best_model_relaxed.pdb
+    jobid: 13
+    wildcards: target=Node15
+
+[Wed Feb  3 11:10:30 2021]
+Finished job 13.
+7 of 40 steps (18%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:10:30 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Node15/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node15/best_model_relaxed.wcn
+    jobid: 36
+    wildcards: target=Node15
+
+[Wed Feb  3 11:10:32 2021]
+Finished job 36.
+8 of 40 steps (20%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:10:32 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Node15/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node15/best_model_relaxed.msf
+    jobid: 28
+    wildcards: target=Node15
+
+[Wed Feb  3 11:10:37 2021]
+Finished job 28.
+9 of 40 steps (22%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:10:37 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Node10/best_model.pdb
+    output: ancestral_reconstruction/Node10/best_model_relaxed.pdb
+    jobid: 1
+    wildcards: target=Node10
+
+[Wed Feb  3 11:16:08 2021]
+Finished job 1.
+10 of 40 steps (25%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:16:08 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node10/best_model_relaxed.msf
+    jobid: 27
+    wildcards: target=Node10
+
+[Wed Feb  3 11:16:09 2021]
+Finished job 27.
+11 of 40 steps (28%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:16:09 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node10/best_model_relaxed.wcn
+    jobid: 35
+    wildcards: target=Node10
+
+[Wed Feb  3 11:16:11 2021]
+Finished job 35.
+12 of 40 steps (30%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:16:11 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+    jobid: 26
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Wed Feb  3 11:17:57 2021]
+Finished job 26.
+13 of 40 steps (32%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:17:57 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb
+    jobid: 25
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Wed Feb  3 11:23:42 2021]
+Finished job 25.
+14 of 40 steps (35%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:23:42 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.msf
+    jobid: 34
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Wed Feb  3 11:23:43 2021]
+Finished job 34.
+15 of 40 steps (38%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:23:43 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.wcn
+    jobid: 42
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Wed Feb  3 11:23:45 2021]
+Finished job 42.
+16 of 40 steps (40%) done
+Select jobs to execute...
+
+[Wed Feb  3 11:23:45 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node99/best_model.pdb
+    jobid: 18
+    wildcards: target=Node99
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 351 of /home/tmasson/APOA1_evolution/Snakefile:
+Job Missing files after 5 seconds:
+ancestral_reconstruction/Node99/best_model.pdb
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Job id: 18 completed successfully, but some output files are missing. 18
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 583, in handle_job_success
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 252, in handle_job_success
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-03T110034.775719.snakemake.log

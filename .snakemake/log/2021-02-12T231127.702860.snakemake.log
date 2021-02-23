@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 379 of /home/tmasson/APOA1_evolution/Snakefile:
+Missing input files for rule aggregate_msf:
+ancestral_reconstruction/model_Homo_sapiens_ENSP00000364472/best_model_relaxed.msf

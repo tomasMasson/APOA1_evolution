@@ -1,0 +1,90 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	fel_analysis
+	1	filter_cds_ensembl
+	1	fubar_analysis
+	1	mafft2_protein_alignment
+	1	meme_analysis
+	8	model_refinement
+	1	pal2nal_alignment
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	trim_nucleotide_alignment
+	1	trim_signal_peptide
+	49
+Select jobs to execute...
+
+[Tue Jan 26 23:09:31 2021]
+rule filter_cds_ensembl:
+    input: apr_evolution/ensembl_sequences.fna, apr_evolution/sarcopterygii_sequences.faa
+    output: apr_evolution/sarcopterygii_sequences.fna
+    jobid: 53
+
+
+[Tue Jan 26 23:09:31 2021]
+rule mafft2_protein_alignment:
+    input: ancestral_reconstruction/all_sequences.faa
+    output: ancestral_reconstruction/alignment.faa
+    jobid: 4
+
+[Tue Jan 26 23:09:31 2021]
+Finished job 4.
+1 of 49 steps (2%) done
+Select jobs to execute...
+
+[Tue Jan 26 23:09:31 2021]
+rule trim_signal_peptide:
+    input: ancestral_reconstruction/alignment.faa
+    output: ancestral_reconstruction/alignment_trimmed.faa
+    jobid: 3
+
+[Tue Jan 26 23:09:31 2021]
+Finished job 53.
+2 of 49 steps (4%) done
+Select jobs to execute...
+
+[Tue Jan 26 23:09:31 2021]
+rule pal2nal_alignment:
+    input: apr_evolution/sarcopterygii_mafft.faa, apr_evolution/sarcopterygii_sequences.fna
+    output: apr_evolution/sarcopterygii_mafft.fna
+    jobid: 52
+
+[Tue Jan 26 23:09:31 2021]
+Finished job 52.
+3 of 49 steps (6%) done
+Select jobs to execute...
+
+[Tue Jan 26 23:09:31 2021]
+rule trim_nucleotide_alignment:
+    input: apr_evolution/sarcopterygii_mafft.fna
+    output: apr_evolution/sarcopterygii_mafft_trimmed.fna
+    jobid: 51
+
+[Tue Jan 26 23:09:31 2021]
+Error in rule trim_nucleotide_alignment:
+    jobid: 51
+    output: apr_evolution/sarcopterygii_mafft_trimmed.fna
+    shell:
+        trimal -in apr_evolution/sarcopterygii_mafft.fna -out apr_evolution/sarcopterygii_mafft_trimmed.fna -gt 0.05
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+[Tue Jan 26 23:09:32 2021]
+Finished job 3.
+4 of 49 steps (8%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-01-26T230930.539350.snakemake.log

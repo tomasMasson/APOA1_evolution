@@ -1,0 +1,83 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	17	compute_msf
+	17	compute_wcn
+	1	extract_extant_sequences
+	1	mafft2_protein_alignment
+	1	merge_sequences
+	17	model_refinement
+	1	plot_aprs_msf_wcn
+	1	protein_modelling
+	1	trim_signal_peptide
+	60
+Select jobs to execute...
+
+[Tue Feb 23 15:26:35 2021]
+rule extract_extant_sequences:
+    input: apr_evolution/sarcopterygii_sequences.faa
+    output: ancestral_reconstruction/extant_sequences.faa
+    jobid: 20
+
+[Tue Feb 23 15:26:36 2021]
+Finished job 20.
+1 of 60 steps (2%) done
+Select jobs to execute...
+
+[Tue Feb 23 15:26:36 2021]
+rule merge_sequences:
+    input: ancestral_reconstruction/ancestral_sequences.faa, ancestral_reconstruction/extant_sequences.faa
+    output: ancestral_reconstruction/target_sequences.faa
+    jobid: 19
+
+[Tue Feb 23 15:26:36 2021]
+Finished job 19.
+2 of 60 steps (3%) done
+Select jobs to execute...
+
+[Tue Feb 23 15:26:36 2021]
+rule mafft2_protein_alignment:
+    input: ancestral_reconstruction/target_sequences.faa
+    output: ancestral_reconstruction/alignment.faa
+    jobid: 18
+
+[Tue Feb 23 15:26:37 2021]
+Finished job 18.
+3 of 60 steps (5%) done
+Select jobs to execute...
+
+[Tue Feb 23 15:26:37 2021]
+rule trim_signal_peptide:
+    input: ancestral_reconstruction/alignment.faa
+    output: ancestral_reconstruction/alignment_trimmed.faa
+    jobid: 17
+
+[Tue Feb 23 15:26:38 2021]
+Finished job 17.
+4 of 60 steps (7%) done
+Select jobs to execute...
+
+[Tue Feb 23 15:26:38 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Homo_sapiens_ENSP00000364472_best_model.pdb, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588_best_model.pdb, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967_best_model.pdb, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510_best_model.pdb, ancestral_reconstruction/Node2_best_model.pdb, ancestral_reconstruction/Node3_best_model.pdb, ancestral_reconstruction/Node4_best_model.pdb, ancestral_reconstruction/Node5_best_model.pdb, ancestral_reconstruction/Node6_best_model.pdb, ancestral_reconstruction/Node7_best_model.pdb, ancestral_reconstruction/Node8_best_model.pdb, ancestral_reconstruction/Node9_best_model.pdb, ancestral_reconstruction/Node10_best_model.pdb, ancestral_reconstruction/Node11_best_model.pdb, ancestral_reconstruction/Node12_best_model.pdb, ancestral_reconstruction/Node13_best_model.pdb, ancestral_reconstruction/Node14_best_model.pdb
+    jobid: 16
+
+Terminating processes on user request, this might take some time.
+[Tue Feb 23 15:26:45 2021]
+Error in rule protein_modelling:
+    jobid: 16
+    output: ancestral_reconstruction/Homo_sapiens_ENSP00000364472_best_model.pdb, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588_best_model.pdb, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967_best_model.pdb, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510_best_model.pdb, ancestral_reconstruction/Node2_best_model.pdb, ancestral_reconstruction/Node3_best_model.pdb, ancestral_reconstruction/Node4_best_model.pdb, ancestral_reconstruction/Node5_best_model.pdb, ancestral_reconstruction/Node6_best_model.pdb, ancestral_reconstruction/Node7_best_model.pdb, ancestral_reconstruction/Node8_best_model.pdb, ancestral_reconstruction/Node9_best_model.pdb, ancestral_reconstruction/Node10_best_model.pdb, ancestral_reconstruction/Node11_best_model.pdb, ancestral_reconstruction/Node12_best_model.pdb, ancestral_reconstruction/Node13_best_model.pdb, ancestral_reconstruction/Node14_best_model.pdb
+    shell:
+        
+        ./src/run_modeller.py ancestral_reconstruction/alignment_trimmed.faa Homo_sapiens_ENSP00000364472 apoa1.pdb &&        rm *.B* *.D* *.V* *.ini *.rsr *.sch &&        mv *best_model.pdb *.pir ancestral_reconstruction/
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-23T152634.863964.snakemake.log

@@ -1,0 +1,28 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	4	compute_msf
+	4	compute_wcn
+	1	mafft2_protein_alignment
+	4	model_refinement
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	4	protein_modelling
+	1	trim_signal_peptide
+	23
+Select jobs to execute...
+
+[Wed Feb  3 11:59:12 2021]
+rule plot_aprs_evolution:
+    input: apr_evolution/aprs_aggregation_scores.csv, apr_evolution/aprs_entropy.csv, apr_evolution/sarcopterygii_mafft.faa
+    output: viz/panels/aprs_conservation.svg
+    jobid: 6
+
+Terminating processes on user request, this might take some time.
+Cancelling snakemake on user request.

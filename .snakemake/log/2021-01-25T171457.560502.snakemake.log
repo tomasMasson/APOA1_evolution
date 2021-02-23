@@ -1,0 +1,60 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	fel_analysis
+	1	fubar_analysis
+	1	meme_analysis
+	8	model_refinement
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	run_tango_predictions
+	45
+Select jobs to execute...
+
+[Mon Jan 25 17:14:58 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+    jobid: 27
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+
+[Mon Jan 25 17:14:58 2021]
+rule fubar_analysis:
+    input: apr_evolution/vertebrates_mafft_trimmed.fna, apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_fubar.json
+    jobid: 55
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 328 of /home/tmasson/APOA1_evolution/Snakefile:
+Job Missing files after 5 seconds:
+ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Job id: 27 completed successfully, but some output files are missing. 27
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 583, in handle_job_success
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 252, in handle_job_success
+Terminating processes on user request, this might take some time.
+[Mon Jan 25 17:15:20 2021]
+Error in rule fubar_analysis:
+    jobid: 55
+    output: apr_evolution/vertebrates_fubar.json
+    shell:
+        
+        hyphy fubar --alignment apr_evolution/vertebrates_mafft_trimmed.fna --tree apr_evolution/vertebrates_phylogeny.treefile &&         mv apr_evolution/vertebrates_mafft_trimmed.fna.FUBAR.json apr_evolution/vertebrates_fubar.json &&         rm apr_evolution/vertebrates_mafft_trimmed.fna.FUBAR.cache
+        
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-01-25T171457.560502.snakemake.log

@@ -1,0 +1,4 @@
+NoSuchEntryError in line 342 of /home/tmasson/APOA1_evolution/Snakefile:
+'targets'
+  File "/home/tmasson/APOA1_evolution/Snakefile", line 342, in <module>
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/pytools/persistent_dict.py", line 744, in fetch

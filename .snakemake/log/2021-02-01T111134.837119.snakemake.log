@@ -1,0 +1,570 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	add_extant_sequences
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	filter_bad_quality_sequences
+	1	filter_sarcopterygii_sequences
+	1	get_protein_sequences
+	1	infer_phylogeny
+	1	mafft2_protein_alignment
+	1	mafft_protein_alignment
+	1	merge_sequences
+	8	model_refinement
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	trim_protein_alignment
+	1	trim_signal_peptide
+	47
+Select jobs to execute...
+
+[Mon Feb  1 11:11:35 2021]
+rule get_protein_sequences:
+    output: apr_evolution/ensembl_sequences.faa
+    jobid: 12
+
+[Mon Feb  1 11:11:38 2021]
+Finished job 12.
+1 of 47 steps (2%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:11:38 2021]
+rule filter_sarcopterygii_sequences:
+    input: apr_evolution/ensembl_sequences.faa
+    output: apr_evolution/raw_sarcopterygii_sequences.faa
+    jobid: 11
+
+[Mon Feb  1 11:11:43 2021]
+Finished job 11.
+2 of 47 steps (4%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:11:43 2021]
+rule filter_bad_quality_sequences:
+    input: apr_evolution/raw_sarcopterygii_sequences.faa
+    output: apr_evolution/sarcopterygii_sequences.faa
+    jobid: 10
+
+[Mon Feb  1 11:11:43 2021]
+Finished job 10.
+3 of 47 steps (6%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:11:43 2021]
+rule add_extant_sequences:
+    input: apr_evolution/sarcopterygii_sequences.faa
+    output: ancestral_reconstruction/extant_sequences.faa
+    jobid: 13
+
+[Mon Feb  1 11:11:43 2021]
+rule mafft_protein_alignment:
+    input: apr_evolution/sarcopterygii_sequences.faa
+    output: apr_evolution/sarcopterygii_mafft.faa
+    jobid: 9
+
+[Mon Feb  1 11:11:44 2021]
+Finished job 13.
+4 of 47 steps (9%) done
+[Mon Feb  1 11:12:00 2021]
+Finished job 9.
+5 of 47 steps (11%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:12:00 2021]
+rule trim_protein_alignment:
+    input: apr_evolution/sarcopterygii_mafft.faa
+    output: apr_evolution/sarcopterygii_mafft_trimmed.faa
+    jobid: 8
+
+[Mon Feb  1 11:12:00 2021]
+Finished job 8.
+6 of 47 steps (13%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:12:00 2021]
+rule infer_phylogeny:
+    input: apr_evolution/sarcopterygii_mafft_trimmed.faa
+    output: apr_evolution/sarcopterygii_phylogeny.treefile, apr_evolution/sarcopterygii_phylogeny.state
+    jobid: 7
+
+[Mon Feb  1 11:50:41 2021]
+Finished job 7.
+7 of 47 steps (15%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:50:41 2021]
+rule extract_ancestral_sequences:
+    input: apr_evolution/sarcopterygii_phylogeny.state
+    output: ancestral_reconstruction/ancestral_sequences.faa
+    jobid: 6
+
+[Mon Feb  1 11:50:50 2021]
+Finished job 6.
+8 of 47 steps (17%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:50:50 2021]
+rule merge_sequences:
+    input: ancestral_reconstruction/ancestral_sequences.faa, ancestral_reconstruction/extant_sequences.faa
+    output: ancestral_reconstruction/all_sequences.faa
+    jobid: 5
+
+[Mon Feb  1 11:50:50 2021]
+Finished job 5.
+9 of 47 steps (19%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:50:50 2021]
+rule mafft2_protein_alignment:
+    input: ancestral_reconstruction/all_sequences.faa
+    output: ancestral_reconstruction/alignment.faa
+    jobid: 4
+
+[Mon Feb  1 11:50:50 2021]
+Finished job 4.
+10 of 47 steps (21%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:50:50 2021]
+rule trim_signal_peptide:
+    input: ancestral_reconstruction/alignment.faa
+    output: ancestral_reconstruction/alignment_trimmed.faa
+    jobid: 3
+
+[Mon Feb  1 11:50:51 2021]
+Finished job 3.
+11 of 47 steps (23%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:50:51 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node15/best_model.pdb
+    jobid: 15
+    wildcards: target=Node15
+
+
+[Mon Feb  1 11:50:51 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node92/best_model.pdb
+    jobid: 17
+    wildcards: target=Node92
+
+[Mon Feb  1 11:52:41 2021]
+Finished job 17.
+12 of 47 steps (26%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:52:41 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Node92/best_model.pdb
+    output: ancestral_reconstruction/Node92/best_model_relaxed.pdb
+    jobid: 16
+    wildcards: target=Node92
+
+[Mon Feb  1 11:52:49 2021]
+Finished job 15.
+13 of 47 steps (28%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:52:49 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+    jobid: 27
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Mon Feb  1 11:54:47 2021]
+Finished job 27.
+14 of 47 steps (30%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:54:47 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb
+    jobid: 26
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Mon Feb  1 11:57:34 2021]
+Finished job 16.
+15 of 47 steps (32%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:57:34 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Node92/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node92/best_model_relaxed.msf
+    jobid: 30
+    wildcards: target=Node92
+
+[Mon Feb  1 11:57:35 2021]
+Finished job 30.
+16 of 47 steps (34%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:57:35 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model.pdb
+    jobid: 25
+    wildcards: target=Crocodylus_porosus_ENSCPRP00005000967
+
+[Mon Feb  1 11:59:33 2021]
+Finished job 25.
+17 of 47 steps (36%) done
+Select jobs to execute...
+
+[Mon Feb  1 11:59:33 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model.pdb
+    output: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.pdb
+    jobid: 24
+    wildcards: target=Crocodylus_porosus_ENSCPRP00005000967
+
+[Mon Feb  1 12:00:39 2021]
+Finished job 26.
+18 of 47 steps (38%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:00:39 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.wcn
+    jobid: 43
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Mon Feb  1 12:00:41 2021]
+Finished job 43.
+19 of 47 steps (40%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:00:41 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.msf
+    jobid: 35
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+[Mon Feb  1 12:00:42 2021]
+Finished job 35.
+20 of 47 steps (43%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:00:42 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model.pdb
+    jobid: 23
+    wildcards: target=Mus_musculus_ENSMUSP00000034588
+
+[Mon Feb  1 12:02:39 2021]
+Finished job 23.
+21 of 47 steps (45%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:02:39 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model.pdb
+    output: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.pdb
+    jobid: 22
+    wildcards: target=Mus_musculus_ENSMUSP00000034588
+
+[Mon Feb  1 12:05:05 2021]
+Finished job 24.
+22 of 47 steps (47%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:05:05 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.msf
+    jobid: 34
+    wildcards: target=Crocodylus_porosus_ENSCPRP00005000967
+
+[Mon Feb  1 12:05:06 2021]
+Finished job 34.
+23 of 47 steps (49%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:05:06 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.wcn
+    jobid: 42
+    wildcards: target=Crocodylus_porosus_ENSCPRP00005000967
+
+[Mon Feb  1 12:05:08 2021]
+Finished job 42.
+24 of 47 steps (51%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:05:08 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node99/best_model.pdb
+    jobid: 19
+    wildcards: target=Node99
+
+[Mon Feb  1 12:06:56 2021]
+Finished job 19.
+25 of 47 steps (53%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:06:56 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Node99/best_model.pdb
+    output: ancestral_reconstruction/Node99/best_model_relaxed.pdb
+    jobid: 18
+    wildcards: target=Node99
+
+[Mon Feb  1 12:08:24 2021]
+Finished job 22.
+26 of 47 steps (55%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:08:24 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.msf
+    jobid: 33
+    wildcards: target=Mus_musculus_ENSMUSP00000034588
+
+[Mon Feb  1 12:08:26 2021]
+Finished job 33.
+27 of 47 steps (57%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:08:26 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.wcn
+    jobid: 41
+    wildcards: target=Mus_musculus_ENSMUSP00000034588
+
+[Mon Feb  1 12:08:28 2021]
+Finished job 41.
+28 of 47 steps (60%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:08:28 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node10/best_model.pdb
+    jobid: 2
+    wildcards: target=Node10
+
+[Mon Feb  1 12:10:24 2021]
+Finished job 2.
+29 of 47 steps (62%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:10:24 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Node10/best_model.pdb
+    output: ancestral_reconstruction/Node10/best_model_relaxed.pdb
+    jobid: 1
+    wildcards: target=Node10
+
+[Mon Feb  1 12:11:57 2021]
+Finished job 18.
+30 of 47 steps (64%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:11:57 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Node99/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node99/best_model_relaxed.msf
+    jobid: 31
+    wildcards: target=Node99
+
+[Mon Feb  1 12:11:58 2021]
+Finished job 31.
+31 of 47 steps (66%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:11:58 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Node99/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node99/best_model_relaxed.wcn
+    jobid: 39
+    wildcards: target=Node99
+
+[Mon Feb  1 12:12:00 2021]
+Finished job 39.
+32 of 47 steps (68%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:12:00 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model.pdb
+    jobid: 21
+    wildcards: target=Gorilla_gorilla_ENSGGOP00000033442
+
+[Mon Feb  1 12:14:02 2021]
+Finished job 21.
+33 of 47 steps (70%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:14:02 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model.pdb
+    output: ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.pdb
+    jobid: 20
+    wildcards: target=Gorilla_gorilla_ENSGGOP00000033442
+
+[Mon Feb  1 12:15:16 2021]
+Finished job 1.
+34 of 47 steps (72%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:15:16 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node10/best_model_relaxed.wcn
+    jobid: 36
+    wildcards: target=Node10
+
+[Mon Feb  1 12:15:18 2021]
+Finished job 36.
+35 of 47 steps (74%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:15:18 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Node92/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node92/best_model_relaxed.wcn
+    jobid: 38
+    wildcards: target=Node92
+
+[Mon Feb  1 12:15:20 2021]
+Finished job 38.
+36 of 47 steps (77%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:15:20 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node10/best_model_relaxed.msf
+    jobid: 28
+    wildcards: target=Node10
+
+[Mon Feb  1 12:15:21 2021]
+Finished job 28.
+37 of 47 steps (79%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:15:21 2021]
+rule model_refinement:
+    input: ancestral_reconstruction/Node15/best_model.pdb
+    output: ancestral_reconstruction/Node15/best_model_relaxed.pdb
+    jobid: 14
+    wildcards: target=Node15
+
+[Mon Feb  1 12:20:14 2021]
+Finished job 14.
+38 of 47 steps (81%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:20:14 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Node15/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node15/best_model_relaxed.msf
+    jobid: 29
+    wildcards: target=Node15
+
+[Mon Feb  1 12:20:15 2021]
+Finished job 29.
+39 of 47 steps (83%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:20:15 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Node15/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Node15/best_model_relaxed.wcn
+    jobid: 37
+    wildcards: target=Node15
+
+[Mon Feb  1 12:20:17 2021]
+Finished job 37.
+40 of 47 steps (85%) done
+[Mon Feb  1 12:20:18 2021]
+Finished job 20.
+41 of 47 steps (87%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:20:18 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.wcn
+    jobid: 40
+    wildcards: target=Gorilla_gorilla_ENSGGOP00000033442
+
+
+[Mon Feb  1 12:20:18 2021]
+rule compute_msf:
+    input: ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.pdb
+    output: ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.msf
+    jobid: 32
+    wildcards: target=Gorilla_gorilla_ENSGGOP00000033442
+
+[Mon Feb  1 12:20:19 2021]
+Finished job 32.
+42 of 47 steps (89%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:20:19 2021]
+rule aggregate_msf:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.msf, ancestral_reconstruction/Node15/best_model_relaxed.msf, ancestral_reconstruction/Node92/best_model_relaxed.msf, ancestral_reconstruction/Node99/best_model_relaxed.msf, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.msf, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.msf, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.msf, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.msf
+    output: ancestral_reconstruction/msf.csv
+    jobid: 45
+
+[Mon Feb  1 12:20:20 2021]
+Finished job 45.
+43 of 47 steps (91%) done
+[Mon Feb  1 12:20:20 2021]
+Finished job 40.
+44 of 47 steps (94%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:20:20 2021]
+rule aggregate_wcn:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.wcn, ancestral_reconstruction/Node15/best_model_relaxed.wcn, ancestral_reconstruction/Node92/best_model_relaxed.wcn, ancestral_reconstruction/Node99/best_model_relaxed.wcn, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.wcn, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.wcn, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.wcn, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.wcn
+    output: ancestral_reconstruction/wcn.csv
+    jobid: 46
+
+[Mon Feb  1 12:20:20 2021]
+Finished job 46.
+45 of 47 steps (96%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:20:20 2021]
+rule plot_aprs_msf_wcn:
+    input: ancestral_reconstruction/msf.csv, ancestral_reconstruction/wcn.csv
+    output: viz/panels/aprs_flexibility.svg, viz/panels/aprs_flexibility_profiles.svg
+    jobid: 44
+
+[Mon Feb  1 12:20:23 2021]
+Finished job 44.
+46 of 47 steps (98%) done
+Select jobs to execute...
+
+[Mon Feb  1 12:20:23 2021]
+localrule all:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.pdb, ancestral_reconstruction/Node15/best_model_relaxed.pdb, ancestral_reconstruction/Node92/best_model_relaxed.pdb, ancestral_reconstruction/Node99/best_model_relaxed.pdb, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.pdb, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.pdb, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.pdb, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb, ancestral_reconstruction/Node10/best_model_relaxed.msf, ancestral_reconstruction/Node15/best_model_relaxed.msf, ancestral_reconstruction/Node92/best_model_relaxed.msf, ancestral_reconstruction/Node99/best_model_relaxed.msf, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.msf, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.msf, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.msf, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.msf, ancestral_reconstruction/Node10/best_model_relaxed.wcn, ancestral_reconstruction/Node15/best_model_relaxed.wcn, ancestral_reconstruction/Node92/best_model_relaxed.wcn, ancestral_reconstruction/Node99/best_model_relaxed.wcn, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.wcn, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.wcn, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.wcn, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.wcn, viz/panels/aprs_flexibility.svg, viz/panels/aprs_flexibility_profiles.svg
+    jobid: 0
+
+[Mon Feb  1 12:20:23 2021]
+Finished job 0.
+47 of 47 steps (100%) done
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-01T111134.837119.snakemake.log

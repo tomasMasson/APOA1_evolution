@@ -1,0 +1,53 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	all
+	1	plot_aprs_evolution
+	1	run_tango_predictions
+	3
+Select jobs to execute...
+
+[Mon Feb  1 01:13:50 2021]
+rule run_tango_predictions:
+    input: apr_evolution/sarcopterygii_mafft_trimmed.faa
+    output: apr_evolution/aprs_aggregation_scores.csv
+    jobid: 46
+
+
+        ./src/run_tango.py apr_evolution/sarcopterygii_mafft_trimmed.faa 36 44 /home/tmasson/tango/tango_x86_64_release APR1 >> apr_evolution/aprs_aggregation_scores.csv
+        ./src/run_tango.py apr_evolution/sarcopterygii_mafft_trimmed.faa 51 59 /home/tmasson/tango/tango_x86_64_release APR2 >> apr_evolution/aprs_aggregation_scores.csv
+        ./src/run_tango.py apr_evolution/sarcopterygii_mafft_trimmed.faa 65 73 /home/tmasson/tango/tango_x86_64_release APR3 >> apr_evolution/aprs_aggregation_scores.csv
+        ./src/run_tango.py apr_evolution/sarcopterygii_mafft_trimmed.faa 225 233 /home/tmasson/tango/tango_x86_64_release APR4 >> apr_evolution/aprs_aggregation_scores.csv
+        rm nt=N.txt
+        
+[Mon Feb  1 01:13:55 2021]
+Finished job 46.
+1 of 3 steps (33%) done
+Select jobs to execute...
+
+[Mon Feb  1 01:13:55 2021]
+rule plot_aprs_evolution:
+    input: apr_evolution/aprs_aggregation_scores.csv, apr_evolution/aprs_entropy.csv, apr_evolution/hyphy_results.csv
+    output: viz/panels/aprs_conservation.svg, viz/panels/natural_selection_regimes.svg
+    jobid: 45
+
+
+        ./viz/src/plot_apr_evolution.py apr_evolution/aprs_aggregation_scores.csv apr_evolution/aprs_entropy.csv apr_evolution/hyphy_results.csv &&        mv aprs_conservation.svg natural_selection_regimes.svg viz/panels/
+        
+[Mon Feb  1 01:13:57 2021]
+Finished job 45.
+2 of 3 steps (67%) done
+Select jobs to execute...
+
+[Mon Feb  1 01:13:57 2021]
+localrule all:
+    input: ancestral_reconstruction/Node10/best_model_relaxed.pdb, ancestral_reconstruction/Node15/best_model_relaxed.pdb, ancestral_reconstruction/Node92/best_model_relaxed.pdb, ancestral_reconstruction/Node99/best_model_relaxed.pdb, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.pdb, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.pdb, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.pdb, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.pdb, ancestral_reconstruction/Node10/best_model_relaxed.msf, ancestral_reconstruction/Node15/best_model_relaxed.msf, ancestral_reconstruction/Node92/best_model_relaxed.msf, ancestral_reconstruction/Node99/best_model_relaxed.msf, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.msf, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.msf, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.msf, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.msf, ancestral_reconstruction/Node10/best_model_relaxed.wcn, ancestral_reconstruction/Node15/best_model_relaxed.wcn, ancestral_reconstruction/Node92/best_model_relaxed.wcn, ancestral_reconstruction/Node99/best_model_relaxed.wcn, ancestral_reconstruction/Gorilla_gorilla_ENSGGOP00000033442/best_model_relaxed.wcn, ancestral_reconstruction/Mus_musculus_ENSMUSP00000034588/best_model_relaxed.wcn, ancestral_reconstruction/Crocodylus_porosus_ENSCPRP00005000967/best_model_relaxed.wcn, ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model_relaxed.wcn, viz/panels/aprs_conservation.svg, viz/panels/natural_selection_regimes.svg, viz/panels/aprs_flexibility.svg, viz/panels/aprs_flexibility_profiles.svg
+    jobid: 0
+
+[Mon Feb  1 01:13:57 2021]
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-01T011350.302243.snakemake.log

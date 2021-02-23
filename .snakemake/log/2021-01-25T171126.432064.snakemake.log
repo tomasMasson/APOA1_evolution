@@ -1,0 +1,130 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	fel_analysis
+	1	fix_treefile_meme
+	1	fubar_analysis
+	1	mafft2_protein_alignment
+	1	meme_analysis
+	1	merge_sequences
+	8	model_refinement
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	run_tango_predictions
+	1	trim_signal_peptide
+	50
+Select jobs to execute...
+
+[Mon Jan 25 17:11:26 2021]
+rule extract_ancestral_sequences:
+    input: apr_evolution/vertebrates_phylogeny.state
+    output: ancestral_reconstruction/ancestral_sequences.faa
+    jobid: 6
+
+[Mon Jan 25 17:11:26 2021]
+rule fix_treefile_meme:
+    input: apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_phylogeny_meme.treefile
+    jobid: 58
+
+[Mon Jan 25 17:11:26 2021]
+Finished job 58.
+1 of 50 steps (2%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:11:26 2021]
+rule fel_analysis:
+    input: apr_evolution/vertebrates_mafft_trimmed.fna, apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_fel.json
+    jobid: 49
+
+[Mon Jan 25 17:11:36 2021]
+Finished job 6.
+2 of 50 steps (4%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:11:36 2021]
+rule run_tango_predictions:
+    input: apr_evolution/vertebrates_mafft_trimmed.faa
+    output: apr_evolution/aprs_aggregation_scores.csv
+    jobid: 45
+
+[Mon Jan 25 17:11:43 2021]
+Finished job 45.
+3 of 50 steps (6%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:11:43 2021]
+rule merge_sequences:
+    input: ancestral_reconstruction/ancestral_sequences.faa, ancestral_reconstruction/extant_sequences.faa
+    output: ancestral_reconstruction/all_sequences.faa
+    jobid: 5
+
+[Mon Jan 25 17:11:43 2021]
+Finished job 5.
+4 of 50 steps (8%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:11:43 2021]
+rule mafft2_protein_alignment:
+    input: ancestral_reconstruction/all_sequences.faa
+    output: ancestral_reconstruction/alignment.faa
+    jobid: 4
+
+[Mon Jan 25 17:11:44 2021]
+Finished job 4.
+5 of 50 steps (10%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:11:44 2021]
+rule trim_signal_peptide:
+    input: ancestral_reconstruction/alignment.faa
+    output: ancestral_reconstruction/alignment_trimmed.faa
+    jobid: 3
+
+[Mon Jan 25 17:11:45 2021]
+Finished job 3.
+6 of 50 steps (12%) done
+Select jobs to execute...
+
+[Mon Jan 25 17:11:45 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+    jobid: 27
+    wildcards: target=Gallus_gallus_ENSGALP00000011510
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 328 of /home/tmasson/APOA1_evolution/Snakefile:
+Job Missing files after 5 seconds:
+ancestral_reconstruction/Gallus_gallus_ENSGALP00000011510/best_model.pdb
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Job id: 27 completed successfully, but some output files are missing. 27
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 583, in handle_job_success
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 252, in handle_job_success
+Terminating processes on user request, this might take some time.
+[Mon Jan 25 17:13:33 2021]
+Error in rule fel_analysis:
+    jobid: 49
+    output: apr_evolution/vertebrates_fel.json
+    shell:
+        hyphy fel --alignment apr_evolution/vertebrates_mafft_trimmed.fna --tree apr_evolution/vertebrates_phylogeny.treefile --output apr_evolution/vertebrates_fel.json
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job fel_analysis since they might be corrupted:
+apr_evolution/vertebrates_fel.json
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-01-25T171126.432064.snakemake.log

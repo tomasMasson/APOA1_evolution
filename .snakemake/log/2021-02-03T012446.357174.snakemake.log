@@ -1,0 +1,43 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	fel_analysis
+	1	fubar_analysis
+	1	meme_analysis
+	8	model_refinement
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	44
+Select jobs to execute...
+
+[Wed Feb  3 01:24:46 2021]
+rule protein_modelling:
+    input: ancestral_reconstruction/alignment_trimmed.faa, apoa1.pdb
+    output: ancestral_reconstruction/Node10/best_model.pdb
+    jobid: 2
+    wildcards: target=Node10
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in line 350 of /home/tmasson/APOA1_evolution/Snakefile:
+Job Missing files after 5 seconds:
+ancestral_reconstruction/Node10/best_model.pdb
+This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait.
+Job id: 2 completed successfully, but some output files are missing. 2
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 583, in handle_job_success
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 252, in handle_job_success
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-03T012446.357174.snakemake.log

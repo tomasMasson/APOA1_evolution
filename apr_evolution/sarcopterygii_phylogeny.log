@@ -1,0 +1,490 @@
+IQ-TREE multicore version 2.0.3 for Linux 64-bit built Dec 20 2020
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor,
+Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    lenovo-B50 (AVX2, FMA3, 7 GB RAM)
+Command: iqtree -s apr_evolution/sarcopterygii_mafft.faa --prefix apr_evolution/sarcopterygii_phylogeny --ufboot 1000 --alrt 1000 -nt 4 --ancestral -o Xenopus_tropicalis_ENSXETP00000008146,Leptobrachium_leishanense_ENSLLEP00000049402
+Seed:    586506 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Wed Feb  3 13:20:07 2021
+Kernel:  AVX+FMA - 4 threads (4 CPU cores detected)
+
+Reading alignment file apr_evolution/sarcopterygii_mafft.faa ... Fasta format detected
+Alignment most likely contains protein sequences
+Alignment has 155 sequences with 664 columns, 523 distinct patterns
+262 parsimony-informative, 143 singleton sites, 259 constant sites
+                                                    Gap/Ambiguity  Composition  p-value
+   1  Nomascus_leucogenys_ENSNLEP00000008947               59.79%    passed     97.74%
+   2  Gorilla_gorilla_ENSGGOP00000033442                   59.79%    passed     99.79%
+   3  Pan_troglodytes_ENSPTRP00000080550                   59.79%    passed     99.79%
+   4  Pan_troglodytes_ENSPTRP00000007404                   59.79%    passed     99.79%
+   5  Pan_paniscus_ENSPPAP00000007656                      59.79%    passed     99.78%
+   6  Sarcophilus_harrisii_ENSSHAP00000015521              57.53%    failed      0.81%
+   7  Dasypus_novemcinctus_ENSDNOP00000015747              60.54%    passed     91.96%
+   8  Callithrix_jacchus_ENSCJAP00000023173                59.94%    passed     77.28%
+   9  Cercocebus_atys_ENSCATP00000044852                   59.79%    passed     95.36%
+  10  Macaca_fascicularis_ENSMFAP00000037249               59.79%    passed     95.36%
+  11  Macaca_mulatta_ENSMMUP00000021209                    59.79%    passed     95.36%
+  12  Macaca_nemestrina_ENSMNEP00000035632                 59.79%    passed     98.53%
+  13  Papio_anubis_ENSPANP00000006074                      59.79%    passed     95.36%
+  14  Theropithecus_gelada_ENSTGEP00000026520              59.79%    passed     95.36%
+  15  Mandrillus_leucophaeus_ENSMLEP00000035049            59.79%    passed     95.36%
+  16  Physeter_catodon_ENSPCTP00005026118                  60.09%    passed     99.99%
+  17  Vulpes_vulpes_ENSVVUP00000034996                     59.94%    passed     95.29%
+  18  Panthera_pardus_ENSPPRP00000001916                   59.94%    passed     99.99%
+  19  Capra_hircus_blackbengal_ENSCHIP00010011233          56.33%    passed     99.96%
+  20  Panthera_leo_ENSPLOP00000025470                      59.94%    passed     99.99%
+  21  Canis_lupus_familiarisbasenji_ENSCAFP00030009795     59.94%    passed     98.15%
+  22  Urocitellus_parryii_ENSUPAP00010007066               60.24%    passed     99.70%
+  23  Capra_hircus_ENSCHIP00000023988                      60.09%    passed    100.00%
+  24  Oryctolagus_cuniculus_ENSOCUP00000009241             59.94%    passed     99.58%
+  25  Mus_musculus_ENSMUSP00000034588                      60.24%    passed     83.39%
+  26  Bos_taurus_ENSBTAP00000002914                        60.09%    passed     99.94%
+  27  Procavia_capensis_ENSPCAP00000001437                 60.39%    passed     88.65%
+  28  Bos_indicus_hybrid_ENSBIXP00005041040                60.09%    passed     99.94%
+  29  Cricetulus_griseus_chok1gshd_ENSCGRP00001027089      60.24%    passed     94.00%
+  30  Camelus_dromedarius_ENSCDRP00005025823               59.94%    passed     99.96%
+  31  Canis_lupus_familiaris_ENSCAFP00000019630            59.94%    passed     98.15%
+  32  Heterocephalus_glaber_female_ENSHGLP00000027468      60.24%    passed     71.75%
+  33  Catagonus_wagneri_ENSCWAP00000005209                 60.09%    passed     99.02%
+  34  Ovis_aries_rambouillet_ENSOARP00020032164            60.09%    passed    100.00%
+  35  Marmota_marmota_marmota_ENSMMMP00000026221           57.23%    passed     62.83%
+  36  Rattus_norvegicus_ENSRNOP00000065206                 60.99%    passed      7.99%
+  37  Balaenoptera_musculus_ENSBMSP00010006480             60.09%    passed    100.00%
+  38  Ovis_aries_ENSOARP00000002748                        60.99%    passed     99.98%
+  39  Bos_taurus_hybrid_ENSBIXP00000029002                 60.09%    passed     99.94%
+  40  Monodon_monoceros_ENSMMNP00015023340                 57.98%    passed     99.57%
+  41  Ictidomys_tridecemlineatus_ENSSTOP00000002077        60.24%    passed     99.29%
+  42  Nannospalax_galili_ENSNGAP00000019853                60.24%    passed     96.94%
+  43  Spermophilus_dauricus_ENSSDAP00000014821             60.24%    passed     99.95%
+  44  Monodelphis_domestica_ENSMODP00000059859             60.24%    failed      0.00%
+  45  Octodon_degus_ENSODEP00000012142                     60.39%    passed     99.50%
+  46  Lynx_canadensis_ENSLCNP00005015953                   59.94%    passed     99.96%
+  47  Moschus_moschiferus_ENSMMSP00000027806               60.09%    passed     99.93%
+  48  Mus_spicilegus_ENSMSIP00000012851                    60.24%    passed     93.38%
+  49  Ochotona_princeps_ENSOPRP00000016294                 60.39%    passed     95.69%
+  50  Rhinolophus_ferrumequinum_ENSRFEP00010013048         60.09%    passed     97.93%
+  51  Mus_spretus_MGP_SPRETEiJ_P0091280                    60.24%    passed     91.15%
+  52  Fukomys_damarensis_ENSFDAP00000018576                60.24%    passed     62.16%
+  53  Peromyscus_maniculatus_bairdii_ENSPEMP00000011287    60.24%    passed     70.69%
+  54  Phocoena_sinus_ENSPSNP00000006449                    60.09%    passed     99.81%
+  55  Carlito_syrichta_ENSTSYP00000021888                  59.94%    passed     95.16%
+  56  Microtus_ochrogaster_ENSMOCP00000019788              60.09%    passed     94.74%
+  57  Mus_caroli_MGP_CAROLIEiJ_P0087687                    60.24%    passed     92.78%
+  58  Ursus_americanus_ENSUAMP00000025573                  59.94%    passed     98.86%
+  59  Canis_lupus_familiarisgreatdane_ENSCAFP00040004612   59.94%    passed     98.15%
+  60  Sciurus_vulgaris_ENSSVLP00005028052                  60.09%    passed     99.97%
+  61  Chinchilla_lanigera_ENSCLAP00000016837               60.24%    passed     98.98%
+  62  Zalophus_californianus_ENSZCAP00015033404            59.94%    passed     98.03%
+  63  Otolemur_garnettii_ENSOGAP00000020480                59.94%    passed     99.13%
+  64  Equus_asinus_asinus_ENSEASP00005009167               59.94%    passed     98.19%
+  65  Delphinapterus_leucas_ENSDLEP00000014868             60.09%    passed     99.70%
+  66  Cavia_aperea_ENSCAPP00000008812                      60.24%    passed     99.98%
+  67  Rhinopithecus_roxellana_ENSRROP00000041818           59.79%    passed     93.19%
+  68  Meriones_unguiculatus_ENSMUGP00000015766             56.02%    passed     89.37%
+  69  Piliocolobus_tephrosceles_ENSPTEP00000022375         59.79%    passed     90.18%
+  70  Microcebus_murinus_ENSMICP00000036936                58.89%    passed     97.43%
+  71  Mesocricetus_auratus_ENSMAUP00000019954              60.24%    passed     86.89%
+  72  Castor_canadensis_ENSCCNP00000017901                 60.24%    passed    100.00%
+  73  Chlorocebus_sabaeus_ENSCSAP00000015337               59.79%    passed     93.76%
+  74  Bison_bison_bison_ENSBBBP00000016449                 61.30%    passed     85.53%
+  75  Canis_lupus_dingo_ENSCAFP00020002685                 59.94%    passed     98.15%
+  76  Ailuropoda_melanoleuca_ENSAMEP00000009115            59.94%    passed     98.94%
+  77  Ursus_thibetanus_thibetanus_ENSUTTP00000020530       36.14%    passed     79.19%
+  78  Ursus_maritimus_ENSUMAP00000004530                   59.04%    passed     88.46%
+  79  Sus_scrofa_ENSSSCP00000033805                        57.98%    failed      0.00%
+  80  Neovison_vison_ENSNVIP00000007881                    59.94%    passed     99.09%
+  81  Vombatus_ursinus_ENSVURP00010032044                  59.94%    passed      6.78%
+  82  Prolemur_simus_ENSPSMP00000000253                    59.94%    passed     97.70%
+  83  Propithecus_coquereli_ENSPCOP00000003211             60.09%    passed     98.96%
+  84  Cavia_porcellus_ENSCPOP00000032306                   60.24%    passed     99.95%
+  85  Felis_catus_ENSFCAP00000016102                       55.57%    passed     45.06%
+  86  Heterocephalus_glaber_male_ENSHGLP00100014646        60.39%    passed     73.76%
+  87  Colobus_angolensis_palliatus_ENSCANP00000040304      59.79%    passed     89.27%
+  88  Jaculus_jaculus_ENSJJAP00000010024                   60.24%    passed     98.44%
+  89  Equus_caballus_ENSECAP00000007649                    59.94%    passed     97.76%
+  90  Cricetulus_griseus_picr_ENSCGRP00015025344           59.64%    passed     85.68%
+  91  Saimiri_boliviensis_boliviensis_ENSSBOP00000022311   59.94%    passed     97.92%
+  92  Mustela_putorius_furo_ENSMPUP00000004184             51.36%    passed     29.59%
+  93  Mus_pahari_MGP_PahariEiJ_P0023342                    60.24%    passed     74.65%
+  94  Aotus_nancymaae_ENSANAP00000033484                   60.09%    passed     85.17%
+  95  Dipodomys_ordii_ENSDORP00000011659                   59.79%    passed     99.80%
+  96  Cervus_hanglu_yarkandensis_ENSCHYP00000004610        60.09%    passed     99.87%
+  97  Cricetulus_griseus_crigri_ENSCGRP00000019384         59.64%    passed     85.68%
+  98  Rhinopithecus_bieti_ENSRBIP00000043069               59.79%    passed     94.47%
+  99  Phascolarctos_cinereus_ENSPCIP00000032276            53.77%    failed      0.00%
+ 100  Bos_grunniens_ENSBGRP00000005993                     60.09%    passed    100.00%
+ 101  Chrysemys_picta_bellii_ENSCPBP00000028773            60.54%    passed     51.12%
+ 102  Crocodylus_porosus_ENSCPRP00005000967                60.24%    passed     98.47%
+ 103  Sphenodon_punctatus_ENSSPUP00000007265               59.79%    passed     98.86%
+ 104  Xenopus_tropicalis_ENSXETP00000008146                58.89%    failed      0.11%
+ 105  Dromaius_novaehollandiae_ENSDNVP00000014880          60.24%    passed     95.13%
+ 106  Apteryx_haastii_ENSAHAP00000003827                   60.24%    passed     96.69%
+ 107  Apteryx_owenii_ENSAOWP00000014531                    60.24%    passed     96.69%
+ 108  Anas_platyrhynchos_ENSAPLP00020022679                60.24%    passed     98.56%
+ 109  Numida_meleagris_ENSNMEP00000001196                  60.24%    passed     98.02%
+ 110  Gallus_gallus_ENSGALP00000011510                     60.24%    passed     97.81%
+ 111  Pavo_cristatus_ENSPSTP00000000252                    60.24%    passed     98.92%
+ 112  Meleagris_gallopavo_ENSMGAP00000002830               60.24%    passed     93.49%
+ 113  Serinus_canaria_ENSSCAP00000006377                   60.24%    passed     99.54%
+ 114  Phasianus_colchicus_ENSPCLP00000013604               60.24%    passed     98.32%
+ 115  Parus_major_ENSPMJP00000009700                       60.24%    passed     98.34%
+ 116  Chrysolophus_pictus_ENSCPIP00010013510               60.24%    passed     98.32%
+ 117  Pelodiscus_sinensis_ENSPSIP00000013398               60.69%    passed     60.03%
+ 118  Anas_zonorhyncha_ENSAZOP00000003200                  60.24%    passed     97.65%
+ 119  Malurus_cyaneus_samueli_ENSMCSP00000009095           60.24%    passed     97.73%
+ 120  Buteo_japonicus_ENSBJAP00000012443                   60.24%    passed     95.92%
+ 121  Salvator_merianae_ENSSMRP00000027812                 59.94%    passed     22.23%
+ 122  Chelonoidis_abingdonii_ENSCABP00000011720            57.53%    passed     96.42%
+ 123  Lonchura_striata_domestica_ENSLSDP00000009597        60.24%    passed     95.70%
+ 124  Anser_brachyrhynchus_ENSABRP00000015627              60.24%    passed     98.07%
+ 125  Apteryx_rowi_ENSARWP00000003317                      60.24%    passed     96.69%
+ 126  Catharus_ustulatus_ENSCUSP00005018368                60.24%    passed     83.93%
+ 127  Falco_tinnunculus_ENSFTIP00000005443                 60.24%    passed     76.18%
+ 128  Amazona_collaria_ENSACOP00000004363                  60.24%    passed     98.24%
+ 129  Melopsittacus_undulatus_ENSMUNP00000012161           60.24%    passed     97.37%
+ 130  Pelusios_castaneus_ENSPCEP00000009751                59.79%    passed      7.21%
+ 131  Strigops_habroptila_ENSSHBP00005022354               60.24%    passed     96.14%
+ 132  Strix_occidentalis_caurina_ENSSOCP00000001221        60.24%    passed     99.62%
+ 133  Struthio_camelus_australis_ENSSCUP00000014227        51.36%    failed      2.12%
+ 134  Accipiter_nisus_ENSANIP00000001475                   60.24%    passed     90.96%
+ 135  Corvus_moneduloides_ENSCMUP00000023632               60.24%    passed     97.40%
+ 136  Coturnix_japonica_ENSCJPP00005012959                 60.24%    passed     90.29%
+ 137  Podarcis_muralis_ENSPMRP00000028847                  58.28%    failed      0.04%
+ 138  Nothoprocta_perdicaria_ENSNPEP00000003975            60.24%    passed     87.30%
+ 139  Leptobrachium_leishanense_ENSLLEP00000049402         60.69%    failed      0.48%
+ 140  Naja_naja_ENSNNAP00000017659                         60.69%    failed      0.01%
+ 141  Erythrura_gouldiae_ENSEGOP00005016720                60.24%    passed     93.38%
+ 142  Otus_sunia_ENSOSUP00000003523                        60.24%    passed     99.60%
+ 143  Aquila_chrysaetos_chrysaetos_ENSACCP00020010530      60.24%    passed     90.96%
+ 144  Camarhynchus_parvulus_ENSCPVP00000011620             60.24%    passed     99.18%
+ 145  Calidris_pugnax_ENSCPUP00000026873                   60.24%    passed     98.63%
+ 146  Lepidothrix_coronata_ENSLCOP00000005332              60.24%    passed     99.83%
+ 147  Calidris_pygmaea_ENSCPGP00000002516                  60.24%    passed     98.63%
+ 148  Gopherus_agassizii_ENSGAGP00000013816                59.94%    passed     65.73%
+ 149  Pogona_vitticeps_ENSPVIP00000011490                  45.48%    failed      0.02%
+ 150  Gopherus_evgoodei_ENSGEVP00005028671                 59.94%    passed     65.73%
+ 151  Terrapene_carolina_triunguis_ENSTMTP00000008566      60.54%    passed     35.84%
+ 152  Cairina_moschata_domestica_ENSCMMP00000021797        60.24%    passed     97.70%
+ 153  Taeniopygia_guttata_ENSTGUP00000022325               60.24%    passed     97.09%
+ 154  Junco_hyemalis_ENSJHYP00000012243                    60.24%    passed     99.20%
+ 155  Homo_sapiens_ENSP00000364472                         59.79%    passed     99.79%
+WARNING: 153 sequences contain more than 50% gaps/ambiguity
+****  TOTAL                                                59.53%  10 sequences failed composition chi2 test (p-value<5%; df=19)
+
+
+Create initial parsimony tree by phylogenetic likelihood library (PLL)... 0.070 seconds
+Perform fast likelihood tree search using LG+I+G model...
+Estimate model parameters (epsilon = 5.000)
+Perform nearest neighbor interchange...
+Estimate model parameters (epsilon = 1.000)
+1. Initial log-likelihood: -19786.994
+Optimal log-likelihood: -19786.101
+Proportion of invariable sites: 0.014
+Gamma shape alpha: 2.621
+Parameters optimization took 1 rounds (0.679 sec)
+Time for fast ML tree search: 11.129 seconds
+
+NOTE: ModelFinder requires 132 MB RAM!
+ModelFinder will test up to 546 protein models (sample size: 664) ...
+ No. Model         -LnL         df  AIC          AICc         BIC
+  1  LG            20095.240    307 40804.480    41335.694    42185.453
+  2  LG+I          20071.919    308 40759.837    41296.018    42145.308
+  3  LG+G4         19788.905    308 40193.810    40729.990    41579.281
+  4  LG+I+G4       19785.551    309 40189.102    40730.288    41579.071
+  5  LG+R2         19830.307    309 40278.614    40819.801    41668.583
+  6  LG+R3         19781.538    311 40185.075    40736.393    41584.041
+  7  LG+R4         19777.097    313 40180.195    40741.806    41588.157
+ 16  LG+F+G4       19849.133    327 40352.266    40990.695    41823.205
+ 17  LG+F+I+G4     19845.611    328 40347.222    40991.473    41822.658
+ 19  LG+F+R3       19843.430    330 40346.860    41002.896    41831.293
+ 20  LG+F+R4       19833.555    332 40331.109    40999.121    41824.539
+ 29  WAG+G4        19905.494    308 40426.988    40963.168    41812.459
+ 30  WAG+I+G4      19902.347    309 40422.695    40963.881    41812.664
+ 32  WAG+R3        19901.218    311 40424.435    40975.753    41823.401
+ 33  WAG+R4        19891.213    313 40408.426    40970.038    41816.388
+ 42  WAG+F+G4      20099.849    327 40853.698    41492.127    42324.637
+ 43  WAG+F+I+G4    20096.350    328 40848.700    41492.950    42324.136
+ 45  WAG+F+R3      20106.891    330 40873.781    41529.817    42358.214
+ 46  WAG+F+R4      20084.879    332 40833.758    41501.770    42327.188
+ 55  JTT+G4        19677.730    308 39971.460    40507.641    41356.931
+ 56  JTT+I+G4      19675.728    309 39969.455    40510.642    41359.424
+ 58  JTT+R3        19670.322    311 39962.645    40513.963    41361.610
+ 59  JTT+R4        19665.114    313 39956.227    40517.839    41364.190
+ 68  JTT+F+G4      19731.525    327 40117.050    40755.478    41587.988
+ 69  JTT+F+I+G4    19729.256    328 40114.512    40758.763    41589.949
+ 71  JTT+F+R3      19728.582    330 40117.163    40773.200    41601.597
+ 72  JTT+F+R4      19716.044    332 40096.088    40764.100    41589.518
+ 81  JTTDCMut+G4   19684.935    308 39985.870    40522.050    41371.341
+ 82  JTTDCMut+I+G4 19682.981    309 39983.961    40525.148    41373.930
+ 84  JTTDCMut+R3   19677.709    311 39977.419    40528.737    41376.384
+ 85  JTTDCMut+R4   19672.523    313 39971.047    40532.658    41379.009
+ 94  JTTDCMut+F+G4 19747.049    327 40148.099    40786.528    41619.037
+ 95  JTTDCMut+F+I+G4 19744.810    328 40145.620    40789.871    41621.057
+ 97  JTTDCMut+F+R3 19744.434    330 40148.867    40804.903    41633.301
+ 98  JTTDCMut+F+R4 19731.464    332 40126.929    40794.941    41620.358
+107  DCMut+G4      19898.526    308 40413.052    40949.233    41798.523
+108  DCMut+I+G4    19896.091    309 40410.181    40951.368    41800.151
+110  DCMut+R3      19893.686    311 40409.373    40960.691    41808.339
+111  DCMut+R4      19875.855    313 40377.710    40939.321    41785.672
+120  DCMut+F+G4    19956.582    327 40567.164    41205.593    42038.103
+121  DCMut+F+I+G4  19953.658    328 40563.316    41207.567    42038.753
+123  DCMut+F+R3    19958.166    330 40576.331    41232.367    42060.764
+124  DCMut+F+R4    19942.136    332 40548.272    41216.284    42041.702
+133  VT+G4         19986.937    308 40589.874    41126.055    41975.345
+134  VT+I+G4       19984.256    309 40586.513    41127.699    41976.482
+136  VT+R3         19980.190    311 40582.380    41133.698    41981.345
+137  VT+R4         19976.872    313 40579.745    41141.356    41987.707
+146  VT+F+G4       20115.652    327 40885.305    41523.734    42356.243
+147  VT+F+I+G4     20112.771    328 40881.542    41525.793    42356.979
+149  VT+F+R3       20111.840    330 40883.680    41539.716    42368.113
+150  VT+F+R4       20101.139    332 40866.277    41534.290    42359.707
+159  PMB+G4        20322.760    308 41261.520    41797.701    42646.991
+160  PMB+I+G4      20319.805    309 41257.610    41798.796    42647.579
+162  PMB+R3        20317.360    311 41256.721    41808.039    42655.687
+163  PMB+R4        20314.083    313 41254.166    41815.777    42662.128
+172  PMB+F+G4      20442.874    327 41539.748    42178.176    43010.686
+173  PMB+F+I+G4    20439.654    328 41535.308    42179.558    43010.744
+175  PMB+F+R3      20439.716    330 41539.432    42195.468    43023.865
+176  PMB+F+R4      20430.389    332 41524.778    42192.790    43018.208
+185  Blosum62+G4   20361.508    308 41339.016    41875.196    42724.487
+186  Blosum62+I+G4 20357.898    309 41333.795    41874.981    42723.764
+188  Blosum62+R3   20354.115    311 41330.230    41881.548    42729.196
+189  Blosum62+R4   20351.416    313 41328.832    41890.444    42736.795
+198  Blosum62+F+G4 20485.371    327 41624.742    42263.170    43095.680
+199  Blosum62+F+I+G4 20481.532    328 41619.064    42263.315    43094.501
+201  Blosum62+F+R3 20479.073    330 41618.145    42274.181    43102.578
+202  Blosum62+F+R4 20469.725    332 41603.451    42271.463    43096.881
+211  Dayhoff+G4    19895.211    308 40406.422    40942.602    41791.893
+212  Dayhoff+I+G4  19892.783    309 40403.566    40944.752    41793.535
+214  Dayhoff+R3    19890.441    311 40402.882    40954.200    41801.848
+215  Dayhoff+R4    19872.445    313 40370.890    40932.501    41778.852
+224  Dayhoff+F+G4  19953.948    327 40561.896    41200.325    42032.834
+225  Dayhoff+F+I+G4 19951.027    328 40558.054    41202.304    42033.490
+227  Dayhoff+F+R3  19955.611    330 40571.221    41227.257    42055.654
+228  Dayhoff+F+R4  19939.564    332 40543.128    41211.140    42036.558
+237  mtREV+G4      20783.836    308 42183.672    42719.853    43569.143
+238  mtREV+I+G4    20782.190    309 42182.380    42723.567    43572.349
+240  mtREV+R3      20784.150    311 42190.299    42741.617    43589.265
+241  mtREV+R4      20772.053    313 42170.107    42731.718    43578.069
+250  mtREV+F+G4    20039.096    327 40732.192    41370.621    42203.131
+251  mtREV+F+I+G4  20035.360    328 40726.721    41370.971    42202.157
+253  mtREV+F+R3    20041.059    330 40742.119    41398.155    42226.552
+254  mtREV+F+R4    20024.300    332 40712.601    41380.613    42206.030
+263  mtART+G4      21064.499    308 42744.999    43281.179    44130.470
+264  mtART+I+G4    21063.205    309 42744.410    43285.597    44134.380
+266  mtART+R3      21083.586    311 42789.172    43340.490    44188.137
+267  mtART+R4      21048.838    313 42723.676    43285.288    44131.639
+276  mtART+F+G4    20108.767    327 40871.533    41509.962    42342.471
+277  mtART+F+I+G4  20105.084    328 40866.168    41510.418    42341.604
+279  mtART+F+R3    20108.237    330 40876.475    41532.511    42360.908
+280  mtART+F+R4    20097.128    332 40858.256    41526.268    42351.686
+289  mtZOA+G4      20406.876    308 41429.751    41965.931    42815.222
+290  mtZOA+I+G4    20405.916    309 41429.831    41971.018    42819.800
+292  mtZOA+R3      20415.204    311 41452.407    42003.725    42851.373
+293  mtZOA+R4      20390.390    313 41406.780    41968.391    42814.742
+302  mtZOA+F+G4    19785.021    327 40224.042    40862.471    41694.980
+303  mtZOA+F+I+G4  19781.400    328 40218.799    40863.050    41694.236
+305  mtZOA+F+R3    19781.849    330 40223.697    40879.734    41708.131
+306  mtZOA+F+R4    19765.960    332 40195.920    40863.932    41689.349
+315  mtMet+G4      20673.125    308 41962.249    42498.430    43347.720
+316  mtMet+I+G4    20672.138    309 41962.275    42503.462    43352.244
+318  mtMet+R3      20679.788    311 41981.575    42532.894    43380.541
+319  mtMet+R4      20660.529    313 41947.059    42508.670    43355.021
+328  mtMet+F+G4    19732.131    327 40118.261    40756.690    41589.200
+329  mtMet+F+I+G4  19728.299    328 40112.598    40756.848    41588.034
+331  mtMet+F+R3    19730.705    330 40121.411    40777.447    41605.844
+332  mtMet+F+R4    19716.179    332 40096.359    40764.371    41589.788
+341  mtVer+G4      20717.854    308 42051.709    42587.889    43437.180
+342  mtVer+I+G4    20717.162    309 42052.323    42593.510    43442.293
+344  mtVer+R3      20720.270    311 42062.539    42613.858    43461.505
+345  mtVer+R4      20699.543    313 42025.086    42586.698    43433.048
+354  mtVer+F+G4    19958.058    327 40570.116    41208.544    42041.054
+355  mtVer+F+I+G4  19954.941    328 40565.883    41210.133    42041.319
+357  mtVer+F+R3    19959.174    330 40578.347    41234.383    42062.780
+358  mtVer+F+R4    19944.771    332 40553.542    41221.554    42046.972
+367  mtInv+G4      20922.635    308 42461.269    42997.449    43846.740
+368  mtInv+I+G4    20920.733    309 42459.467    43000.653    43849.436
+370  mtInv+R3      20926.746    311 42475.492    43026.810    43874.458
+371  mtInv+R4      20913.569    313 42453.138    43014.750    43861.100
+380  mtInv+F+G4    19712.161    327 40078.322    40716.750    41549.260
+381  mtInv+F+I+G4  19708.111    328 40072.222    40716.473    41547.659
+383  mtInv+F+R3    19710.786    330 40081.572    40737.608    41566.005
+384  mtInv+F+R4    19697.113    332 40058.226    40726.238    41551.656
+393  mtMAM+G4      21037.468    308 42690.936    43227.116    44076.407
+394  mtMAM+I+G4    21035.998    309 42689.996    43231.183    44079.966
+396  mtMAM+R3      21054.464    311 42730.928    43282.246    44129.893
+397  mtMAM+R4      21012.477    313 42650.954    43212.566    44058.917
+406  mtMAM+F+G4    20185.862    327 41025.723    41664.152    42496.662
+407  mtMAM+F+I+G4  20181.520    328 41019.039    41663.290    42494.476
+409  mtMAM+F+R3    20186.333    330 41032.667    41688.703    42517.100
+410  mtMAM+F+R4    20173.171    332 41010.342    41678.354    42503.771
+419  HIVb+G4       20095.221    308 40806.442    41342.622    42191.913
+420  HIVb+I+G4     20094.465    309 40806.930    41348.116    42196.899
+422  HIVb+R3       20101.072    311 40824.145    41375.463    42223.111
+423  HIVb+R4       20083.455    313 40792.911    41354.522    42200.873
+432  HIVb+F+G4     19965.140    327 40584.281    41222.709    42055.219
+433  HIVb+F+I+G4   19963.966    328 40583.932    41228.182    42059.368
+435  HIVb+F+R3     19969.361    330 40598.723    41254.759    42083.156
+436  HIVb+F+R4     19954.529    332 40573.057    41241.069    42066.487
+445  HIVw+G4       21104.805    308 42825.610    43361.791    44211.081
+446  HIVw+I+G4     21104.676    309 42827.352    43368.539    44217.322
+448  HIVw+R3       21114.632    311 42851.265    43402.583    44250.231
+449  HIVw+R4       21090.493    313 42806.987    43368.598    44214.949
+458  HIVw+F+G4     20717.745    327 42089.490    42727.919    43560.429
+459  HIVw+F+I+G4   20715.897    328 42087.795    42732.046    43563.231
+461  HIVw+F+R3     20730.013    330 42120.026    42776.062    43604.459
+462  HIVw+F+R4     20706.953    332 42077.906    42745.919    43571.336
+471  FLU+G4        20244.129    308 41104.259    41640.439    42489.730
+472  FLU+I+G4      20243.879    309 41105.757    41646.944    42495.727
+474  FLU+R3        20249.544    311 41121.087    41672.405    42520.053
+475  FLU+R4        20233.015    313 41092.030    41653.641    42499.992
+484  FLU+F+G4      20085.305    327 40824.610    41463.039    42295.549
+485  FLU+F+I+G4    20084.535    328 40825.070    41469.321    42300.507
+487  FLU+F+R3      20091.502    330 40843.004    41499.040    42327.437
+488  FLU+F+R4      20074.010    332 40812.020    41480.032    42305.449
+497  rtREV+G4      20041.233    308 40698.465    41234.646    42083.936
+498  rtREV+I+G4    20037.609    309 40693.219    41234.405    42083.188
+500  rtREV+R3      20031.754    311 40685.509    41236.827    42084.474
+501  rtREV+R4      20026.960    313 40679.920    41241.532    42087.883
+510  rtREV+F+G4    20011.889    327 40677.777    41316.206    42148.716
+511  rtREV+F+I+G4  20007.881    328 40671.763    41316.014    42147.199
+513  rtREV+F+R3    20004.605    330 40669.210    41325.246    42153.643
+514  rtREV+F+R4    19991.446    332 40646.891    41314.903    42140.321
+523  cpREV+G4      20125.873    308 40867.746    41403.926    42253.217
+524  cpREV+I+G4    20123.933    309 40865.865    41407.052    42255.835
+526  cpREV+R3      20125.728    311 40873.457    41424.775    42272.423
+527  cpREV+R4      20122.350    313 40870.700    41432.311    42278.662
+536  cpREV+F+G4    20244.938    327 41143.877    41782.305    42614.815
+537  cpREV+F+I+G4  20242.029    328 41140.058    41784.308    42615.494
+539  cpREV+F+R3    20256.402    330 41172.804    41828.840    42657.237
+540  cpREV+F+R4    20236.904    332 41137.807    41805.819    42631.237
+Akaike Information Criterion:           JTT+R4
+Corrected Akaike Information Criterion: JTT+G4
+Bayesian Information Criterion:         JTT+G4
+Best-fit model: JTT+G4 chosen according to BIC
+
+All model information printed to apr_evolution/sarcopterygii_phylogeny.model.gz
+CPU time for ModelFinder: 3676.388 seconds (1h:1m:16s)
+Wall-clock time for ModelFinder: 1021.884 seconds (0h:17m:1s)
+Generating 1000 samples for ultrafast bootstrap (seed: 586506)...
+
+NOTE: 54 MB RAM (0 GB) is required!
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -19677.730
+Optimal log-likelihood: -19677.727
+Gamma shape alpha: 2.448
+Parameters optimization took 1 rounds (0.549 sec)
+Computing ML distances based on estimated model parameters... 4.648 sec
+Computing BIONJ tree...
+0.015 seconds
+Log-likelihood of BIONJ tree: -19733.806
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 98 parsimony trees... 5.872 second
+Computing log-likelihood of 98 initial trees ... 18.668 seconds
+Current best score: -19677.727
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -19676.271
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 3: -19669.839
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 4: -19660.590
+Iteration 10 / LogL: -19682.253 / Time: 0h:1m:16s
+Iteration 20 / LogL: -19682.553 / Time: 0h:2m:11s
+Finish initializing candidate tree set (20)
+Current best tree score: -19660.590 / CPU time: 128.613
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 29: -19659.917
+Iteration 30 / LogL: -19724.709 / Time: 0h:3m:12s (0h:10m:57s left)
+Iteration 40 / LogL: -19665.925 / Time: 0h:4m:6s (0h:9m:21s left)
+Iteration 50 / LogL: -19659.918 / Time: 0h:5m:3s (0h:8m:9s left)
+Log-likelihood cutoff on original alignment: -19720.189
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 52: -19659.638
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 56: -19658.534
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 59: -19658.042
+Iteration 60 / LogL: -19658.689 / Time: 0h:6m:9s (0h:10m:20s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 63: -19657.151
+Iteration 70 / LogL: -19657.750 / Time: 0h:7m:25s (0h:10m:0s left)
+Iteration 80 / LogL: -19682.962 / Time: 0h:8m:45s (0h:9m:11s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 82: -19655.954
+Iteration 90 / LogL: -19659.452 / Time: 0h:10m:7s (0h:10m:27s left)
+Iteration 100 / LogL: -19664.609 / Time: 0h:11m:28s (0h:9m:29s left)
+Log-likelihood cutoff on original alignment: -19714.349
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.994
+Iteration 110 / LogL: -19657.552 / Time: 0h:12m:41s (0h:10m:28s left)
+Iteration 120 / LogL: -19658.255 / Time: 0h:13m:58s (0h:9m:23s left)
+Iteration 130 / LogL: -19657.173 / Time: 0h:15m:10s (0h:8m:14s left)
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 138: -19655.906
+Iteration 140 / LogL: -19660.747 / Time: 0h:16m:21s (0h:11m:31s left)
+BETTER TREE FOUND at iteration 146: -19655.905
+Iteration 150 / LogL: -19701.148 / Time: 0h:17m:43s (0h:11m:24s left)
+Log-likelihood cutoff on original alignment: -19711.252
+Iteration 160 / LogL: -19661.030 / Time: 0h:18m:51s (0h:10m:12s left)
+Iteration 170 / LogL: -19656.058 / Time: 0h:19m:51s (0h:8m:55s left)
+Iteration 180 / LogL: -19657.651 / Time: 0h:20m:51s (0h:7m:41s left)
+Iteration 190 / LogL: -19656.978 / Time: 0h:22m:2s (0h:6m:31s left)
+Iteration 200 / LogL: -19655.958 / Time: 0h:22m:56s (0h:5m:18s left)
+Log-likelihood cutoff on original alignment: -19711.252
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.995
+Iteration 210 / LogL: -19655.907 / Time: 0h:24m:2s (0h:10m:21s left)
+Iteration 220 / LogL: -19659.223 / Time: 0h:25m:4s (0h:9m:9s left)
+Iteration 230 / LogL: -19655.907 / Time: 0h:26m:21s (0h:8m:3s left)
+Iteration 240 / LogL: -19696.811 / Time: 0h:27m:34s (0h:6m:55s left)
+TREE SEARCH COMPLETED AFTER 247 ITERATIONS / Time: 0h:28m:18s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -19655.905
+Optimal log-likelihood: -19655.905
+Gamma shape alpha: 2.438
+Parameters optimization took 1 rounds (0.626 sec)
+BEST SCORE FOUND : -19655.905
+Ancestral state probabilities printed to apr_evolution/sarcopterygii_phylogeny.state
+
+Testing tree branches by SH-like aLRT with 1000 replicates...
+2.122 sec.
+Creating bootstrap support values...
+Split supports printed to NEXUS file apr_evolution/sarcopterygii_phylogeny.splits.nex
+Total tree length: 17.271
+
+Total number of iterations: 247
+CPU time used for tree search: 6114.114 sec (1h:41m:54s)
+Wall-clock time used for tree search: 1695.726 sec (0h:28m:15s)
+Total CPU time used: 6139.162 sec (1h:42m:19s)
+Total wall-clock time used: 1703.726 sec (0h:28m:23s)
+
+Computing bootstrap consensus tree...
+Reading input file apr_evolution/sarcopterygii_phylogeny.splits.nex...
+155 taxa and 1054 splits.
+Consensus tree written to apr_evolution/sarcopterygii_phylogeny.contree
+Reading input trees file apr_evolution/sarcopterygii_phylogeny.contree
+Log-likelihood of consensus tree: -19659.396
+
+Analysis results written to: 
+  IQ-TREE report:                apr_evolution/sarcopterygii_phylogeny.iqtree
+  Maximum-likelihood tree:       apr_evolution/sarcopterygii_phylogeny.treefile
+  Likelihood distances:          apr_evolution/sarcopterygii_phylogeny.mldist
+  Ancestral state:               apr_evolution/sarcopterygii_phylogeny.state
+
+Ultrafast bootstrap approximation results written to:
+  Split support values:          apr_evolution/sarcopterygii_phylogeny.splits.nex
+  Consensus tree:                apr_evolution/sarcopterygii_phylogeny.contree
+  Screen log file:               apr_evolution/sarcopterygii_phylogeny.log
+
+Date and Time: Wed Feb  3 14:05:35 2021

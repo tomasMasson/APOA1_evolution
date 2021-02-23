@@ -1,0 +1,51 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_hyphy_results
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	8	compute_msf
+	8	compute_wcn
+	1	extract_ancestral_sequences
+	1	fel_analysis
+	1	fix_treefile_meme
+	1	fubar_analysis
+	1	mafft2_protein_alignment
+	1	meme_analysis
+	1	merge_sequences
+	8	model_refinement
+	1	parse_fel
+	1	parse_fubar
+	1	parse_meme
+	1	plot_aprs_evolution
+	1	plot_aprs_msf_wcn
+	8	protein_modelling
+	1	run_tango_predictions
+	1	trim_signal_peptide
+	50
+Select jobs to execute...
+
+[Mon Jan 25 17:11:06 2021]
+rule fubar_analysis:
+    input: apr_evolution/vertebrates_mafft_trimmed.fna, apr_evolution/vertebrates_phylogeny.treefile
+    output: apr_evolution/vertebrates_fubar.json
+    jobid: 55
+
+
+[Mon Jan 25 17:11:06 2021]
+rule run_tango_predictions:
+    input: apr_evolution/vertebrates_mafft_trimmed.faa
+    output: apr_evolution/aprs_aggregation_scores.csv
+    jobid: 45
+
+RuleException in line 237 of /home/tmasson/APOA1_evolution/Snakefile:
+NameError: The name 'tango' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 136, in run_jobs
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 441, in run
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 230, in _run
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 156, in _run
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/snakemake/executors/__init__.py", line 162, in printjob

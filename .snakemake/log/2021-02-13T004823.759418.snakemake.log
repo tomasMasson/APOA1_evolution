@@ -1,0 +1,3 @@
+NameError in line 352 of /home/tmasson/APOA1_evolution/Snakefile:
+name 'TARGETS' is not defined
+  File "/home/tmasson/APOA1_evolution/Snakefile", line 352, in <module>

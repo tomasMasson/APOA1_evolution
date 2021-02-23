@@ -1,0 +1,9 @@
+ValueError in line 317 of /home/tmasson/APOA1_evolution/Snakefile:
+Sequences must all be the same length
+  File "/home/tmasson/APOA1_evolution/Snakefile", line 317, in <module>
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/Bio/AlignIO/__init__.py", line 390, in read
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/Bio/AlignIO/__init__.py", line 341, in parse
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/Bio/AlignIO/__init__.py", line 283, in _SeqIO_to_alignment_iterator
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/Bio/Align/__init__.py", line 162, in __init__
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/Bio/Align/__init__.py", line 526, in extend
+  File "/home/tmasson/miniconda3/envs/apoa1/lib/python3.8/site-packages/Bio/Align/__init__.py", line 588, in _append

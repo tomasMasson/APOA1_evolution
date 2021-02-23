@@ -1,0 +1,55 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	aggregate_msf
+	1	aggregate_wcn
+	1	all
+	1	compute_wcn
+	1	plot_aprs_msf_wcn
+	5
+Select jobs to execute...
+
+[Fri Feb 12 23:37:23 2021]
+rule compute_wcn:
+    input: ancestral_reconstruction/Homo_sapiens_ENSP00000364472_best_model_relaxed.pdb
+    output: ancestral_reconstruction/Homo_sapiens_ENSP00000364472_best_model_relaxed.wcn
+    jobid: 13
+    wildcards: model=Homo_sapiens_ENSP00000364472
+
+[Fri Feb 12 23:37:24 2021]
+Finished job 13.
+1 of 5 steps (20%) done
+Select jobs to execute...
+
+[Fri Feb 12 23:37:24 2021]
+rule aggregate_wcn:
+    input: ancestral_reconstruction/Homo_sapiens_ENSP00000364472_best_model_relaxed.wcn
+    output: ancestral_reconstruction/wcn.csv
+    jobid: 12
+
+[Fri Feb 12 23:37:24 2021]
+Finished job 12.
+2 of 5 steps (40%) done
+Select jobs to execute...
+
+[Fri Feb 12 23:37:24 2021]
+rule aggregate_msf:
+    output: ancestral_reconstruction/msf.csv
+    jobid: 11
+
+[Fri Feb 12 23:37:25 2021]
+Error in rule aggregate_msf:
+    jobid: 11
+    output: ancestral_reconstruction/msf.csv
+    shell:
+        paste ancestral_reconstruction/\*.msf > ancestral_reconstruction/msf.csv
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Removing output files of failed job aggregate_msf since they might be corrupted:
+ancestral_reconstruction/msf.csv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /home/tmasson/APOA1_evolution/.snakemake/log/2021-02-12T233722.767611.snakemake.log

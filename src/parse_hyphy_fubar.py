@@ -25,7 +25,7 @@ def parse_hyphy(hyphy_file):
 def filter_dataframe(df, algn_file, reference):
     '''
     Takes a data and headers lists from parse_hyphy and filter
-    the positions corresponding to SfMNPV sequence.
+    the positions corresponding to the reference sequence.
     Returns a pandas dataframe.
     '''
 

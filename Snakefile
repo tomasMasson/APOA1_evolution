@@ -8,7 +8,7 @@ rule all:
         "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
         "ancestral_reconstruction/ancestral_sequences.faa",
         "viz/panels/aprs_conservation.svg",
-#        "viz/panels/natural_selection_regimes.svg",
+        "viz/panels/natural_selection_regimes.svg",
         "viz/panels/aprs_flexibility.svg",
         "viz/panels/aprs_flexibility_profiles.svg",
 #        "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
@@ -108,7 +108,7 @@ rule infer_supplementary_phylogeny:
 rule filter_cds_ensembl:
     input:
         "apr_evolution/ensembl_sequences.fna",
-        "apr_evolution/sarcopterygii_sequences.faa"
+        "apr_evolution/sarcopterygii_mafft.faa"
     output:
         "apr_evolution/sarcopterygii_sequences.fna"
     shell:
@@ -127,18 +127,18 @@ rule pal2nal_alignment:
         """
 
 # Trim out highly gapped positions
-rule trim_nucleotide_alignment:
-    input:
-        "apr_evolution/sarcopterygii_mafft.fna"
-    output:
-        "apr_evolution/sarcopterygii_mafft_trimmed.fna"
-    shell:
-        "trimal -in {input} -out {output} -gt 0.05"
+#rule trim_nucleotide_alignment:
+#    input:
+#        "apr_evolution/sarcopterygii_mafft.fna"
+#    output:
+#        "apr_evolution/sarcopterygii_mafft_trimmed.fna"
+#    shell:
+#        "trimal -in {input} -out {output} -gt 0.05"
 
 # Run FEL analysis
 rule fel_analysis:
     input:
-        "apr_evolution/sarcopterygii_mafft_trimmed.fna",
+        "apr_evolution/sarcopterygii_mafft.fna",
         "apr_evolution/sarcopterygii_phylogeny.treefile"
     output:
         "apr_evolution/sarcopterygii_fel.json"
@@ -148,15 +148,15 @@ rule fel_analysis:
 # Run FUBAR analysis
 rule fubar_analysis:
     input:
-        "apr_evolution/sarcopterygii_mafft_trimmed.fna",
+        "apr_evolution/sarcopterygii_mafft.fna",
         "apr_evolution/sarcopterygii_phylogeny.treefile"
     output:
         "apr_evolution/sarcopterygii_fubar.json"
     shell:
         """
         hyphy fubar --alignment {input[0]} --tree {input[1]} && \
-        mv apr_evolution/sarcopterygii_mafft_trimmed.fna.FUBAR.json {output} && \
-        rm apr_evolution/sarcopterygii_mafft_trimmed.fna.FUBAR.cache
+        mv apr_evolution/sarcopterygii_mafft.fna.FUBAR.json {output} && \
+        rm apr_evolution/sarcopterygii_mafft.fna.FUBAR.cache
         """
 
 # Remove treefile node label for MEME
@@ -173,14 +173,14 @@ rule fix_treefile_meme:
 # Run MEME analysis
 rule meme_analysis:
     input:
-        "apr_evolution/sarcopterygii_mafft_trimmed.fna",
+        "apr_evolution/sarcopterygii_mafft.fna",
         "apr_evolution/sarcopterygii_phylogeny_meme.treefile"
     output:
         "apr_evolution/sarcopterygii_meme.json"
     shell:
         """
         hyphy meme  --alignment {input[0]} --tree {input[1]} --outfile {output} &&\
-        mv apr_evolution/sarcopterygii_mafft_trimmed.fna.MEME.json {output}
+        mv apr_evolution/sarcopterygii_mafft.fna.MEME.json {output}
         """
 
 # Parse FEL JSON results into CSV files
@@ -188,11 +188,13 @@ rule parse_fel:
     input:
         "apr_evolution/sarcopterygii_fel.json",
         "apr_evolution/sarcopterygii_mafft.faa"
+    params:
+        "Homo_sapiens_ENSP00000364472"
     output:
         "apr_evolution/sarcopterygii_fel.csv"
     shell:
         """
-        ./src/parse_hyphy_fel.py {input} gorilla
+        ./src/parse_hyphy_fel.py {input} {params}
         """
 
 # Parse FUBAR JSON results into CSV files
@@ -200,11 +202,13 @@ rule parse_fubar:
     input:
         "apr_evolution/sarcopterygii_fubar.json",
         "apr_evolution/sarcopterygii_mafft.faa"
+    params:
+        "Homo_sapiens_ENSP00000364472"
     output:
         "apr_evolution/sarcopterygii_fubar.csv"
     shell:
         """
-        ./src/parse_hyphy_fubar.py {input} gorilla
+        ./src/parse_hyphy_fubar.py {input} {params}
         """
 
 # Parse MEME JSON results into CSV files
@@ -212,11 +216,13 @@ rule parse_meme:
     input:
         "apr_evolution/sarcopterygii_meme.json",
         "apr_evolution/sarcopterygii_mafft.faa"
+    params:
+        "Homo_sapiens_ENSP00000364472"
     output:
         "apr_evolution/sarcopterygii_meme.csv"
     shell:
         """
-        ./src/parse_hyphy_meme.py {input} gorilla
+        ./src/parse_hyphy_meme.py {input} {params}
         """
 
 # Aggregate HyPhy results
@@ -290,7 +296,9 @@ EXTANTS = ["Homo_sapiens_ENSP00000364472",
            "Gallus_gallus_ENSGALP00000011510"]
 
 # Ancestral nodes used for structural comparisons
-NODES = [f"Node{i}" for i in range(2, 15, 1)]
+NODES = ["Node2", "Node3", "Node4", "Node5",
+         "Node6", "Node7", "Node54", "Node55",
+         "Node58", "Node59", "Node68", "Node69"]
 
 # Set target sequences
 TARGETS = EXTANTS + NODES

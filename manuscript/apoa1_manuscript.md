@@ -27,38 +27,42 @@ Apolipoprotein A-I (apoA-I) has a key function in the reverse cholesterol transp
 
 ## Introduction
 
-Apolipoprotein A-I (apoA-I) is the most abundant protein component of high-density lipoproteins (HDL) and is responsible for the reverse cholesterol transport from extracellular tissues back to the liver (Lund-Katz and Phillips 2010; Rader et al. 2008), which has been associated with a protective function against cardiac disease and atherosclerosis (Navab et al. 2008; Rosenson et al. 2015). The scaffolding functions of apoA-I in the HDL particle and its multiple protein-protein interactions, mainly with the lecithin:cholesterol acyltransferase and the ATP-binding cassette A1 transporter (Chroni et al. 2002; Manthei et al. 2020), forces it to maintain a dynamical and flexible conformation (Gursky and Atkinson 1996).
+Apolipoprotein A-I (apoA-I) is the most abundant protein component of high-density lipoproteins (HDL) and is responsible for the reverse cholesterol transport from extracellular tissues back to the liver (@Lund_Katz_2010; @Rader_2009), which has been associated with a protective function against cardiac disease and atherosclerosis (@Navab_2009; @Rosenson_2015). The scaffolding functions of apoA-I in the HDL particle and its multiple protein-protein interactions, mainly with the lecithin:cholesterol acyltransferase and the ATP-binding cassette A1 transporter (@Chroni_2003; @Manthei_2020), forces it to maintain a dynamical and flexible conformation (@Gursky_1996).
 
-In contrast to these physiological functions, several point mutations affecting apoA-I have been associated with hereditary amyloid pathology (Sipe et al. 2016). These mutations are mainly distributed into two "hot spots", located at the N-terminal region and the C-terminal portion of the protein, each one with a typical clinical manifestation (Das and Gursky 2015). Mutations that occur at the N-terminal region (residues 26–100) are characterized by amyloid deposits in the liver and kidney (Mucchiano et al. 2001; Obici et al. 2006), while those located at a short C-terminal domain (residues 170–178) are mainly associated with heart, larynx and skin deposits (Gaglione et al. 2018). In non-hereditary amyloidosis, full-length apoA-I is deposited in atherosclerotic plaques as fibrils or the senile forms of amyloid. This process has been associated with aging, but it has also been described in chronic pathologies such as Alzheimer's disease and type 2 diabetes mellitus (Westermark et al. 1995). 
+In contrast to these physiological functions, several point mutations affecting apoA-I have been associated with hereditary amyloid pathology (@Sipe_2016). These mutations are mainly distributed into two "hot spots", located at the N-terminal region and the C-terminal portion of the protein, each one with a typical clinical manifestation (@Das_2015). Mutations that occur at the N-terminal region (residues 26–100) are characterized by amyloid deposits in the liver and kidney (@Mucchiano_2001; @Obici_2006), while those located at a short C-terminal domain (residues 170–178) are mainly associated with heart, larynx and skin deposits (@Gaglione_2018). In non-hereditary amyloidosis, full-length apoA-I is deposited in atherosclerotic plaques as fibrils or the senile forms of amyloid. This process has been associated with aging, but it has also been described in chronic pathologies such as Alzheimer's disease and type 2 diabetes mellitus (@Westermark_1995). 
 
-Amyloid behaviour of apoA-I N-terminal fragment has been attributed to the presence of aggregation-prone regions (APRs) in its sequence and, specifically, to an APR located at the N-terminus (Obici et al. 2006). It has been hypothesized that amyloidogenic mutations or post-translational modifications could promote aggregation through the destabilization of the partially disorganized structure of apoA-I -described as a molten globular state- followed by the exposure of APRs. In this sense, most studies addressing the effect of amyloid variants have focused on the biophysical and physiological consequences of specific mutants. However, our understanding of the relationship between apoA-I sequence determinants and its aggregation process remains unclear.
+Amyloid behaviour of apoA-I N-terminal fragment has been attributed to the presence of aggregation-prone regions (APRs) in its sequence and, specifically, to an APR located at the N-terminus (@Obici_2006). It has been hypothesized that amyloidogenic mutations or post-translational modifications could promote aggregation through the destabilization of the partially disorganized structure of apoA-I -described as a molten globular state- followed by the exposure of APRs. In this sense, most studies addressing the effect of amyloid variants have focused on the biophysical and physiological consequences of specific mutants. However, our understanding of the relationship between apoA-I sequence determinants and its aggregation process remains unclear.
 
-In this study, through an extensive evolutionary analysis we characterized the conservation of aggregating regions in a broad dataset of vertebrates apoA-I sequences. Using the recently described full-length consensus structure (Melchior, 2017), we examined the structural properties of apoA-I that contribute to minimize the exposure of its constituent APRs. In silico saturation mutagenesis analysis of apoA-I demonstrated that an evolutionary-conserved APR, located between residues 14-19, contributes to the thermodynamic stability of the N-terminus and revealed a common destabilizing effect for amyloid-associated variants. Using molecular dynamics simulations, we studied the conformational and dynamical impact of five different amyloid variants on the structure of full-length apoA-I. Altogether, our results suggest that APR1 is a structural component that contributes to the stability of apoA-I helix bundle and emphasizes the destabilizing effect of amyloid variants, which is linked to subsequent APRs exposure in the case of G26R variant. This information is relevant to understand how a marginally stable, but metabolically active protein manages to initiate the formation of an amyloid structure and develop a severe pathology.
+In this study, through an extensive evolutionary analysis we characterized the conservation of aggregating regions in a broad dataset of vertebrates apoA-I sequences. Using the recently described full-length consensus structure (@Melchior_2017), we examined the structural properties of apoA-I that contribute to minimize the exposure of its constituent APRs. In silico saturation mutagenesis analysis of apoA-I demonstrated that an evolutionary-conserved APR, located between residues 14-19, contributes to the thermodynamic stability of the N-terminus and revealed a common destabilizing effect for amyloid-associated variants. Using molecular dynamics simulations, we studied the conformational and dynamical impact of five different amyloid variants on the structure of full-length apoA-I. Altogether, our results suggest that APR1 is a structural component that contributes to the stability of apoA-I helix bundle and emphasizes the destabilizing effect of amyloid variants, which is linked to subsequent APRs exposure in the case of G26R variant. This information is relevant to understand how a marginally stable, but metabolically active protein manages to initiate the formation of an amyloid structure and develop a severe pathology.
 
 ## Results
 
 ### Molecular evolution of apoA-I aggregating regions within the Sarcopterygii group
 
-Given that apoA-I has four previously characterized aggregation-prone regions (APRs), we asked if this amyloid regions could be relevant to the protein functionality in spite of its know pathogenic role [@Louros_2016?]. To tackle this question, first of all we decided to explored the evolutionary conservation of these motifs within apoA-I sequences of sarcopterygian organisms. Our analysis was restricted to this group because of the large evolutionary distance between fishes and tetrapods, a factor that could mislead our results. We collected our sequences from the Ensembl database and constructed multiple sequence alignment (MSA) in order to identify the APRs present in other species based on the reported APRs for the human species. Then, we employed the Tango software to predict the sequence-based aggregation propensity of each one of the APRs sequences and also computed the sequence conservation from the MSA based on the Shannon entropy (H). Our amyloidogenicity results for the four APRs suggest that the APR1 (residues 14 to 19) present an amyloid behaviour in more than 60% of the sequences of our dataset, followed by the APR4 in approximately 30% of the sequences. On the other hand, APR2 and APR3 presented a non aggregating behaviour in virtually all the sequences (Figure 1A). Regarding sequence conservation, APR1 is also one of the most conserved APRs, together with the APR3. When compared against the average H value of apoA-I, the sequence entropy of APR1 and APR3 are significantly lower, meaning that these amyloid regions are more conserved than most of the residues of apoA-I on average (Figure 1B). 
+Given that apoA-I has four previously characterized aggregation-prone regions (APRs), we asked if this amyloid regions could be relevant to the protein functionality in spite of its know pathogenic role [@Louros_2015]. To tackle this question, first of all we decided to explored the evolutionary conservation of these motifs within apoA-I sequences of sarcopterygian organisms. Our analysis was restricted to this group because of the large divergence between fishes and tetrapods, a factor that could confound our results. We collected our sequences from the Ensembl database and constructed a multiple sequence alignment (MSA) in order to identify the APRs present in other species based on the previously reported sequences for the human species. Then, we employed the Tango software to predict the sequence-based aggregation propensity of each one of the APRs sequences and also computed the sequence conservation from the MSA based on the Shannon entropy (H). Our amyloidogenicity results for the four APRs suggest that the APR1 (residues 14 to 19) retained its amyloid behaviour in more than 60% of the sequences of the dataset, followed by the APR4 in approximately 30% of the sequences. On the other hand, APR2 and APR3 presented a non aggregating behaviour in virtually all the sequences (Figure 1A). Regarding the sequence conservation of aggregating regions, the data showed that the sequence entropy of APRs residues are significantly higher than the average H value for apoA-I (*P* value = 0.018), implying that these amyloid sequences are evolutionary less conserved (Figure 1B). In fact, the H values distribution for the different APRs seems to different between each other, with APR1 having the more conserved sequence (Supplementary figure 1).
 
-![Figure 1 Evolutionary conservation of APRs within apoA-I sequences. **A** Percentage of sequences in our dataset that are described are amyloidogenic according to Tango (average score over 5%). **B** Sequence entropy (H) calculated for each residue inside the corresponding APR.](){width=100%}
+![Figure 1 Evolutionary conservation of APRs within apoA-I sequences. **A** Percentage of sequences in our dataset that are described are amyloidogenic according to Tango (average score over 5%). **B** Sequence entropy (H) calculated for each residue inside the corresponding APR.](figure1.png){width=100%}
 
-We decided to study the selection constraints affecting apoA-I as a way to provide further evidence of the conservation of its APRs. A maximum likelihood phylogeny reflecting the evolutionary relationships between sequences was reconstructed from the MSA (Supplementary figure 1). Using this phylogeny as framework, we computed the site-wise evolutionary rates at codon level (dN/dS, ratio of nonsynonymous to synonymous mutations) and evaluated its statistical significance in order to evidence the presence of selection constraints acting on the apoA-I sequence. In particular, we employed different methods from the HyPHY package in order to detect both pervasive and episodic selection events. In general terms, the evolutionary rate profile of apoA-I revealed that most of the protein sequence displayed a dN/dS value significantly lower than 1 but this value tend to rise for the C-terminus of the protein (Supplementary figure 2A). Using a cartoon representation to depict the statistical evidence for the different types of selective pressure (negative, neutral or positive) at each site, we evidenced the extent of negative selection, both pervasive and episodic, acting on apoA-I sequence. In accordance with the entropy results, the residues corresponding to the APRs have evolved mainly under purifying selection, meaning that they tend to be conserved during evolution (Supplementary figure 2B). These data together supports the idea that some APRs, in particular APR1, have been conserved during the evolutionary history of apoA-I and may contribute to the functional properties of the protein.
+We decided to study the selection constraints affecting apoA-I as a way to provide further evidence of the conservation of its APRs. A maximum likelihood phylogeny reflecting the evolutionary relationships between sequences was reconstructed from the MSA (Supplementary figure 2A). Using this phylogeny as framework, we computed the site-wise evolutionary rates at the codon level (*dN/dS*, ratio of nonsynonymous to synonymous mutations) and evaluated its statistical significance in order to evidence the presence of selection constraints acting on the apoA-I sequence. In particular, we employed different methods from the HyPhy package in order to detect both pervasive and episodic selection events. In general terms, the evolutionary rate profile of apoA-I revealed that most of the protein sequence displayed dN/dS values between 0 and 1, indicating a predominance of negative and neutral selection (Supplementary figure 2B). Using a cartoon representation to depict the statistical evidence for the different types of selective pressure (negative, neutral or positive) at each site, we evidenced the extent of selection constraints, both pervasive and episodic, acting on apoA-I sequence. In accordance with the entropy results, the residues corresponding to the APRs showed evidence of both purifying and neutral selection, meaning that some APR residues tend to be conserved during evolution but others can accept substitutions (Supplementary figure 2C).
 
 ### Comparative structural modelling of apoA-I historical sequences
 
-Prompted by the sequence conservation of some of the APRs present in apoA-I, we decided to expand these results with information at the protein structure level. For this, we implemented a comparative modelling approach to compared several apoA-I structures corresponding to the ancestral sequences inferred from apoA-I phylogeny and several extant species, including reptiles, birds and mammals. To date, the most comprehensive and complete structure available for apoA-I is deposited on the webpage of the Davidson's lab [ApoA-I consensus structure link](http://homepages.uc.edu/~davidswm/Melchior%20et%20al%20apoA-I.pdb), so we used it as the template for our homology-based modelling pipeline. We used Modeller to generate a structural model for each target sequence and the PyRosetta FastRelax tool to further refine it. A structure-based alignment of the best scoring model for each target sequence showed that the root mean square deviation (RMSD) between structures were in the range of 0.5-1, suggesting that the overall structure of apoA-I has been conserved along its evolutionary history (Supplementary figure 3A). Additionally, we computed the approximated intrinsic dynamic profile for each model using a gaussian normal network (GNM) model. These results showed that, besides the geometric properties of human apoA-I structure, its mean squared fluctuation (MSF) profiles are also conserved across ancestral and extant structures (Supplementary figure 3B).
+Prompted by the conserved amyloid behaviour of APR1 and APR4, we decided to expand these results with information derived from protein structural date. We implemented a comparative modelling approach to compared several apoA-I structures corresponding to the ancestral sequences inferred from apoA-I phylogeny and several extant species, including reptiles, birds and mammals. To date, the most comprehensive and complete structure available for apoA-I is deposited on the webpage of the Davidson's lab [ApoA-I consensus structure link](http://homepages.uc.edu/~davidswm/Melchior%20et%20al%20apoA-I.pdb), so we used it as the template for our homology-based modelling pipeline. We used Modeller to generate a structural model for each target sequence and the PyRosetta FastRelax tool to further refine it. A structure-based alignment of the best scoring model for each target sequence showed that the root mean square deviation (RMSD) between structures were in the range of 0.5-1, suggesting that the overall structure of apoA-I has been conserved along its evolutionary history (Supplementary figure 3A). Additionally, we computed the approximated intrinsic dynamic profile for each model using a gaussian normal network (GNM) model. These results showed that, besides the geometric properties of human apoA-I structure, its mean squared fluctuation (MSF) profiles are also conserved across ancestral and extant structures (Supplementary figure 3B).
 
-We used these structural models to explore the intrinsic fluctuations levels and packaging number of the residue sites composing apoA-I APRs. Our results showed that APRs residue have significantly lower MSF values when compared with the value distribution for the non-APR residues of apoA-I (Figure 2A, *P* value = X). In a similar trend, the weighted contact number (WCN), a measure of how crowned is the molecular environment of a residue, also showed that APRs sites are consistently surrounded by a larger number of residues than the non-APR site of apoA-I (Figure 2B, *P* value = Y). Together, this data suggest that apoA-I has conserved its structure and dynamics behaviour during its evolution. In this structural context, APRs residues are integrated into relatively rigid and densely packaged segments of apoA-I, a hallmark of functionally relevant sites for the protein structure [@cita].
+We used these structural models to explore the intrinsic fluctuations levels and packaging number of the residue sites composing apoA-I APRs. Our results showed that APRs residue have significantly lower MSF values when compared with the value distribution for the non-APR residues of apoA-I (Figure 2A, *P* value = 1.93 x 10⁻⁴). In a similar trend, the weighted contact number (WCN), a measure of how crowned is the molecular environment of a residue, also showed that APRs sites are consistently surrounded by a larger number of residues than the non-APR site of apoA-I (Figure 2B, *P* value = 6.69 x 10⁻⁴). Together, this data suggest that apoA-I has conserved its structure and dynamics behaviour during its evolution. In this structural context, APRs residues are integrated into relatively rigid and densely packaged segments of apoA-I, a hallmark of functionally relevant sites for the protein structure [@cita].
+
+![Figure 2 Dynamic and structural properties of APRs within apoA-I structures. **A** Fluctuation. **B** Contact number.](figure2.png){width=100%}
 
 ### Amyloid-associated variants have a destabilizing effect on apoA-I monomer structure
 
 In order to better understand the structural consequences of amyloid variants on apoA-I monomer, we explored their thermodynamic and pathological effects using in silico saturation mutagenesis. Destabilizing effect of each possible mutation in apoA-I sequence, represented by the difference in free energy (ΔΔG) between wild type and mutant structure, was measured using the FoldX empirical force field and the MutateX automation pipeline. To complement this approach, variant impact on protein function was estimated using Rhapsody. We noticed from the ΔΔGs distribution that most of the variants had a moderate impact on apoA-I stability (-1 kcal/mol < ΔΔG < 1 kcal/mol) (Figure 4A, complete FoldX results are available with Supplementary Figure 3). Further examination revealed that apoA-I structure is highly sensitive to mutations in the region of residues 7-28, which comprises the APR1 (Figure 4B). Rhapsody predictions also support this region as a mutation-sensible segment of apoA-I structure (Supplementary Figure 4). This result suggests that conservation of APR1 in apoA-I could be necessary to maintain the marginal thermodynamic stability of the ɑ-helix bundle despite the risk to undergo aggregation. In line with our observations, APRs have been recently proposed to play a stabilizing role on protein structure (Langenberg et al. 2020).  
+
+![Figure 3 APR1 contributes to the stability of the ɑ-helix bundle in apoA-I. The protein structural stability was quantified using the FoldX engine. The free energy difference (ΔΔG) was calculated by comparison between the ΔG of the mutant and wild type sequence A ΔΔG values distribution corresponding to all possible mutations. B Heatmap of ΔΔG values for the first 40 residues of apoA-I N-terminal region.](figure3.png){width=100%}
+
 We used ΔΔG values to highlight differences between pathogenic variants associated with amyloidosis or HDL deficiencies (Gogonea 2016), and natural variants reported by the gnomAD project (Karczewski et al. 2020). Our results evidenced that amyloid mutations had a destabilizing effect and a pathogenicity score significantly greater when compared with natural or HDL-deficiency variants (Figure 5A and 5B), emphasizing the relationship between structural destabilization and amyloid pathology onset. An interesting observation from this result is that HDL-deficiency mutations have similar effects compared with natural variants, suggesting that this type of mutations exert its pathogenic effect without disrupting apoA-I monomer stability. Given the fact that a small group of variants in the gnomAD database showed an elevated impact on protein stability (> 2 ΔΔG kcal/mol), we decided to investigate how frequently they occur at population level. Frequency spectrum (Figure 5C) showed that variants with a severe impact on protein stability were present at low frequencies, thus minimizing their deleterious effect on the population. In contrast, variants with the higher frequency in our dataset had a nearly neutral effect on stability. It is worth noting that although gnomAD excluded subjects with mendelian and pediatric diseases from its cohorts, we cannot rule out the possibility that some of these destabilizing variants correspond to non diagnosed pathologies.  
 
-![Figure 4 APR1 contributes to the stability of the ɑ-helix bundle in apoA-I. The protein structural stability was quantified using the FoldX engine. The free energy difference (ΔΔG) was calculated by comparison between the ΔG of the mutant and wild type sequence A ΔΔG values distribution corresponding to all possible mutations. B Heatmap of ΔΔG values for the first 40 residues of apoA-I N-terminal region.](){width=100%}
   
-![Figure 5 Impact of apoA-I variants on protein stability and function A-B Free energy difference (ΔΔG) and Rhapsody pathogenicity distributions for amyloid, HDL and gnomAD variant classes (p-value < 0.01, Mann-Whitney rank test). C Allele frequency distribution for gnomAD variants against its predicted effect on protein stability.](){width=100%}
+![Figure 4 Impact of apoA-I variants on protein stability and function A-B Free energy difference (ΔΔG) and Rhapsody pathogenicity distributions for amyloid, HDL and gnomAD variant classes (p-value < 0.01, Mann-Whitney rank test). C Allele frequency distribution for gnomAD variants against its predicted effect on protein stability.](figure4.png){width=100%}
 
 ### Molecular dynamics simulations of apoA-I mutants
 
@@ -140,188 +144,3 @@ Scipy Python library was used for data manipulation and all statistical analyses
 \newpage
 
 ## References
-
-Abraham, Mark James, Teemu Murtola, Roland Schulz, Szilárd Páll, Jeremy C. Smith, Berk Hess, and Erik Lindahl. 2015. “GROMACS: High Performance Molecular Simulations through Multi-Level Parallelism from Laptops to Supercomputers.” SoftwareX 1–2:19–25.
-Adachi, Emi, Hiroyuki Nakajima, Chiharu Mizuguchi, Padmaja Dhanasekaran, Hiroyuki Kawashima, Kohjiro Nagao, Kenichi Akaji, Sissel Lund-Katz, Michael C. Phillips, and Hiroyuki Saito. 2012. “Dual Role of an N-Terminal Amyloidogenic Mutation in Apolipoprotein A-I.” Journal of Biological Chemistry 288(4):2848–56.
-Bakan, A., L. M. Meireles, and I. Bahar. 2011. “ProDy: Protein Dynamics Inferred from Theory and Experiments.” Bioinformatics 27(11):1575–77.
-Bashtovyy, Denys, Martin K. Jones, G. M. Anantharamaiah, and Jere P. Segrest. 2010. “Sequence Conservation of Apolipoprotein A-I Affords Novel Insights into HDL Structure-Function.” Journal of Lipid Research 52(3):435–50.
-Buck, Patrick M., Sandeep Kumar, and Satish K. Singh. 2013. “On the Role of Aggregation Prone Regions in Protein Evolution, Stability, and Enzymatic Catalysis: Insights from Diverse Analyses” edited by L. M. Iakoucheva. PLoS Computational Biology 9(10):e1003291.
-Campitelli, Paul, Tushar Modi, Sudhir Kumar, and S. Banu Ozkan. 2020. “The Role of Conformational Dynamics and Allostery in Modulating Protein Evolution.” Annual Review of Biophysics 49(1):267–88.
-de Carvalho, Leonor Lopes, Eva Bligt-Lindén, Arunachalam Ramaiah, Mark S. Johnson, and Tiina A. Salminen. 2019. “Evolution and Functional Classification of Mammalian Copper Amine Oxidases.” Molecular Phylogenetics and Evolution 139:106571.
-Cavigiolio, Giorgio and Shobini Jayaraman. 2014. “Proteolysis of Apolipoprotein A-I by Secretory Phospholipase A2.” Journal of Biological Chemistry 289(14):10011–23.
-Chroni, Angeliki, Tong Liu, Irina Gorshkova, Horng-Yuan Kan, Yoshinari Uehara, Arnold von Eckardstein, and Vassilis I. Zannis. 2002. “The Central Helices of ApoA-I Can Promote ATP-Binding Cassette Transporter A1 (ABCA1)-Mediated Lipid Efflux.” Journal of Biological Chemistry 278(9):6719–30.
-Das, Madhurima and Olga Gursky. 2015. “Amyloid-Forming Properties of Human Apolipoproteins: Sequence Analyses and Structural Insights.” Pp. 175–211 in Advances in Experimental Medicine and Biology. Springer International Publishing.
-Das, Madhurima, Xiaohu Mei, Shobini Jayaraman, David Atkinson, and Olga Gursky. 2014. “Amyloidogenic Mutations in Human Apolipoprotein A-I Are Not Necessarily Destabilizing - A Common Mechanism of Apolipoprotein A-I Misfolding in Familial Amyloidosis and Atherosclerosis.” FEBS Journal 281(11):2525–42.
-Das, Madhurima, Christopher J. Wilson, Xiaohu Mei, Thomas E. Wales, John R. Engen, and Olga Gursky. 2016. “Structural Stability and Local Dynamics in Disease-Causing Mutants of Human Apolipoprotein A-I: What Makes the Protein Amyloidogenic?” Journal of Molecular Biology 428(2):449–62.
-Fernandez-Escamilla, Ana Maria, Frederic Rousseau, Joost Schymkowitz, and Luis Serrano. 2004. “Prediction of Sequence-Dependent and Mutational Effects on the Aggregation of Peptides and Proteins.” Nature Biotechnology 22(10):1302–6.
-Fiser, A. and A. Sali. 2003. “ModLoop: Automated Modeling of Loops in Protein Structures.” Bioinformatics 19(18):2500–2501.
-Fu, Limin, Beifang Niu, Zhengwei Zhu, Sitao Wu, and Weizhong Li. 2012. “CD-HIT: Accelerated for Clustering the next-Generation Sequencing Data.” Bioinformatics 28(23):3150–52.
-Fuentes, Lukas A., Wendy H. J. Beck, Maki Tsujita, and Paul M. M. Weers. 2018. “Charged Residues in the C-Terminal Domain of Apolipoprotein A-I Modulate Oligomerization.” Biochemistry 57(15):2200–2210.
-Gaddi, Gisela M., Romina A. Gisonno, Silvana A. Rosú, Lucrecia M. Curto, Eduardo D. Prieto, Guillermo R. Schinella, Gabriela S. Finarelli, M. Fernanda Cortez, Letizia Bauzá, Esteban E. Elías, Nahuel A. Ramella, and M. Alejandra Tricerri. 2020. “Structural Analysis of a Natural Apolipoprotein A-I Variant (L60R) Associated with Amyloidosis.” Archives of Biochemistry and Biophysics 685:108347.
-Gaglione, Rosa, Giovanni Smaldone, Rocco Di Girolamo, Renata Piccoli, Emilia Pedone, and Angela Arciello. 2018. “Cell Milieu Significantly Affects the Fate of AApoAI Amyloidogenic Variants: Predestination or Serendipity?” Biochimica et Biophysica Acta (BBA) - General Subjects 1862(3):377–84.
-Gisonno, Romina A., Eduardo D. Prieto, Juan P. Gorgojo, Lucrecia M. Curto, M. Eugenia Rodriguez, Silvana A. Rosú, Gisela M. Gaddi, Gabriela S. Finarelli, M. Fernanda Cortez, Guillermo R. Schinella, M. Alejandra Tricerri, and Nahuel A. Ramella. 2020. “Fibrillar Conformation of an Apolipoprotein A-I Variant Involved in Amyloidosis and Atherosclerosis.” Biochimica et Biophysica Acta - General Subjects 1864(4):129515.
-Gogonea, Valentin. 2016. “Structural Insights into High Density Lipoprotein: Old Models and New Facts.” Frontiers in Pharmacology 6.
-Guerois, Raphael, Jens Erik Nielsen, and Luis Serrano. 2002. “Predicting Changes in the Stability of Proteins and Protein Complexes: A Study of More than 1000 Mutations.” Journal of Molecular Biology 320(2):369–87.
-Gursky, Olga and David Atkinson. 1996. “Thermal Unfolding of Human High-Density Apolipoprotein A-1: Implications for a Lipid-Free Molten Globular State.” Proceedings of the National Academy of Sciences of the United States of America 93(7):2991–95.
-Kalyaanamoorthy, Subha, Bui Quang Minh, Thomas K. F. Wong, Arndt von Haeseler, and Lars S. Jermiin. 2017. “ModelFinder: Fast Model Selection for Accurate Phylogenetic Estimates.” Nature Methods 14(6):587–89.
-Karczewski, Konrad J., Laurent C. Francioli, Grace Tiao, Beryl B. Cummings, Jessica Alföldi, Qingbo Wang, Ryan L. Collins, Kristen M. Laricchia, Andrea Ganna, Daniel P. Birnbaum, Laura D. Gauthier, Harrison Brand, Matthew Solomonson, Nicholas A. Watts, Daniel Rhodes, Moriel Singer-Berk, Eleina M. England, Eleanor G. Seaby, Jack A. Kosmicki, Raymond K. Walters, Katherine Tashman, Yossi Farjoun, Eric Banks, Timothy Poterba, Arcturus Wang, Cotton Seed, Nicola Whiffin, Jessica X. Chong, Kaitlin E. Samocha, Emma Pierce-Hoffman, Zachary Zappala, Anne H. O’Donnell-Luria, Eric Vallabh Minikel, Ben Weisburd, Monkol Lek, James S. Ware, Christopher Vittal, Irina M. Armean, Louis Bergelson, Kristian Cibulskis, Kristen M. Connolly, Miguel Covarrubias, Stacey Donnelly, Steven Ferriera, Stacey Gabriel, Jeff Gentry, Namrata Gupta, Thibault Jeandet, Diane Kaplan, Christopher Llanwarne, Ruchi Munshi, Sam Novod, Nikelle Petrillo, David Roazen, Valentin Ruano-Rubio, Andrea Saltzman, Molly Schleicher, Jose Soto, Kathleen Tibbetts, Charlotte Tolonen, Gordon Wade, Michael E. Talkowski, Benjamin M. Neale, Mark J. Daly, and Daniel G. MacArthur. 2020. “The Mutational Constraint Spectrum Quantified from Variation in 141,456 Humans.” Nature 581(7809):434–43.
-Kareinen, Ilona, Marc Baumann, Su Duy Nguyen, Katariina Maaninka, Andrey Anisimov, Minoru Tozuka, Matti Jauhiainen, Miriam Lee-Rueckert, and Petri T. Kovanen. 2018. “Chymase Released from Hypoxia-Activated Cardiac Mast Cells Cleaves Human ApoA-I at Tyr192 and Compromises Its Cardioprotective Activity.” Journal of Lipid Research 59(6):945–57.
-Koster, J. and S. Rahmann. 2012. “Snakemake--a Scalable Bioinformatics Workflow Engine.” Bioinformatics 28(19):2520–22.
-Langenberg, Tobias, Rodrigo Gallardo, Rob van der Kant, Nikolaos Louros, Emiel Michiels, Ramon Duran-Romaña, Bert Houben, Rafaela Cassio, Hannah Wilkinson, Teresa Garcia, Chris Ulens, Joost Van Durme, Frederic Rousseau, and Joost Schymkowitz. 2020. “Thermodynamic and Evolutionary Coupling between the Native and Amyloid State of Globular Proteins.” Cell Reports 31(2):107512.
-Leman, Luke J., Bruce E. Maryanoff, and M. Reza Ghadiri. 2013. “Molecules That Mimic Apolipoprotein A-I: Potential Agents for Treating Atherosclerosis.” Journal of Medicinal Chemistry 57(6):2169–96.
-Letunic, Ivica and Peer Bork. 2019. “Interactive Tree Of Life (ITOL) v4: Recent Updates and New Developments.” Nucleic Acids Research 47(W1):W256--W259.
-Louros, Nikolaos, Katerina Konstantoulea, Matthias De~Vleeschouwer, Meine Ramakers, Joost Schymkowitz, and Frederic Rousseau. 2019. “WALTZ-DB 2.0: An Updated Database Containing Structural Information of Experimentally Determined Amyloid-Forming Peptides.” Nucleic Acids Research 48(D1):D389--D393.
-Lund-Katz, Sissel and Michael C. Phillips. 2010. “High Density Lipoprotein Structure–Function and Role in Reverse Cholesterol Transport.” Pp. 183–227 in Cholesterol Binding and Cholesterol Transport Proteins: Springer Netherlands.
-Machado, Matías R., Exequiel E. Barrera, Florencia Klein, Martín Sóñora, Steffano Silva, and Sergio Pantano. 2019. “The SIRAH 2.0 Force Field: Altius, Fortius, Citius.” Journal of Chemical Theory and Computation 15(4):2719–33.
-Machado, Matías R. and Sergio Pantano. 2016. “SIRAH Tools: Mapping, Backmapping and Visualization of Coarse-Grained Models.” Bioinformatics 32(10):1568–70.
-Machado, Matías R. and Sergio Pantano. 2020. “Split the Charge Difference in Two! A Rule of Thumb for Adding Proper Amounts of Ions in MD Simulations.” Journal of Chemical Theory and Computation 16(3):1367–72.
-Manthei, Kelly A., Dhabaleswar Patra, Christopher J. Wilson, Maria V Fawaz, Lolita Piersimoni, Jenny Capua Shenkar, Wenmin Yuan, Philip C. Andrews, John R. Engen, Anna Schwendeman, Melanie D. Ohi, and John J. G. Tesmer. 2020. “Structural Analysis of Lecithin:Cholesterol Acyltransferase Bound to High Density Lipoprotein Particles.” Communications Biology 3(1).
-Matsunaga, Akira, Yoshinari Uehara, Bo Zhang, and Keijiro Saku. 2010. Apolipoprotein A-I Mutations. First Edit. Elsevier Inc.
-Melchior, John T., Ryan G. Walker, Allison L. Cooke, Jamie Morris, Mark Castleberry, Thomas B. Thompson, Martin K. Jones, Hyun D. Song, Kerry-Anne Rye, Michael N. Oda, Mary G. Sorci-Thomas, Michael J. Thomas, Jay W. Heinecke, Xiaohu Mei, David Atkinson, Jere P. Segrest, Sissel Lund-Katz, Michael C. Phillips, and W. Sean Davidson. 2017. “A Consensus Model of Human Apolipoprotein A-I in Its Monomeric and Lipid-Free State.” Nature Structural & Molecular Biology 24(12):1093–99.
-Minh, B. Q., M. A. T. Nguyen, and A. von Haeseler. 2013. “Ultrafast Approximation for Phylogenetic Bootstrap.” Molecular Biology and Evolution 30(5):1188–95.
-Minh, Bui Quang, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf, Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear. 2020. “IQ-TREE 2: New Models and Efficient Methods for Phylogenetic Inference in the Genomic Era” edited by E. Teeling. Molecular Biology and Evolution 37(5):1530–34.
-Mizuguchi, Chiharu, Miho Nakagawa, Norihiro Namba, Misae Sakai, Naoko Kurimitsu, Ayane Suzuki, Kaho Fujita, Sayaka Horiuchi, Teruhiko Baba, Takashi Ohgita, Kazuchika Nishitsuji, and Hiroyuki Saito. 2019. “Mechanisms of Aggregation and Fibril Formation of the Amyloidogenic N-Terminal Fragment of Apolipoprotein A-I.” Journal of Biological Chemistry 294(36):13515–24.
-Mucchiano, G. I., B. Häggqvist, K. Sletten, and P. Westermark. 2001. “Apolipoprotein A-1-Derived Amyloid in Atherosclerotic Plaques of the Human Aorta.” The Journal of Pathology 193(2000):270–75.
-Murrell, B., S. Moola, A. Mabona, T. Weighill, D. Sheward, S. L. Kosakovsky Pond, and K. Scheffler. 2013. “FUBAR: A Fast, Unconstrained Bayesian AppRoximation for Inferring Selection.” Molecular Biology and Evolution 30(5):1196–1205.
-Navab, Mohamad, Srinivasa T. Reddy, Brian J. Van Lenten, G. M. Anantharamaiah, and Alan M. Fogelman. 2008. “The Role of Dysfunctional HDL in Atherosclerosis.” Journal of Lipid Research 50(Supplement):S145--S149.
-Obici, Laura, Guido Franceschini, Laura Calabresi, Sofia Giorgetti, Monica Stoppini, Giampaolo Merlini, and Vittorio Bellotti. 2006. “Structure, Function and Amyloidogenic Propensity of Apolipoprotein A-I.” Amyloid : The International Journal of Experimental and Clinical Investigation : The Official Journal of the International Society of Amyloidosis 13(4):191–205.
-Oda, Michael N. 2017. “Lipid-Free ApoA-I Structure - Origins of Model Diversity.” Biochimica et Biophysica Acta - Molecular and Cell Biology of Lipids 1862(2):221–33.
-Pettersen, Eric F., Thomas D. Goddard, Conrad C. Huang, Gregory S. Couch, Daniel M. Greenblatt, Elaine C. Meng, and Thomas E. Ferrin. 2004. “UCSF Chimera?A Visualization System for Exploratory Research and Analysis.” Journal of Computational Chemistry 25(13):1605–12.
-Pond, Sergei L. Kosakovsky and Simon D. W. Frost. 2005. “Not So Different After All: A Comparison of Methods for Detecting Amino Acid Sites Under Selection.” Molecular Biology and Evolution 22(5):1208–22.
-Pond, Sergei L. Kosakovsky, David Posada, Michael B. Gravenor, Christopher H. Woelk, and Simon D. W. Frost. 2006. “Automated Phylogenetic Detection of Recombination Using a Genetic Algorithm.” Molecular Biology and Evolution 23(10):1891–1901.
-Ponzoni, Luca, Daniel A. Peñaherrera, Zoltán N. Oltvai, and Ivet Bahar. 2020. “Rhapsody: Predicting the Pathogenicity of Human Missense Variants” edited by Y. Ponty. Bioinformatics 36(10):3084–92.
-Rader, Daniel J., Eric T. Alexander, Ginny L. Weibel, Jeffrey Billheimer, and George H. Rothblat. 2008. “The Role of Reverse Cholesterol Transport in Animals and Humans and Relationship to Atherosclerosis.” Journal of Lipid Research 50(Supplement):S189--S194.
-Raimondi, Sara, Fulvio Guglielmi, Sofia Giorgetti, Sonia Di Gaetano, Angela Arciello, Daria M. Monti, Annalisa Relini, Daniela Nichino, Silvia M. Doglia, Antonino Natalello, Piero Pucci, Palma Mangione, Laura Obici, Giampaolo Merlini, Monica Stoppini, Paul Robustelli, Gian Gaetano Tartaglia, Michele Vendruscolo, Christopher M. Dobson, Renata Piccoli, and Vittorio Bellotti. 2011. “Effects of the Known Pathogenic Mutations on the Aggregation Pathway of the Amyloidogenic Peptide of Apolipoprotein A-I.” Journal of Molecular Biology 407(3):465–76.
-Ramella, Nahuel a, Guillermo R. Schinella, Sergio T. Ferreira, Eduardo D. Prieto, María E. Vela, José Luis Ríos, M. Alejandra Tricerri, and Omar J. Rimoldi. 2012. “Human Apolipoprotein A-I Natural Variants: Molecular Mechanisms Underlying Amyloidogenic Propensity.” PloS One 7(8):e43755.
-Rosenson, Robert S., H. Bryan Brewer, Benjamin J. Ansell, Philip Barter, M. John Chapman, Jay W. Heinecke, Anatol Kontush, Alan R. Tall, and Nancy R. Webb. 2015. “Dysfunctional HDL and Atherosclerotic Cardiovascular Disease.” Nature Reviews Cardiology 13(1):48–60.
-Rosú, Silvana A., Omar J. Rimoldi, Eduardo D. Prieto, Lucrecia M. Curto, José M. Delfino, Nahuel A. Ramella, and M. Alejandra Tricerri. 2015. “Amyloidogenic Propensity of a Natural Variant of Human Apolipoprotein A-I: Stability and Interaction with Ligands.” PLoS ONE 10(5):1–17.
-Sievers, Fabian, Andreas Wilm, David Dineen, Toby J. Gibson, Kevin Karplus, Weizhong Li, Rodrigo Lopez, Hamish McWilliam, Michael Remmert, Johannes Söding, Julie D. Thompson, and Desmond G. Higgins. 2011. “Fast, Scalable Generation of High-Quality Protein Multiple Sequence Alignments Using Clustal Omega.” Molecular Systems Biology 7(1):539.
-Sipe, Jean D., Merrill D. Benson, Joel N. Buxbaum, Shu-ichi Ikeda, Giampaolo Merlini, Maria J. M. Saraiva, and Per Westermark. 2016. “Amyloid Fibril Proteins and Amyloidosis: Chemical Identification and Clinical Classification International Society of Amyloidosis 2016 Nomenclature Guidelines.” Amyloid 23(4):209–13.
-Suyama, M., D. Torrents, and P. Bork. 2006. “PAL2NAL: Robust Conversion of Protein Sequence Alignments into the Corresponding Codon Alignments.” Nucleic Acids Research 34(Web Server):W609--W612.
-Tareen, Ammar and Justin B. Kinney. 2019. “Logomaker: Beautiful Sequence Logos in Python” edited by A. Valencia. Bioinformatics 36(7):2272–74.
-Tiberti, Matteo, Thilde Terkelsen, Tycho Canter Cremers, Miriam Di Marco, Isabelle da Piedade, Emiliano Maiani, and Elena Papaleo. 2019. “MutateX: An Automated Pipeline for in-Silico Saturation Mutagenesis of Protein Structures and Structural Ensembles.”
-Wang, Sheng, Siqi Sun, Zhen Li, Renyu Zhang, and Jinbo Xu. 2017. “Accurate De Novo Prediction of Protein Contact Map by Ultra-Deep Learning Model” edited by A. Schlessinger. PLOS Computational Biology 13(1):e1005324.
-Westermark, P. P., G. G. Mucchiano, T. T. Marthin, K. H. K. H. Johnson, and K. K. Sletten. 1995. “Apolipoprotein A1-Derived Amyloid in Human Aortic Atherosclerotic Plaques.” Am J Pathol 147(5):1186–92.
-Wong, Yuan Qi, Katrina J. Binger, Geoffrey J. Howlett, and Michael D. W. Griffin. 2010. “Methionine Oxidation Induces Amyloid Fibril Formation by Full-Length Apolipoprotein A-I.” Proceedings of the National Academy of Sciences of the United States of America 107(5):1977–82.
-
-\newpage
-
-## Supplementary material
-
-Supplementary Figure 1 Apoa-I evolutionary rates based on codon alignments
-A Evolutionary rate (dN/dS) profile for apoA-I coding sequence, estimated with FEL. Points colored in blue indicate the presence of purifying selection, while orange indicates neutral selection at a residue position.
-B Evolutionary rate (dN/dS) for each residue type inside apoA-I tandem repeats. Proline and positively charged residues (K and R) display values consistent with a more stringent conservation. 
-
-Supplementary Figure 2 Sequence logos representing apoA-I tandem repeats
-Sequence logos corresponding to each of the ten tandem repeats present in apoA-I (residues 48-243) were extracted from a multiple sequence alignment of mammalian sequence using the LogoMaker package. Position-specific conservation was calculated using information content (expressed in Bits).
-
-Supplementary Figure 3 FoldX Thermodynamic Destabilization landscape
-ΔΔG values obtained by in silico saturation mutagenesis of apoA-I structure using the FoldX engine. Mutation introduced is depicted in the Y axis. Scales at the right indicate ΔΔG values expressed in kcal/mol.
-
-Supplementary Figure 4 Rhapsody Pathogenicity landscape
-Pathogenicity values obtained by in silico saturation mutagenesis of apoA-I structure using the Rhapsody package. Mutation introduced is depicted in the Y axis. Scales at the right indicate pathogenicity score (1 more pathogenic, 0 less pathogenic).
-
-Supplementary Figure 5 Root mean square fluctuation (RMSF) profiles for apoA-I mutants
-RMSF values were computed for each protein position over the last 100 ns of the simulation. Mean values are depicted together with its standard deviation.
-________________
-Supplementary Table 1 Coevolving residue pairs for apoA-I
-res_i   res_j   Prob
-32          38          0.9745979
-32          41          0.9356469
-29          42          0.8026068
-32          42          0.7793443
-10          63          0.7535808
-21          52          0.7366209
-33          42          0.7339497
-29          45          0.7262684
-14          59          0.6868986
-28          45          0.6604719
-25          45          0.6544870
-18          56          0.6307588
-18          52          0.6276968
-25          49          0.6210243
-14          56          0.6128104
-21          49          0.6127903
-14          63          0.6056398
-33          39          0.6045238
-7           70          0.6029568
-10          66          0.6011602
-10          67          0.5999863
-22          49          0.5937240
-7           67          0.5832257
-3           9           0.5820144
-7           63          0.5752648
-29          46          0.5712630
-18          53          0.5689167
-6           66          0.5582736
-10          70          0.5409693
-14          228         0.5365205
-6           70          0.5255757
-10          59          0.5169616
-28          41          0.5164070
-11          60          0.5149656
-32          45          0.5145751
-7           66          0.5117174
-11          63          0.5069553
-17          59          0.5011830
-________________
-
-
-Supplementary Table 2 Root mean square deviation values from molecular dynamics simulations
-
-
-
-
-System
-	Root Mean Square Deviation (RMSD, Å)
-	Replicate 1
-	Replicate 2
-	Replicate 3
-	Replicate 4
-	Replicate 5
-	Mean
-	Standard Deviation
-	Wild type (WT)
-	7.91
-	7.24
-	8.04
-	5.39
-	7.92
-	7.30
-	1.11
-	G26R
-	6.75
-	10.33
-	7.54
-	7.65
-	6.10
-	7.67
-	1.61
-	L60R
-	6.61
-	6.11
-	10.28
-	8.30
-	7.87
-	7.83
-	1.63
-	Δ107
-	7.28
-	6.84
-	7.77
-	6.03
-	8.79
-	7.34
-	1.03
-	R173P
-	8.97
-	8.24
-	7.14
-	6.91
-	8.16
-	7.88
-	0.85
-	
-
-[a]no parecen ser claves al model que dice gursky, el L46 esta en la region44-55, lo que pasa es que desde el 185 en adelante no estan en la estructura cristalina asi que quiza se puedan predecir
-dx.doi.org/10.1021/bi2017014 | Biochemistry 2012, 51, 10−18

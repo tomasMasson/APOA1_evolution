@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy import stats
 
 
 def read_df(data):
@@ -31,12 +32,24 @@ def read_df(data):
     return df
 
 
+def mannwhitneyu_test(df):
+    """
+    Performs a Wilcoxon-Mann U to asses if the
+    difference between APR and non-APR are
+    significant.
+    """
+
+    apr = list(df[df["Class"] == "APR"]["Average"])
+    non_apr = list(df[df["Class"] == "non-APR"]["Average"])
+    print(stats.mannwhitneyu(apr, non_apr))
+
+
 def plot_msf_wcn(df_msf, df_wcn):
 
     # Set font size to 10
     matplotlib.rcParams.update({'font.size': 10})
     # Create a figure object
-    f, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+    f, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 3))
     # Plot MSF values
     sns.boxplot(x="Average",
                 y="Class",
@@ -135,6 +148,12 @@ def main():
     # Close previous figure
     plt.close()
     plot_profiles(df_msf, df_wcn)
+    # Calculate P value for MSF
+    print("Mann Whitney U test for MSF")
+    mannwhitneyu_test(df_msf)
+    # Calculate P value for WCN
+    print("Mann Whitney U test for WCN")
+    mannwhitneyu_test(df_wcn)
 
 
 if __name__ == "__main__":

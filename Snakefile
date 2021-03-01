@@ -8,7 +8,9 @@ rule all:
         "apr_evolution/sarcopterygii_phylogeny_suppl.treefile",
         "ancestral_reconstruction/ancestral_sequences.faa",
         "viz/panels/aprs_conservation.svg",
+        "viz/panels/aprs_entropy.svg",
         "viz/panels/natural_selection_regimes.svg",
+        "evolutionary_rate_profile.svg",
         "viz/panels/aprs_flexibility.svg",
         "viz/panels/aprs_flexibility_profiles.svg",
 #        "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
@@ -473,8 +475,10 @@ rule plot_aprs_evolution:
         "apr_evolution/aprs_entropy.csv",
         "apr_evolution/sarcopterygii_mafft.faa"
     output:
+        "viz/panels/aprs_entropy.svg",
         "viz/panels/aprs_conservation.svg"
     params:
+        "aprs_entropy.svg",
         "aprs_conservation.svg"
     shell:
         """
@@ -487,8 +491,10 @@ rule plot_hyphy_evolution:
     input:
         "apr_evolution/hyphy_results.csv"
     output:
+        "viz/panel/evolutionary_rate_profile",
         "viz/panels/natural_selection_regimes.svg"
     params:
+        "evolutionary_rate_profile.svg",
         "natural_selection_regimes.svg"
     shell:
         """

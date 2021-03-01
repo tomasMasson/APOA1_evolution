@@ -6,6 +6,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 from Bio import AlignIO
+from scipy import stats
 
 
 def filter_gapped_positions(df, alignment):
@@ -52,16 +53,22 @@ def plot_aprs_scores(aggregation, entropy, alignment):
     ent_df = pd.read_csv(entropy, names=["Entropy"])
     # Filter out the gap positions
     ent_df = filter_gapped_positions(ent_df, alignment)
+    # Remove signal peptide residues
+    ent_df = ent_df.iloc[23:, :]
     # Reset index values
     ent_df = ent_df.reset_index(drop=True)
     # Add APR/non-APR labels
     ent_df["Class"] = "non-APR"
-    ent_df.loc[37:43, "Class"] = "APR1"
-    ent_df.loc[76:82, "Class"] = "APR2"
-    ent_df.loc[90:96, "Class"] = "APR3"
-    ent_df.loc[250:256, "Class"] = "APR4"
-    # Drop non-apr data
-    ent_df = ent_df[ent_df.Class != "non-APR"]
+    ent_df.loc[13:18, "Class"] = "APR"
+    ent_df.loc[52:57, "Class"] = "APR"
+    ent_df.loc[66:71, "Class"] = "APR"
+    ent_df.loc[226:231, "Class"] = "APR"
+
+    # Perform Mann Whitney U test for entropy of APR and non-APR residues
+    apr = list(ent_df[ent_df["Class"] == "APR"]["Entropy"])
+    non_apr = list(ent_df[ent_df["Class"] == "non-APR"]["Entropy"])
+    print("Entropy Mann Whitney U test:")
+    print(stats.mannwhitneyu(apr, non_apr))
 
     # Create a new DataFrame to store the conservation value for each APR.
     # Initialize it with the number of sequences analyzed
@@ -79,7 +86,7 @@ def plot_aprs_scores(aggregation, entropy, alignment):
     # Set font size to 10
     matplotlib.rcParams.update({'font.size': 10})
     # Create a figure object
-    f, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 3))
+    f, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 3))
 
     # Plot APRs scores distribution
     sns.barplot(x="Conservation",
@@ -117,6 +124,57 @@ def plot_aprs_scores(aggregation, entropy, alignment):
     # Save figure
     plt.savefig("aprs_conservation.svg")
 
+
+def plot_aprs_entropies(entropy, alignment):
+    """
+    Creates a boxplot displaying the entropy values for each APR.
+    """
+
+    # Convert entropy input to a pd DataFrame
+    ent_df = pd.read_csv(entropy, names=["Entropy"])
+    # Filter out the gap positions
+    ent_df = filter_gapped_positions(ent_df, alignment)
+    # Remove signal peptide residues
+    ent_df = ent_df.iloc[23:, :]
+    # Reset index values
+    ent_df = ent_df.reset_index(drop=True)
+    # Add APR/non-APR labels
+    ent_df["Class"] = "non-APR"
+    ent_df.loc[13:18, "Class"] = "APR1"
+    ent_df.loc[52:57, "Class"] = "APR2"
+    ent_df.loc[66:71, "Class"] = "APR3"
+    ent_df.loc[226:231, "Class"] = "APR4"
+    # Remove non-APR data
+    ent_df = ent_df[ent_df["Class"] != "non-APR"]
+
+    # Set font size to 10
+    matplotlib.rcParams.update({'font.size': 10})
+    # Create a figure object
+    f, ax = plt.subplots(1, 1, figsize=(8, 4))
+
+    # Plot Entropy values for each APR
+    sns.boxplot(x="Entropy",
+                y="Class",
+                data=ent_df,
+                whis=[0, 100],
+                palette="vlag",
+                ax=ax)
+
+    # Plot Entropy data points for each APR
+    sns.stripplot(x="Entropy",
+                  y="Class",
+                  data=ent_df,
+                  size=4,
+                  color=".3",
+                  linewidth=0,
+                  alpha=0.5,
+                  ax=ax)
+    # Set axis labels
+    ax.set(xlabel="Sequence Entropy (H)",
+           ylabel="")
+    # Save figure
+    plt.savefig("aprs_entropy.svg")
+
     return f
 
 
@@ -127,7 +185,7 @@ def main():
             description="""
             Plot APRs scores and Entropy.
             """,
-            usage="python3 plot_aprs_conservation.py <agg_scores> <entropies> <hyphy>"
+            usage="python3 plot_aprs_conservation.py <agg_scores> <entropies> <alignment>"
             )
     parser.add_argument('agg_scores', help='APRs scores file')
     parser.add_argument('entropies', help='Residues entropy values')
@@ -136,6 +194,7 @@ def main():
     args = parser.parse_args()
     agg_scores, entropies, alignment = args.agg_scores, args.entropies, args.alignment
     plot_aprs_scores(agg_scores, entropies, alignment)
+    plot_aprs_entropies(entropies, alignment)
 
 
 if __name__ == "__main__":

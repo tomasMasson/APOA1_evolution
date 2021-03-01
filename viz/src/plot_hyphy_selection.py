@@ -7,6 +7,31 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
+def plot_evolutionary_rate_profile(fel_results):
+    """
+    Plots dN/dS profile using FEL and FUBAR results
+    """
+
+    # Read FEL and FUBAR csv data
+    fel = pd.read_csv(fel_results)
+    fel["Omega"] = fel.beta / fel.alpha
+    # Remove signal peptide
+    fel = fel.iloc[24:,:]
+    # Reset index
+    fel = fel.reset_index() 
+    f, ax = plt.subplots(1, 1, figsize=(6, 4))
+    # Plot FEL dN/dS profile
+    sns.scatterplot(x=fel.index,
+                y="Omega",
+                data=fel,
+                linewidth=0.5,
+                palette="vlag",
+                ax=ax)
+    ax.set_xlabel("Sequence Position")
+    ax.set_ylabel("dN/dS")
+    # Save plot
+    plt.savefig("evolutionary_rate_profile.svg")
+
 def plot_selection_type(hyphy_results):
     """
     Plot a rectangle with colors scheme based on the
@@ -34,7 +59,7 @@ def plot_selection_type(hyphy_results):
     ax.spines['top'].set_visible(False)
     ax.spines['left'].set_visible(False)
     # Plot FEL sites
-    for index, sel in enumerate(fel):
+    for index, sel in enumerate(fel[24:]):
         color = "#1f78b4"
         if "Diver" in sel:
             color = "#fdc086"
@@ -44,7 +69,7 @@ def plot_selection_type(hyphy_results):
         ax.add_artist(rect)
     ax.text(-30, 83, 'FEL')
     # Plot FUBAR sites
-    for index, sel in enumerate(fubar):
+    for index, sel in enumerate(fubar[24:]):
         color = "#1f78b4"
         if "Diver" in sel:
             color = "#fdc086"
@@ -54,7 +79,7 @@ def plot_selection_type(hyphy_results):
         ax.add_artist(rect)
     ax.text(-30, 53, 'FUBAR')
     # Plot MEME sites
-    for index, sel in enumerate(meme):
+    for index, sel in enumerate(meme[24:]):
         color = "#1f78b4"
         if "Episodic" in sel:
             color = "#fdc086"
@@ -70,7 +95,7 @@ def plot_selection_type(hyphy_results):
     ax.vlines(227, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
     ax.vlines(232, 0, 90, colors='Black', linestyles='dashed', linewidth=0.8)
     ax.add_artist(rect)
-    # Show plot
+    # Save plot
     plt.savefig("natural_selection_regimes.svg")
 
 
@@ -84,7 +109,9 @@ def main():
             usage="python3 plot_hyphy_selection.py <hyphy>"
             )
     parser.add_argument('hyphy', help='HyPhy residues selection regimes')
+    parser.add_argument('fel', help='FEL csv results')
     args = parser.parse_args()
+    plot_evolutionary_rate_profile(args.fel)
     plot_selection_type(args.hyphy)
 
 

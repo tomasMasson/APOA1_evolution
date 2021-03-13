@@ -106,6 +106,7 @@ def plot_profiles(df_msf, df_wcn):
     # Create a figure object
     f, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 6))
     # Plot MSF values distribution
+    print(df_msf)
     for node in df_msf.columns[:8]:
         sns.lineplot(x=df_msf.index,
                      y=df_msf[node],

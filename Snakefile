@@ -10,9 +10,9 @@ rule all:
         "viz/panels/aprs_conservation.svg",
         "viz/panels/aprs_entropy.svg",
         "viz/panels/natural_selection_regimes.svg",
-        "evolutionary_rate_profile.svg",
+        "viz/panels/evolutionary_rate_profile.svg",
         "viz/panels/aprs_flexibility.svg",
-        "viz/panels/aprs_flexibility_profiles.svg",
+        "viz/panels/aprs_flexibility_profiles.svg"
 #        "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
 
 
@@ -294,8 +294,12 @@ rule reconstruct_ancestral_sequences:
 # Extant species used for structural comparisons
 EXTANTS = ["Homo_sapiens_ENSP00000364472",
            "Mus_musculus_ENSMUSP00000034588",
+           "Canis_lupus_familiaris_ENSCAFP00000019630",
+           "Bos_taurus_ENSBTAP00000002914",
+           "Gallus_gallus_ENSGALP00000011510",
            "Crocodylus_porosus_ENSCPRP00005000967",
-           "Gallus_gallus_ENSGALP00000011510"]
+           "Chelonoidis_abingdonii_ENSCABP00000011720",
+           "Xenopus_tropicalis_ENSXETP00000008146"]
 
 # Ancestral nodes used for structural comparisons
 NODES = ["Node2", "Node3", "Node4", "Node5",
@@ -347,7 +351,7 @@ rule trim_signal_peptide:
         "ancestral_reconstruction/alignment_trimmed.faa"
     run:
         align = AlignIO.read(input[0], "fasta")
-        align_trimmed = align[:, 24:]
+        align_trimmed = align[:, 40:]
         with open (output[0], "w") as fh:
             for seq in align_trimmed:
                 fh.write(f">{seq.id}\n{seq.seq}\n")
@@ -489,9 +493,10 @@ rule plot_aprs_evolution:
 # HyPhy selection regimes plotting
 rule plot_hyphy_evolution:
     input:
-        "apr_evolution/hyphy_results.csv"
+        "apr_evolution/hyphy_results.csv",
+        "apr_evolution/sarcopterygii_fel.csv"
     output:
-        "viz/panel/evolutionary_rate_profile",
+        "viz/panels/evolutionary_rate_profile.svg",
         "viz/panels/natural_selection_regimes.svg"
     params:
         "evolutionary_rate_profile.svg",

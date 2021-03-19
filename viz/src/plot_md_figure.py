@@ -1,4 +1,4 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 
 import argparse
 import pandas as pd
@@ -21,29 +21,18 @@ def plot_md_dataset(dataset):
         }
 
     df = pd.read_csv(dataset)
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(3.54, 6))
-    sns.barplot(
-            x="system",
-            y="Rg",
-            data=df,
-            palette=palette,
-            edgecolor=".2",
-            ax=ax1
-            )
-    ax1.set(xlabel="System",
-            ylabel="Gyration Radius (nm)",
-            ylim=(1, 3))
+    fig, ax = plt.subplots(1, 1, figsize=(5, 4))
     sns.barplot(
             x="system",
             y="apr1_sasa",
             data=df,
             palette=palette,
             edgecolor=".2",
-            ax=ax2
+            ax=ax
             )
-    ax2.set(xlabel="System",
-            ylabel="APR1 SASA (nm$2$)",
-            ylim=(0, 1.6))
+    ax.set(xlabel="System",
+           ylabel="APR1 SASA (nm$2$)",
+           ylim=(0, 1.6))
     plt.tight_layout()
     plt.savefig("md_figure.svg")
 

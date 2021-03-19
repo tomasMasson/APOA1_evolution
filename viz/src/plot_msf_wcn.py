@@ -104,24 +104,19 @@ def plot_profiles(df_msf, df_wcn):
     # Set font size to 10
     matplotlib.rcParams.update({'font.size': 10})
     # Create a figure object
-    f, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 6))
+    f, (ax1, ax2) = plt.subplots(2, 1, figsize=(24, 12))
     # Plot MSF values distribution
-    print(df_msf)
-    for node in df_msf.columns[:8]:
-        sns.lineplot(x=df_msf.index,
-                     y=df_msf[node],
-                     palette="vlag",
-                     ax=ax1)
+    sns.lineplot(data=df_msf,
+                 palette="vlag",
+                 ax=ax1)
     # Set Axis name
     ax1.set(xlabel="Sequence Position",
             ylabel="Mean Squared Fluctuation (MSF)")
 
     # Plot WCN values distribution
-    for node in df_wcn.columns[:8]:
-        sns.lineplot(x=df_wcn.index,
-                     y=df_wcn[node],
-                     palette="vlag",
-                     ax=ax2)
+    sns.lineplot(data=df_wcn,
+                 palette="vlag",
+                 ax=ax2)
     # Set Axis name
     ax2.set(xlabel="Sequence Position",
             ylabel="Weighted Contact Number (WCN)")

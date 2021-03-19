@@ -5,12 +5,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-order = ['Amyloid', 'gnomAD_v2', 'gnomAD_v3', 'HDL']
+#order = ['Amyloid', 'gnomAD_v2', 'gnomAD_v3', 'HDL']
+order = ['Amyloid', 'gnomAD_v2', 'gnomAD_v3']
 color_mapping = {
         'Amyloid': '#6b8abe',
         'gnomAD_v2': '#ffffb3',
-        'gnomAD_v3': '#8dd3c7',
-        'HDL': '#dd8452'
+        'gnomAD_v3': '#8dd3c7'
+#        'HDL': '#dd8452'
         }
 
 
@@ -44,7 +45,7 @@ def plot_variants_impact(filename):
     plt.tight_layout()
     plt.savefig('variants_effect.svg')
 
-    fig, ax = plt.subplots(1, 1, figsize=(10, 4))
+    fig, ax = plt.subplots(1, 1, figsize=(5, 4))
     ax.set(xscale='log')
     sns.scatterplot(
             x='Frequency',

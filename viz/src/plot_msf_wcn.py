@@ -54,7 +54,7 @@ def plot_msf_wcn(df_msf, df_wcn):
     sns.boxplot(x="Average",
                 y="Class",
                 data=df_msf,
-                whis=[0, 100],
+                fliersize=0,
                 palette="vlag",
                 ax=ax1)
     # Plot MSF data points
@@ -74,7 +74,7 @@ def plot_msf_wcn(df_msf, df_wcn):
     sns.boxplot(x="Average",
                 y="Class",
                 data=df_wcn,
-                whis=[0, 100],
+                fliersize=0,
                 palette="vlag",
                 ax=ax2)
     # Plot MSF data points

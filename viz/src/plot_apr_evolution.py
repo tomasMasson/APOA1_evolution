@@ -104,7 +104,7 @@ def plot_aprs_scores(aggregation, entropy, alignment):
     sns.boxplot(x="Entropy",
                 y="Class",
                 data=ent_df,
-                whis=[0, 100],
+                fliersize=0,
                 palette="vlag",
                 ax=ax2)
 
@@ -156,7 +156,7 @@ def plot_aprs_entropies(entropy, alignment):
     sns.boxplot(x="Entropy",
                 y="Class",
                 data=ent_df,
-                whis=[0, 100],
+                fliersize=0,
                 palette="vlag",
                 ax=ax)
 

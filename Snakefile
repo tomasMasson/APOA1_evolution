@@ -12,7 +12,8 @@ rule all:
         "viz/panels/natural_selection_regimes.svg",
         "viz/panels/evolutionary_rate_profile.svg",
         "viz/panels/aprs_flexibility.svg",
-        "viz/panels/aprs_flexibility_profiles.svg"
+        "viz/panels/aprs_flexibility_profiles.svg",
+        "viz/panels/aprs_impact.svg"
 #        "mutatex/mutations/apoa1_model0_checked_Repair/LA14/WT_apoa1_model0_checked_Repair_2_4.pd"
 
 
@@ -521,5 +522,19 @@ rule plot_aprs_msf_wcn:
     shell:
         """
         ./viz/src/plot_msf_wcn.py {input} &&\
+        mv {params} viz/panels/
+        """
+
+# APR ΔΔG average values plotting
+rule plot_aprs_impact:
+    input:
+        "in-silico_mutagenesis/foldx_dataset.csv"
+    output:
+        "viz/panels/aprs_impact.svg"
+    params:
+        "aprs_impact.svg"
+    shell:
+        """
+        ./viz/src/plot_apr_impact.py {input} &&\
         mv {params} viz/panels/
         """

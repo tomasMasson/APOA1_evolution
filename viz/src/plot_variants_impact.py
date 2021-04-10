@@ -5,28 +5,30 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-#order = ['Amyloid', 'gnomAD_v2', 'gnomAD_v3', 'HDL']
-order = ['Amyloid', 'gnomAD_v2', 'gnomAD_v3']
-color_mapping = {
-        'Amyloid': '#6b8abe',
-        'gnomAD_v2': '#ffffb3',
-        'gnomAD_v3': '#8dd3c7'
-#        'HDL': '#dd8452'
-        }
-
 
 def plot_variants_impact(filename):
 
     df = pd.read_csv(filename)
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+    order = ['Amyloid', 'gnomAD_v2', 'gnomAD_v3']
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
     sns.boxplot(
             x='Class',
             y='FoldX',
             data=df,
-            palette=color_mapping,
+            fliersize=0,
+            palette="vlag",
             hue_order=order,
             ax=ax1
             )
+    # Plot individual points
+    sns.stripplot(x="Class",
+                  y="FoldX",
+                  data=df,
+                  size=4,
+                  color=".3",
+                  linewidth=0,
+                  alpha=0.5,
+                  ax=ax1)
     ax1.set(xlabel='Variant Class',
             ylabel='FoldX ΔΔG (kcal/mol)',
             ylim=(-3, 12))
@@ -35,17 +37,26 @@ def plot_variants_impact(filename):
             x='Class',
             y='Rhapsody',
             data=df,
-            palette=color_mapping,
+            fliersize=0,
+            palette="vlag",
             hue_order=order,
             ax=ax2
             )
+    # Plot individual points
+    sns.stripplot(x="Class",
+                  y="Rhapsody",
+                  data=df,
+                  size=4,
+                  color=".3",
+                  linewidth=0,
+                  alpha=0.5,
+                  ax=ax2)
     ax2.set(xlabel='Variant Class',
             ylabel='Pathogenicity Probability',
             ylim=(0, 1))
-    plt.tight_layout()
     plt.savefig('variants_effect.svg')
 
-    fig, ax = plt.subplots(1, 1, figsize=(5, 4))
+    fig, ax = plt.subplots(1, 1, figsize=(5.5, 4))
     ax.set(xscale='log')
     sns.scatterplot(
             x='Frequency',
@@ -54,10 +65,8 @@ def plot_variants_impact(filename):
             color='gray',
             ax=ax
             )
-    ax.set(
-            xlabel='Allele Frequency',
-            ylabel='FoldX ΔΔG (kcal/mol)')
-    plt.tight_layout()
+    ax.set(xlabel='Allele Frequency',
+           ylabel='FoldX ΔΔG (kcal/mol)')
     fig.savefig('variants_frequency.svg')
 
 

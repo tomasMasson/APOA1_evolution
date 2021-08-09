@@ -24,10 +24,10 @@ def read_df(data):
     df["Average"] = df.mean(axis=1)
     # Add APR/non-APR labels
     df["Class"] = "non-APR"
-    df.iloc[13:19, -1] = "APR"
-    df.iloc[52:58, -1] = "APR"
-    df.iloc[66:72, -1] = "APR"
-    df.iloc[226:232, -1] = "APR"
+    df.iloc[13:19, -1] = "APR1"
+    df.iloc[52:58, -1] = "APR2"
+    df.iloc[66:72, -1] = "APR3"
+    df.iloc[226:232, -1] = "APR4"
 
     return df
 
@@ -39,9 +39,10 @@ def mannwhitneyu_test(df):
     significant.
     """
 
-    apr = list(df[df["Class"] == "APR"]["Average"])
-    non_apr = list(df[df["Class"] == "non-APR"]["Average"])
-    print(stats.mannwhitneyu(apr, non_apr))
+    for apr in ["APR1", "APR2", "APR3", "APR4"]:
+        apr = list(df[df["Class"] == apr]["Average"])
+        non_apr = list(df[df["Class"] == "non-APR"]["Average"])
+        print(stats.mannwhitneyu(apr, non_apr))
 
 
 def plot_msf_wcn(df_msf, df_wcn):
